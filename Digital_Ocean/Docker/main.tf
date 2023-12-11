@@ -1,6 +1,6 @@
-resource "digitalocean_droplet" "Docker-VM01" {
+resource "digitalocean_droplet" "Docker01" {
   image = "docker-20-04"
-  name = "Docker-VM01"
+  name = "Docker01"
   region = "fra1"
   size = "s-1vcpu-1gb"
   ssh_keys = [
