@@ -1,5 +1,4 @@
 ## Docker01 (Portainer)
-
 resource "digitalocean_droplet" "Docker01" {
   image = "docker-20-04"
   name = "Docker01"
@@ -9,14 +8,14 @@ resource "digitalocean_droplet" "Docker01" {
     data.digitalocean_ssh_key.terraform.id
   ]
 
-# Connect and Install Updates
-connection {
+  connection {
     host = self.ipv4_address
     user = "root"
     type = "ssh"
     private_key = file(var.pvt_key)
     timeout = "4m"
   }
+
   provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin",
@@ -62,7 +61,10 @@ resource "digitalocean_droplet" "Docker02" {
   }
 }
 
-
+  provisioner "file" {
+    content     = file("${path.module}/docker-compose.yml")
+    destination = "/root/docker-compose.yml"
+  }
 
 ## Docker03
 resource "digitalocean_droplet" "Docker03" {
