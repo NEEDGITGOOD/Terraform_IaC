@@ -33,3 +33,4 @@ override.tf.json
 .terraformrc
 terraform.rc
 Digital_Ocean/HoneyPot/.terraform.lock.hcl
+Digital_Ocean/Docker/.main.tf.swp
