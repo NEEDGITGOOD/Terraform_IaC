@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    ports:
+      - 9443:9443
+      volumes:
+        - data:/data
+        - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+  dashy:
+    image: lissy93/dashy
+    ports:
+      - "8080:80"
+volumes:
+  data:
