@@ -16,11 +16,16 @@ resource "digitalocean_droplet" "Docker01" {
     timeout = "4m"
   }
 
+  provisioner "file" {
+    content     = file("${path.module}/templates/docker-compose-portainer.yaml")
+    destination = "/root/docker-compose.yml"
+  }
+
   provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin",
       "sudo apt update",
-      "sudo docker run -d -p 80:80 nginx"
+      "docker compose -f /root/docker-compose.yml up -d"
     ]
   }
 }
@@ -61,7 +66,7 @@ resource "digitalocean_droplet" "Docker02" {
     inline = [
       "export PATH=$PATH:/usr/bin",
       "sudo apt update",
-      "sudo docker-compose -f /root/docker-compose.yaml up -d"
+      "docker compose -f /root/docker-compose.yaml up -d"
     ]
   }
 }
@@ -94,7 +99,7 @@ resource "digitalocean_droplet" "Docker03" {
     inline = [
       "export PATH=$PATH:/usr/bin",
       "sudo apt update",
-      "sudo docker-compose -f /root/docker-compose.yaml up -d"
+      "docker compose -f /root/docker-compose.yaml up -d"
     ]
   }
 }
