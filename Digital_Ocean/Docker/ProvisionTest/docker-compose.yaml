@@ -4,7 +4,7 @@ services:
     image: portainer/agent
     network_mode: "host"
     environment:
-      AGENT_CLUSTER_ADDR: 10.114.0.4
+      AGENT_CLUSTER_ADDR: 10.114.0.2
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /var/lib/docker/volumes:/var/lib/docker/volumes

@@ -25,7 +25,8 @@ resource "digitalocean_droplet" "Docker01" {
     inline = [
       "export PATH=$PATH:/usr/bin",
       "sudo apt update",
-      "docker compose -f /root/docker-compose.yml up -d"
+      "snap install http", # Need to install http to run the API calls (create the admin user etc.)
+      "docker compose -f /root/docker-compose.yml up -d" 
     ]
   }
 }
