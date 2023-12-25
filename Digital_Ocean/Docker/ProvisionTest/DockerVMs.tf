@@ -39,7 +39,8 @@ provisioner "file" {
       "chmod 600 ~/.ssh/id_rsa", # Change the permissions of the ssh file
       "snap install http", # Need to install http to run the API calls (create the admin user etc.)
       "docker compose -f /root/docker-compose.yml up -d", # Run the docker-compose file
-      "sudo ufw allow 9000" # Allow port 9000 for portainer
+      "sudo ufw allow 9000", # Allow port 9000 for portainer
+      "http POST localhost:9000/api/users/admin/init Username=\"admin\" Password=\"admin01admin01\"" # Create the admin user
     ]
   }
 
