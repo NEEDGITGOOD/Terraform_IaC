@@ -67,12 +67,18 @@ resource "digitalocean_droplet" "Docker01" {
     ]
   }
 
-  # Add Environments via script (Docker02, Docker03)
-  provisioner "remote-exec" {
-    script = "/root/Terraform_IaC/Digital_Ocean/Docker/ProvisionTest/setup.sh"
+  # Copy the script to the remote machine
+  provisioner "file" {
+    source      = "/root/Terraform_IaC/Digital_Ocean/Docker/ProvisionTest/setup.sh"
+    destination = "/root/setup.sh"
   }
 
-  
+  # Add Environments via script (Docker02, Docker03)
+  provisioner "remote-exec" {
+    script = "/root/setup.sh"
+  }
+
+
     depends_on = [digitalocean_droplet.Docker02, digitalocean_droplet.Docker03]
   }
 
