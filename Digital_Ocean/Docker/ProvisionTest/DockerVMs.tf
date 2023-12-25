@@ -60,6 +60,7 @@ resource "digitalocean_droplet" "Docker01" {
   }
       #"autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -f -N -L 2375:/var/run/docker.sock root@10.114.0.2 -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null"",
       #http --form POST http://localhost:9000/api/endpoints "Authorization: Bearer $TOKEN" Name="Docker03" URL="tcp://localhost:2375" EndpointCreationType=1
+
 # Connect to the Docker03 VM, create ssh tunnel, add environment
   provisioner "remote-exec" {
     inline = [
@@ -67,7 +68,7 @@ resource "digitalocean_droplet" "Docker01" {
       "echo Running SSH command...",
       "autossh -M 0 -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 3\" -f -N -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker03.ipv4_address_private} -o \"StrictHostKeyChecking=no\" -o \"UserKnownHostsFile=/dev/null\"",
       "echo Adding Environment...",
-      "TOKEN=$(http POST localhost:9000/api/auth Username=\\\"admin\\\" Password=\\\"admin01admin01\\\" | jq -r \".jwt\")", # Set the token variable
+      "TOKEN=$(http POST localhost:9000/api/auth Username=\\\"admin\\\" Password=\\\"admin01admin01\\\" | jq -r \".jwt\")",
       "echo $TOKEN",
       "http --form POST http://localhost:9000/api/endpoints \"Authorization: Bearer $TOKEN\" Name='Docker03' URL='tcp://localhost:2374' EndpointCreationType=1"
 
