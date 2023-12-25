@@ -38,7 +38,7 @@ resource "digitalocean_droplet" "Docker01" {
       #"sudo apt update", 
       "chmod 600 ~/.ssh/id_rsa", # Change the permissions of the ssh file
       "snap install http", # Need to install http to run the API calls (create the admin user etc.)
-      "snap install autossh", #Need to install autossh to create the ssh tunnel
+      "apt install autossh", # Need to install autossh to create the ssh tunnel
       "docker compose -f /root/docker-compose.yml up -d", # Run the docker-compose file
       "sudo ufw allow 9000", # Allow port 9000 for portainer
       "sudo ufw allow 2374", # Allow port 2374 for the ssh tunnel (Docker03)
@@ -57,6 +57,14 @@ resource "digitalocean_droplet" "Docker01" {
       #"autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -f -N -L 2375:/var/run/docker.sock root@10.114.0.2 -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null"",
       #http --form POST http://localhost:9000/api/endpoints "Authorization: Bearer $TOKEN" Name="Docker03" URL="tcp://localhost:2375" EndpointCreationType=1
 
+
+#autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -f -N -L 2375:/var/run/docker.sock root@10.114.0.2 -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null
+# ssh -L 2375:/var/run/docker.sock root@10.114.0.2 -N
+# autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -f -N -L 2375:/var/run/docker.sock root@10.114.0.4
+#ssh -L 2375:/var/run/docker.sock root@10.114.0.2 -N
+# autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -f -N -L 2375:/var/run/docker.sock root@10.114.0.2
+
+# AUTOSSH_LOGLEVEL=7 autossh -M 0 -v -o "ServerAliveInterval 30" -o "StrictHostKeyChecking=no" -o "ServerAliveCountMax 3" -N -L 2375:/var/run/docker.sock root@10.114.0.2
 # Connect to the Docker03 VM, create ssh tunnel
   provisioner "remote-exec" {
     inline = [
@@ -73,10 +81,17 @@ resource "digitalocean_droplet" "Docker01" {
     destination = "/root/setup.sh"
   }
 
-  # Add Environments via script (Docker02, Docker03)
-  provisioner "remote-exec" {
-    script = "/root/setup.sh"
-  }
+# Ensure the script is executable
+provisioner "remote-exec" {
+  inline = [
+    "chmod +x /root/setup.sh"
+  ]
+}
+
+# Run the script
+provisioner "remote-exec" {
+  script = "/root/setup.sh"
+}
 
 
     depends_on = [digitalocean_droplet.Docker02, digitalocean_droplet.Docker03]
