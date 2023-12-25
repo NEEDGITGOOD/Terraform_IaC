@@ -69,7 +69,7 @@ resource "digitalocean_droplet" "Docker01" {
 
   # Copy the script to the remote machine
   provisioner "file" {
-    source      = "/root/Terraform_IaC/Digital_Ocean/Docker/ProvisionTest/setup.sh"
+    source      = "setup.sh"
     destination = "/root/setup.sh"
   }
 
