@@ -21,16 +21,16 @@ resource "digitalocean_droplet" "Docker01" {
     destination = "/root/docker-compose.yml"
   }
 
-  provisioner "remote-exec" {
+provisioner "remote-exec" {
   inline = [
-    "mkdir -p ~/.ssh",  # Create the .ssh directory if it doesn't exist (for the ssh file)
+    "mkdir -p /root/.ssh",  # Create the .ssh directory (for the ssh file)
   ]
 }
 
-    provisioner "file" {  
-    content     = file("~/.ssh/id_rsa") # Copy the ssh file to the VM
-    destination = "~/.ssh/id_rsa"
-  }
+provisioner "file" {  
+  content     = file("~/.ssh/id_rsa") # Copy the ssh file to the VM
+  destination = "/root/.ssh/id_rsa"
+}
 
   provisioner "remote-exec" {
     inline = [
