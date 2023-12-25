@@ -50,7 +50,7 @@ resource "digitalocean_droplet" "Docker01" {
     inline = [
       "export PATH=$PATH:/usr/bin",
       "echo Running SSH command...",
-      "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker02.ipv4_address_private} -N -vvv &",
+      "autossh -M 0 -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 3\" -f -N -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker02.ipv4_address_private} -o \"StrictHostKeyChecking=no\" -o \"UserKnownHostsFile=/dev/null\"",
       "echo Adding Environment...",
       "TOKEN=$(http POST localhost:9000/api/auth Username=\"admin\" Password=\"admin01admin01\" | jq -r \".jwt\")", # Set the token variable
       "http --form POST http://localhost:9000/api/endpoints \"Authorization: Bearer $TOKEN\" Name='Docker03' URL='tcp://localhost:2375' EndpointCreationType=1"
@@ -63,7 +63,7 @@ resource "digitalocean_droplet" "Docker01" {
     inline = [
       "export PATH=$PATH:/usr/bin",
       "echo Running SSH command...",
-      "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -L 2374:/var/run/docker.sock root@${digitalocean_droplet.Docker03.ipv4_address_private} -N -vvv &",
+      "autossh -M 0 -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 3\" -f -N -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker03.ipv4_address_private} -o \"StrictHostKeyChecking=no\" -o \"UserKnownHostsFile=/dev/null\"",
       "echo Adding Environment...",
       "TOKEN=$(http POST localhost:9000/api/auth Username=\"admin\" Password=\"admin01admin01\" | jq -r \".jwt\")", # Set the token variable
       "http --form POST http://localhost:9000/api/endpoints \"Authorization: Bearer $TOKEN\" Name='Docker03' URL='tcp://localhost:2374' EndpointCreationType=1"
