@@ -1,5 +1,10 @@
 #!/bin/bash
 
+### Not In use anymore !!! ###
+### Not In use anymore !!! ###
+### Not In use anymore !!! ###
+### Not In use anymore !!! ###
+
 # Extract the private IP address from the terraform.tfstate file
 IP_ADDRESS=$(jq -r '.resources[] | select(.name=="Docker01") .instances[0].attributes.ipv4_address_private' terraform.tfstate)
 
