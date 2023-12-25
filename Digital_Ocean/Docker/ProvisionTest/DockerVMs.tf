@@ -55,9 +55,31 @@ provisioner "file" {
   provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin", 
-      "nohup ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker03.ipv4_address_private} -N &"
+      "nohup ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -L 2374:/var/run/docker.sock root@${digitalocean_droplet.Docker03.ipv4_address_private} -N &"
     ]
   }
+
+# Add Docker02 Environment
+provisioner "remote-exec" {
+  inline = [
+    "export PATH=$PATH:/usr/bin",
+    "TOKEN=$(http POST localhost:9000/api/auth Username="admin" Password="admin01admin01" | jq -r ".jwt")", 
+    <<EOF
+http --form POST http://localhost:9000/api/endpoints "Authorization: Bearer $TOKEN" Name='test-remote' URL='tcp://localhost:2375' EndpointCreationType=1
+EOF
+  ]
+}
+
+# Add Docker03 Environment
+provisioner "remote-exec" {
+  inline = [
+    "export PATH=$PATH:/usr/bin",
+    "TOKEN=$(http POST localhost:9000/api/auth Username="admin" Password="admin01admin01" | jq -r ".jwt")", 
+    <<EOF
+http --form POST http://localhost:9000/api/endpoints "Authorization: Bearer $TOKEN" Name='test-remote' URL='tcp://localhost:2374' EndpointCreationType=1
+EOF
+  ]
+}
 
   depends_on = [digitalocean_droplet.Docker02, digitalocean_droplet.Docker03]
 }
