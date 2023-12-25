@@ -40,6 +40,7 @@ resource "digitalocean_droplet" "Docker01" {
       "snap install http", # Need to install http to run the API calls (create the admin user etc.)
       "docker compose -f /root/docker-compose.yml up -d", # Run the docker-compose file
       "sudo ufw allow 9000", # Allow port 9000 for portainer
+      "sudo ufw allow 2374", # Allow port 2374 for the ssh tunnel (Docker03)
       "http POST localhost:9000/api/users/admin/init Username=\"admin\" Password=\"admin01admin01\"" # Create the admin user
     ]
   }
@@ -58,17 +59,17 @@ resource "digitalocean_droplet" "Docker01" {
   }
 
 # Connect to the Docker03 VM, create ssh tunnel, add environment
-#  provisioner "remote-exec" {
-#    inline = [
-#      "export PATH=$PATH:/usr/bin",
-#      "echo Running SSH command...",
-#      "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -L 2374:/var/run/docker.sock root@${digitalocean_droplet.Docker03.ipv4_address_private} -N -vvv &",
-#      "echo Adding Environment...",
-#      "TOKEN=$(http POST localhost:9000/api/auth Username=\"admin\" Password=\"admin01admin01\" | jq -r \".jwt\")". # Set the token variable
-#      "http --form POST http://localhost:9000/api/endpoints \"Authorization: Bearer $TOKEN\" Name='Docker03' URL='tcp://localhost:2374' EndpointCreationType=1"
-#
-#    ]
-#  }
+  provisioner "remote-exec" {
+    inline = [
+      "export PATH=$PATH:/usr/bin",
+      "echo Running SSH command...",
+      "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -L 2374:/var/run/docker.sock root@${digitalocean_droplet.Docker03.ipv4_address_private} -N -vvv &",
+      "echo Adding Environment...",
+      "TOKEN=$(http POST localhost:9000/api/auth Username=\"admin\" Password=\"admin01admin01\" | jq -r \".jwt\")", # Set the token variable
+      "http --form POST http://localhost:9000/api/endpoints \"Authorization: Bearer $TOKEN\" Name='Docker03' URL='tcp://localhost:2374' EndpointCreationType=1"
+
+    ]
+  }
 
     depends_on = [digitalocean_droplet.Docker02, digitalocean_droplet.Docker03]
   }
