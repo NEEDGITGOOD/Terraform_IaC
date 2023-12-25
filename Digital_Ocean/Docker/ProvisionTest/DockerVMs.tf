@@ -47,7 +47,7 @@ provisioner "file" {
   provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin", 
-      "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker02.ipv4_address_private} -N &" 
+      "nohup ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker02.ipv4_address_private} -N &" 
     ]
   }
 
@@ -55,7 +55,7 @@ provisioner "file" {
   provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin", 
-      "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker03.ipv4_address_private} -N &"
+      "nohup ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker03.ipv4_address_private} -N &"
     ]
   }
 
