@@ -42,6 +42,24 @@ provisioner "file" {
       "sudo ufw allow 9000" # Allow port 9000 for portainer
     ]
   }
+
+# Connect to the Docker02 VM and create a tunnel to the Docker daemon
+  provisioner "remote-exec" {
+    inline = [
+      "export PATH=$PATH:/usr/bin", 
+      "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker02.ipv4_address_private} -N &" 
+    ]
+  }
+
+# This is the same as the above command, but for the third VM
+  provisioner "remote-exec" {
+    inline = [
+      "export PATH=$PATH:/usr/bin", 
+      "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker03.ipv4_address_private} -N &"
+    ]
+  }
+
+  depends_on = [digitalocean_droplet.Docker02, digitalocean_droplet.Docker03]
 }
 
 ## Run the Local script
