@@ -21,10 +21,16 @@ resource "digitalocean_droplet" "Docker01" {
     destination = "/root/docker-compose.yml"
   }
 
+    provisioner "file" {  
+    content     = file("~/.ssh/id_rsa") # Copy the ssh file to the VM
+    destination = "~/.ssh/id_rsa"
+  }
+
   provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin", 
       "sudo apt update", 
+      "chmod 600 ~/.ssh/id_rsa", # Change the permissions of the ssh file
       "snap install http", # Need to install http to run the API calls (create the admin user etc.)
       "docker compose -f /root/docker-compose.yml up -d" # Run the docker-compose file
     ]
