@@ -16,17 +16,17 @@ resource "digitalocean_droplet" "Docker01" {
     timeout = "4m"
   }
 
-  provisioner "file" {
-    content     = file("${path.module}/templates/docker-compose-portainer.yaml")
+  provisioner "file" {  
+    content     = file("${path.module}/templates/docker-compose-portainer.yaml") # Copy the docker-compose file to the VM
     destination = "/root/docker-compose.yml"
   }
 
   provisioner "remote-exec" {
     inline = [
-      "export PATH=$PATH:/usr/bin",
-      "sudo apt update",
+      "export PATH=$PATH:/usr/bin", 
+      "sudo apt update", 
       "snap install http", # Need to install http to run the API calls (create the admin user etc.)
-      "docker compose -f /root/docker-compose.yml up -d" 
+      "docker compose -f /root/docker-compose.yml up -d" # Run the docker-compose file
     ]
   }
 }
@@ -59,7 +59,7 @@ resource "digitalocean_droplet" "Docker02" {
   }
 
   provisioner "file" {
-    content     = file("${path.module}/docker-compose.yaml")
+    content     = file("${path.module}/docker-compose.yaml") # Copy the docker-compose file to the VM
     destination = "/root/docker-compose.yaml"
   }
 
@@ -71,7 +71,6 @@ resource "digitalocean_droplet" "Docker02" {
     ]
   }
 }
-
 
 ## Docker03
 resource "digitalocean_droplet" "Docker03" {
@@ -92,7 +91,7 @@ resource "digitalocean_droplet" "Docker03" {
   }
 
   provisioner "file" {
-    content     = file("${path.module}/docker-compose.yaml")
+    content     = file("${path.module}/docker-compose.yaml") # Copy the docker-compose file to the VM
     destination = "/root/docker-compose.yaml"
   }
 
@@ -100,7 +99,7 @@ resource "digitalocean_droplet" "Docker03" {
     inline = [
       "export PATH=$PATH:/usr/bin",
       "sudo apt update",
-      "docker compose -f /root/docker-compose.yaml up -d"
+      "docker compose -f /root/docker-compose.yaml up -d" # Run the docker-compose file
     ]
   }
 }
