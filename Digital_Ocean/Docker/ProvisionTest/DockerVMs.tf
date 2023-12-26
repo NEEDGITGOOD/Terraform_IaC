@@ -63,6 +63,14 @@ resource "digitalocean_droplet" "Docker01" {
 # autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -f -N -L 2375:/var/run/docker.sock root@10.114.0.4
 #ssh -L 2375:/var/run/docker.sock root@10.114.0.2 -N
 # autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -f -N -L 2375:/var/run/docker.sock root@10.114.0.2
+## Old exec
+#      "autossh -M 0 -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 3\" -f -N -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker03.ipv4_address_private} -o \"StrictHostKeyChecking=no\" -o \"UserKnownHostsFile=/dev/null\"",
+
+
+### This Work! (Manually!) (Lets try it in exec!)
+# autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -f -N -L 2375:/var/run/docker.sock root@10.114.0.4
+
+
 
 # AUTOSSH_LOGLEVEL=7 autossh -M 0 -v -o "ServerAliveInterval 30" -o "StrictHostKeyChecking=no" -o "ServerAliveCountMax 3" -N -L 2375:/var/run/docker.sock root@10.114.0.2
 # Connect to the Docker03 VM, create ssh tunnel
@@ -70,8 +78,7 @@ resource "digitalocean_droplet" "Docker01" {
     inline = [
       "export PATH=$PATH:/usr/bin",
       "echo Running SSH command...",
-      "autossh -M 0 -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 3\" -f -N -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker03.ipv4_address_private} -o \"StrictHostKeyChecking=no\" -o \"UserKnownHostsFile=/dev/null\""
-
+      "autossh -M 0 -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 3\" -f -N -L 2375:/var/run/docker.sock root@10.114.0.4 -o \"StrictHostKeyChecking=no\""
     ]
   }
 
@@ -81,16 +88,14 @@ resource "digitalocean_droplet" "Docker01" {
     destination = "/root/setup.sh"
   }
 
-# Ensure the script is executable
-provisioner "remote-exec" {
-  inline = [
-    "chmod +x /root/setup.sh"
-  ]
-}
-
 # Run the script
 provisioner "remote-exec" {
-  script = "/root/setup.sh"
+    inline = [
+      "chmod +x /root/setup.sh",
+      "export PATH=$PATH:/usr/bin",
+      "echo Running my Script! command...",
+      "bash /root/setup.sh"
+    ]
 }
 
 
