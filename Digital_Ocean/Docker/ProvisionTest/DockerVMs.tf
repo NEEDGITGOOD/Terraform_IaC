@@ -59,16 +59,18 @@ resource "digitalocean_droplet" "Docker01" {
 
 
 #autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -f -N -L 2375:/var/run/docker.sock root@10.114.0.2 -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null
-# ssh -L 2375:/var/run/docker.sock root@10.114.0.2 -N
 # autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -f -N -L 2375:/var/run/docker.sock root@10.114.0.4
-#ssh -L 2375:/var/run/docker.sock root@10.114.0.2 -N
-# autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -f -N -L 2375:/var/run/docker.sock root@10.114.0.2
+
 ## Old exec
 #      "autossh -M 0 -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 3\" -f -N -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker03.ipv4_address_private} -o \"StrictHostKeyChecking=no\" -o \"UserKnownHostsFile=/dev/null\"",
 
 
-### This Work! (Manually!) (Lets try it in exec!)
-# autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -f -N -L 2375:/var/run/docker.sock root@10.114.0.4
+#### This Work! (Manually!) (Lets try it in exec!)
+### AutoSSH
+## autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -f -N -L 2375:/var/run/docker.sock root@10.114.0.4
+
+### SSH
+# ssh -L 2375:/var/run/docker.sock root@10.114.0.2 -N
 
 
 
