@@ -46,81 +46,49 @@ resource "digitalocean_droplet" "Docker01" {
     ]
   }
 
-# Connect to the Docker02 VM, create ssh tunnel
-  provisioner "remote-exec" {
-    inline = [
-      "export PATH=$PATH:/usr/bin",
-      "echo Running SSH command...",
-      "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker02.ipv4_address_private} -N -vvv &",
-      "echo Running SSH command...AUTOSSH Version",
-      "AUTOSSH_LOGLEVEL=7 autossh -M 0 -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 3\" -o \"StrictHostKeyChecking=no\" -f -N -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker02.ipv4_address_private}"
-    ]
-  }
-      #"autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -f -N -L 2375:/var/run/docker.sock root@10.114.0.2 -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null"",
-      #http --form POST http://localhost:9000/api/endpoints "Authorization: Bearer $TOKEN" Name="Docker03" URL="tcp://localhost:2375" EndpointCreationType=1
 
 
-#autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -f -N -L 2375:/var/run/docker.sock root@10.114.0.2 -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null
-# autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -f -N -L 2375:/var/run/docker.sock root@10.114.0.4
 
-## Old exec
-#      "autossh -M 0 -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 3\" -f -N -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker03.ipv4_address_private} -o \"StrictHostKeyChecking=no\" -o \"UserKnownHostsFile=/dev/null\"",
-
-
-#### This Work! (Manually!) (Lets try it in exec!) Wait not really I think i have to connect via normal ssh first then it works? idk anymore lol
-
-### AutoSSH
-## autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -f -N -L 2374:/var/run/docker.sock root@10.114.0.4
-
-## Version with the disabling strict host key thing
-## autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -o "StrictHostKeyChecking=no" -f -N -L 2374:/var/run/docker.sock root@10.114.0.4
-
-## With logging (Works!)
-## AUTOSSH_LOGLEVEL=7 autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -o "StrictHostKeyChecking=no" -f -N -L 2374:/var/run/docker.sock root@10.114.0.4
-
-### SSH Tunnel
-# ssh -L 2375:/var/run/docker.sock root@10.114.0.2 -N &
-
-# Docker Test Command
-# docker -H tcp://localhost:2375 ps
-
-# Get Process via Netstat
-# netstat -tunlp | grep 2375
-# netstat -tunlp | grep 2374
-
-# AUTOSSH_LOGLEVEL=7 autossh -M 0 -v -o "ServerAliveInterval 30" -o "StrictHostKeyChecking=no" -o "ServerAliveCountMax 3" -f -N -L 2375:/var/run/docker.sock root@10.114.0.2
-
-
-# Connect to the Docker03 VM, create ssh tunnel
-  provisioner "remote-exec" {
-    inline = [
-      "export PATH=$PATH:/usr/bin",
-      "echo Running SSH command...",
-      "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -L 2374:/var/run/docker.sock root@${digitalocean_droplet.Docker03.ipv4_address_private} -N -vvv &",
-      "echo Running SSH command...AUTOSSH Version",
-      "AUTOSSH_LOGLEVEL=7 autossh -M 0 -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 3\" -o \"StrictHostKeyChecking=no\" -f -N -L 2374:/var/run/docker.sock root@${digitalocean_droplet.Docker03.ipv4_address_private}"
-    ]
-  }
 
   # Copy the script to the remote machine
   provisioner "file" {
-    source      = "setup.sh"
-    destination = "/root/setup.sh"
+    source      = "ssh_tunnels.sh"
+    destination = "/root/ssh_tunnels.sh"
   }
 
 # Run the script
 provisioner "remote-exec" {
     inline = [
-      "chmod +x /root/setup.sh",
+      "chmod +x /root/ssh_tunnels.sh",
       "export PATH=$PATH:/usr/bin",
       "echo Running my Script! command...",
-      "bash /root/setup.sh"
+      "bash /root/ssh_tunnels.sh"
     ]
 }
 
 
-    depends_on = [digitalocean_droplet.Docker02, digitalocean_droplet.Docker03]
+depends_on = [
+  digitalocean_droplet.Docker02,
+  digitalocean_droplet.Docker03,
+  null_resource.setup_ssh_tunnels
+]
+    }
+
+# My SSH Tunnel Script Creator
+resource "null_resource" "setup_ssh_tunnels" {
+  # Run the script to create the dynamic SSH tunnel file
+  provisioner "local-exec" {
+    command = "bash setup_ssh_tunnels.sh"
   }
+
+  # Ensure this runs after Docker02 and Docker03 are created
+  depends_on = [
+    digitalocean_droplet.Docker02,
+    digitalocean_droplet.Docker03
+  ]
+}
+
+
 
 
 ## Docker02
