@@ -46,12 +46,12 @@ resource "digitalocean_droplet" "Docker01" {
     ]
   }
 
- # Connect to the Docker02 VM, create ssh tunnel, add environment
+# Connect to the Docker03 VM, create ssh tunnel
   provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin",
       "echo Running SSH command...",
-      "autossh -M 0 -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 3\" -f -N -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker02.ipv4_address_private} -o \"StrictHostKeyChecking=no\" -o \"UserKnownHostsFile=/dev/null\""
+      "AUTOSSH_LOGLEVEL=7 autossh -M 0 -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 3\" -o \"StrictHostKeyChecking=no\" -f -N -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker02.ipv4_address_private}"
     ]
   }
       #"autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -f -N -L 2375:/var/run/docker.sock root@10.114.0.2 -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null"",
@@ -65,22 +65,36 @@ resource "digitalocean_droplet" "Docker01" {
 #      "autossh -M 0 -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 3\" -f -N -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker03.ipv4_address_private} -o \"StrictHostKeyChecking=no\" -o \"UserKnownHostsFile=/dev/null\"",
 
 
-#### This Work! (Manually!) (Lets try it in exec!)
+#### This Work! (Manually!) (Lets try it in exec!) Wait not really I think i have to connect via normal ssh first then it works? idk anymore lol
+
 ### AutoSSH
-## autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -f -N -L 2375:/var/run/docker.sock root@10.114.0.4
+## autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -f -N -L 2374:/var/run/docker.sock root@10.114.0.4
 
-### SSH
-# ssh -L 2375:/var/run/docker.sock root@10.114.0.2 -N
+## Version with the disabling strict host key thing
+## autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -o "StrictHostKeyChecking=no" -f -N -L 2374:/var/run/docker.sock root@10.114.0.4
+
+## With logging (Works!)
+## AUTOSSH_LOGLEVEL=7 autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -o "StrictHostKeyChecking=no" -f -N -L 2374:/var/run/docker.sock root@10.114.0.4
+
+### SSH Tunnel
+# ssh -L 2375:/var/run/docker.sock root@10.114.0.2 -N &
+
+# Docker Test Command
+# docker -H tcp://localhost:2375 ps
+
+# Get Process via Netstat
+# netstat -tunlp | grep 2375
+# netstat -tunlp | grep 2374
+
+# AUTOSSH_LOGLEVEL=7 autossh -M 0 -v -o "ServerAliveInterval 30" -o "StrictHostKeyChecking=no" -o "ServerAliveCountMax 3" -f -N -L 2375:/var/run/docker.sock root@10.114.0.2
 
 
-
-# AUTOSSH_LOGLEVEL=7 autossh -M 0 -v -o "ServerAliveInterval 30" -o "StrictHostKeyChecking=no" -o "ServerAliveCountMax 3" -N -L 2375:/var/run/docker.sock root@10.114.0.2
 # Connect to the Docker03 VM, create ssh tunnel
   provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin",
       "echo Running SSH command...",
-      "autossh -M 0 -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 3\" -f -N -L 2375:/var/run/docker.sock root@10.114.0.4 -o \"StrictHostKeyChecking=no\""
+      "AUTOSSH_LOGLEVEL=7 autossh -M 0 -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 3\" -o \"StrictHostKeyChecking=no\" -f -N -L 2374:/var/run/docker.sock root@${digitalocean_droplet.Docker03.ipv4_address_private}"
     ]
   }
 
