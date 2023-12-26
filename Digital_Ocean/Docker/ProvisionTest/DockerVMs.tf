@@ -46,11 +46,13 @@ resource "digitalocean_droplet" "Docker01" {
     ]
   }
 
-# Connect to the Docker03 VM, create ssh tunnel
+# Connect to the Docker02 VM, create ssh tunnel
   provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin",
       "echo Running SSH command...",
+      "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker02.ipv4_address_private} -N -vvv &",
+      "echo Running SSH command...AUTOSSH Version",
       "AUTOSSH_LOGLEVEL=7 autossh -M 0 -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 3\" -o \"StrictHostKeyChecking=no\" -f -N -L 2375:/var/run/docker.sock root@${digitalocean_droplet.Docker02.ipv4_address_private}"
     ]
   }
@@ -94,6 +96,8 @@ resource "digitalocean_droplet" "Docker01" {
     inline = [
       "export PATH=$PATH:/usr/bin",
       "echo Running SSH command...",
+      "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -L 2374:/var/run/docker.sock root@${digitalocean_droplet.Docker03.ipv4_address_private} -N -vvv &",
+      "echo Running SSH command...AUTOSSH Version",
       "AUTOSSH_LOGLEVEL=7 autossh -M 0 -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 3\" -o \"StrictHostKeyChecking=no\" -f -N -L 2374:/var/run/docker.sock root@${digitalocean_droplet.Docker03.ipv4_address_private}"
     ]
   }
