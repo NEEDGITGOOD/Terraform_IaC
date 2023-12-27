@@ -3,7 +3,7 @@ resource "digitalocean_droplet" "Docker01" {
   image = "docker-20-04"
   name = "Docker01"
   region = "fra1"
-  size = "s-1vcpu-1gb"
+  size = "s-1vcpu-2gb"
   ssh_keys = [
     data.digitalocean_ssh_key.terraform.id
   ]
@@ -46,26 +46,26 @@ resource "digitalocean_droplet" "Docker01" {
     ]
   }
 
-  # Copy the script to the remote machine
+  # Copy the script to the remote machine (from my Host to the VM)
   provisioner "file" {
     source      = "ssh_tunnels.sh"
-    destination = "/root/ssh_tunnels.sh"
+    destination = "/root/ssh_tunnels.sh"  
   }
 
 # Run the script
 provisioner "remote-exec" {
     inline = [
-      "chmod +x /root/ssh_tunnels.sh",
-      "export PATH=$PATH:/usr/bin",
-      "echo Running my Script! command...",
-      "bash /root/ssh_tunnels.sh"
+      "export PATH=$PATH:/usr/bin", 
+      "chmod +x /root/ssh_tunnels.sh", # Make the script executable
+      "echo Running my Script! command...", # Logging
+      "bash /root/ssh_tunnels.sh" # Run the script
     ]
 }
 
 depends_on = [
-  digitalocean_droplet.Docker02,
+  digitalocean_droplet.Docker02,  # Wait for Docker02 and Docker03 to be created
   digitalocean_droplet.Docker03,
-  null_resource.setup_ssh_tunnels
+  null_resource.setup_ssh_tunnels # Wait for the script to be created
 ]
     }
 
@@ -88,7 +88,7 @@ resource "digitalocean_droplet" "Docker02" {
   image = "docker-20-04"
   name = "Docker02"
   region = "fra1"
-  size = "s-1vcpu-1gb"
+  size = "s-1vcpu-2gb"
   ssh_keys = [
     data.digitalocean_ssh_key.terraform.id
   ]
@@ -120,7 +120,7 @@ resource "digitalocean_droplet" "Docker03" {
   image = "docker-20-04"
   name = "Docker03"
   region = "fra1"
-  size = "s-1vcpu-1gb"
+  size = "s-1vcpu-2gb"
   ssh_keys = [
     data.digitalocean_ssh_key.terraform.id
   ]
