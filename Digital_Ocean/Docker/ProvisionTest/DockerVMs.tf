@@ -46,10 +46,6 @@ resource "digitalocean_droplet" "Docker01" {
     ]
   }
 
-
-
-
-
   # Copy the script to the remote machine
   provisioner "file" {
     source      = "ssh_tunnels.sh"
@@ -65,7 +61,6 @@ provisioner "remote-exec" {
       "bash /root/ssh_tunnels.sh"
     ]
 }
-
 
 depends_on = [
   digitalocean_droplet.Docker02,
@@ -87,9 +82,6 @@ resource "null_resource" "setup_ssh_tunnels" {
     digitalocean_droplet.Docker03
   ]
 }
-
-
-
 
 ## Docker02
 resource "digitalocean_droplet" "Docker02" {
