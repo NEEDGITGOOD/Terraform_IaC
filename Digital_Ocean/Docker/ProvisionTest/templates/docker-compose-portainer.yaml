@@ -18,7 +18,7 @@ services:
       - /root/my-config.yml:/app/public/conf.yml
       - dashy_data:/app/data
     ports:
-      - 4000:8080
+      - 4000:80
     # Set any environmental variables
     environment:
       - NODE_ENV=production
