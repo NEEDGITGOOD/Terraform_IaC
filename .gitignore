@@ -38,3 +38,4 @@ Digital_Ocean/Docker/.main.tf.swp
 # Ignore Copied Docker Compose File
 Digital_Ocean/Docker/ProvisionTest/docker-compose.yaml
 Digital_Ocean/Docker/ProvisionTest/docker-compose.yaml
+Digital_Ocean/Docker/ProvisionTest/ssh_tunnels.sh
