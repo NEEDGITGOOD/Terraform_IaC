@@ -114,7 +114,7 @@ resource "digitalocean_droplet" "Docker02" {
 
 # Copy the docker-compose file to the VM
   provisioner "file" {
-    source      = "docker-compose_docker02"
+    source      = "docker-compose_docker02.yaml"
     destination = "/root/docker-compose.yaml"
   }
 
