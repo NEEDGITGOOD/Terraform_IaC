@@ -45,7 +45,7 @@ resource "digitalocean_droplet" "Docker01" {
   provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin", 
-      "sudo apt update",  # Update the VM
+      "apt update", # Update the VM
       "chmod 600 ~/.ssh/id_rsa", # Change the permissions of the ssh file
       "snap install http", # Need to install http to run the API calls (create the admin user etc.)
       "apt install autossh", # Need to install autossh to create the ssh tunnel
@@ -121,7 +121,7 @@ resource "digitalocean_droplet" "Docker02" {
   provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin",
-      #"sudo apt update", 
+      "apt update", 
       "docker compose -f /root/docker-compose.yaml up -d"
     ]
   }
@@ -154,7 +154,7 @@ resource "digitalocean_droplet" "Docker03" {
   provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin",
-      "sudo apt update", 
+      "apt update", 
       "docker compose -f /root/docker-compose.yaml up -d" # Run the docker-compose file
     ]
   }
