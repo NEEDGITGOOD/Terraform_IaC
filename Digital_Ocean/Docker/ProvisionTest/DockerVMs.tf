@@ -16,26 +16,36 @@ resource "digitalocean_droplet" "Docker01" {
     timeout = "4m"
   }
 
+  # Upload Dashy Config File
   provisioner "file" {  
-    content     = file("${path.module}/templates/docker-compose-portainer.yaml") # Copy the docker-compose file to the VM
+    source      = "my-config.yml"
+    destination = "/root/my-config.yml"
+  }
+
+  # Copy the docker-compose file to the VM
+  provisioner "file" {  
+    content     = file("${path.module}/templates/docker-compose-portainer.yaml") 
     destination = "/root/docker-compose.yml"
   }
 
+  # Create the .ssh directory (for the ssh file)
   provisioner "remote-exec" {
     inline = [
-      "mkdir -p /root/.ssh",  # Create the .ssh directory (for the ssh file)
+      "mkdir -p /root/.ssh",  
     ]
   }
 
+  # Copy the ssh file to the VM
   provisioner "file" {  
-    content     = file("~/.ssh/id_rsa") # Copy the ssh file to the VM
+    content     = file("~/.ssh/id_rsa") 
     destination = "/root/.ssh/id_rsa"
   }
 
+  # Run Commands on the VM
   provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin", 
-      #"sudo apt update", 
+      "sudo apt update",  # Update the VM
       "chmod 600 ~/.ssh/id_rsa", # Change the permissions of the ssh file
       "snap install http", # Need to install http to run the API calls (create the admin user etc.)
       "apt install autossh", # Need to install autossh to create the ssh tunnel
@@ -52,7 +62,7 @@ resource "digitalocean_droplet" "Docker01" {
     destination = "/root/ssh_tunnels.sh"  
   }
 
-# Run the script
+# Run the ssh script
 provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin", 
@@ -62,6 +72,7 @@ provisioner "remote-exec" {
     ]
 }
 
+# Ensure this runs after Docker02 and Docker03 are created
 depends_on = [
   digitalocean_droplet.Docker02,  # Wait for Docker02 and Docker03 to be created
   digitalocean_droplet.Docker03,
@@ -69,7 +80,7 @@ depends_on = [
 ]
     }
 
-# My SSH Tunnel Script Creator
+# SSH Tunnel Script Creator
 resource "null_resource" "setup_ssh_tunnels" {
   # Run the script to create the dynamic SSH tunnel file
   provisioner "local-exec" {
@@ -101,8 +112,9 @@ resource "digitalocean_droplet" "Docker02" {
     timeout = "4m"
   }
 
+# Copy the docker-compose file to the VM
   provisioner "file" {
-    content     = file("${path.module}/docker-compose.yaml") # Copy the docker-compose file to the VM
+    source      = "docker-compose_docker02"
     destination = "/root/docker-compose.yaml"
   }
 
@@ -133,15 +145,16 @@ resource "digitalocean_droplet" "Docker03" {
     timeout = "4m"
   }
 
+# Copy the docker-compose file to the VM
   provisioner "file" {
-    content     = file("${path.module}/docker-compose.yaml") # Copy the docker-compose file to the VM
+    source      = "docker-compose_docker03.yaml"
     destination = "/root/docker-compose.yaml"
   }
 
   provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin",
-      #"sudo apt update", 
+      "sudo apt update", 
       "docker compose -f /root/docker-compose.yaml up -d" # Run the docker-compose file
     ]
   }
