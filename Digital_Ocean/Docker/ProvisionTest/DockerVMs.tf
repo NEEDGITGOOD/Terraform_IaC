@@ -52,7 +52,7 @@ resource "digitalocean_droplet" "Docker01" {
       "docker compose -f /root/docker-compose.yml up -d", # Run the docker-compose file
       "sudo ufw allow 9000", # Allow port 9000 for portainer
       "sudo ufw allow 2374", # Allow port 2374 for the ssh tunnel (Docker03)
-      "sudo ufw allow 8080", # Allow port 8080 for Dashy
+      "sudo ufw allow 80", # Allow port 80 for Dashy
       "http POST localhost:9000/api/users/admin/init Username=\"admin\" Password=\"admin01admin01\"" # Create the admin user
     ]
   }
