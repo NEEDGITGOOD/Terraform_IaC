@@ -43,3 +43,8 @@ Digital_Ocean/Docker/ProvisionTest/ssh_tunnels.sh
 
 # Ignore Automatically Generated & Copied Dashy Config File
 Digital_Ocean/Docker/ProvisionTest/my-config.yml
+
+# Exclude any SSH keys
+*.pem
+*.pub
+id_rsa
