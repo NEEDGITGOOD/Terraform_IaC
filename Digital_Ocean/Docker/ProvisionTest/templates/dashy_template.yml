@@ -36,14 +36,14 @@ sections:
     tags: [docker, management, portainer]
     hotkey: 1
 
-  - title: CentOS01
+  - title: AlmaLinux01 - AlmaLinux 8.4
     icon: fab fa-centos
     url: http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS/centos01  
     description: CentOS machine on Docker01
     tags: [docker, centos, virtual machine]
     hotkey: 2
 
-  - title: Dashboard01
+  - title: Dashboard01 - Dashy
     icon: fas fa-tachometer-alt
     url: http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:4000  
     description: Dashy dashboard on Docker01

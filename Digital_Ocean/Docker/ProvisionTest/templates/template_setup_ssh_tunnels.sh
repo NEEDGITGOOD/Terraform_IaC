@@ -25,3 +25,9 @@ http --form POST http://localhost:9000/api/endpoints "Authorization: Bearer $TOK
 ## Docker03
 echo "Adding Environment for Docker03..."
 http --form POST http://localhost:9000/api/endpoints "Authorization: Bearer $TOKEN" Name='Docker03' URL='tcp://localhost:2374' EndpointCreationType=1
+
+# Adding Docker01 IP for Dashy Config
+
+## Docker01
+DOCKER01_IP=$(hostname -I | cut -d' ' -f1)
+sed -i "s/PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS/${DOCKER01_IP}/" ./my-config.yml

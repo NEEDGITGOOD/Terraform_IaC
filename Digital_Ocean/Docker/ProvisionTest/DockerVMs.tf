@@ -64,7 +64,6 @@ resource "digitalocean_droplet" "Docker01" {
       "export PATH=$PATH:/usr/bin", 
       "apt update", # Update the VM
       "chmod 600 ~/.ssh/id_rsa", # Change the permissions of the ssh file
-      "sed -i 's/PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS/$(hostname -I | awk '{print $1}')/' ./my.config.yml",
       "snap install http", # Need to install http to run the API calls (create the admin user etc.)
       "apt install autossh", # Need to install autossh to create the ssh tunnel
       "docker compose -f /root/docker-compose.yml up -d", # Run the docker-compose file
