@@ -26,26 +26,26 @@ sections:
       apiKey: efdbade728b37086877a5e83442004db
       city: Innsbruck
 
-- name: Docker01
+- name: Docker01 - PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS
   icon: far fa-briefcase
   items:
   - title: Portainer01
     icon: fas fa-server
-    url: http://[DOCKER01_IP]:9000/  
+    url: http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:9000/  
     description: Portainer management on Docker01
     tags: [docker, management, portainer]
     hotkey: 1
 
   - title: CentOS01
     icon: fab fa-centos
-    url: http://[DOCKER01_IP]/centos01  
+    url: http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS/centos01  
     description: CentOS machine on Docker01
     tags: [docker, centos, virtual machine]
     hotkey: 2
 
   - title: Dashboard01
     icon: fas fa-tachometer-alt
-    url: http://[DOCKER01_IP]/dashboard01  
+    url: http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:4000  
     description: Dashy dashboard on Docker01
     tags: [docker, dashboard, dashy]
     hotkey: 3
@@ -88,20 +88,18 @@ sections:
     url: http://[DOCKER03_IP]/wordpress 
     description: Kali VM - Attackbox on Docker03
     tags: [docker, kali, vm, security]
-    hotkey: 4
 
   - title: ADGuard DNS01
     icon: fas fa-shield-alt
     url: http://[DOCKER03_IP]/adguard  
     description: ADGuard DNS service on Docker03
     tags: [docker, dns, adguard]
-    hotkey: 5
 
-- name: HoneyPot01
-  icon: fas fa-honey-pot
+- name: Security
+  icon: fa-solid fa-honey-pot
   items:
-  - title: ADGuard DNS01
-    icon: favicon
+  - title: HoneyPot01
+    icon: fas fa-honey-pot
     url: http://192.0.0.1  
     description: HoneyPot Debian server
     tags: [honeypot, security, debian] 

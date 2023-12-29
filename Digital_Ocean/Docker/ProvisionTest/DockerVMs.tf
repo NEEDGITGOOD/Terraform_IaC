@@ -33,7 +33,7 @@ resource "digitalocean_droplet" "Docker01" {
     timeout = "4m"
   }
 
-  ## Upload Dashy Config File
+ ## Upload Dashy Config File
   provisioner "file" {  
     source      = "my-config.yml"
     destination = "/root/my-config.yml"
@@ -54,7 +54,7 @@ resource "digitalocean_droplet" "Docker01" {
 
   ## Copy the ssh file to the VM
   provisioner "file" {  
-    content     = "./ssh/myKey.pem" 
+    source      = "./ssh/myKey.pem"
     destination = "/root/.ssh/id_rsa"
   }
 
@@ -64,6 +64,7 @@ resource "digitalocean_droplet" "Docker01" {
       "export PATH=$PATH:/usr/bin", 
       "apt update", # Update the VM
       "chmod 600 ~/.ssh/id_rsa", # Change the permissions of the ssh file
+      "sed -i 's/PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS/$(hostname -I | awk '{print $1}')/' ./my.config.yml",
       "snap install http", # Need to install http to run the API calls (create the admin user etc.)
       "apt install autossh", # Need to install autossh to create the ssh tunnel
       "docker compose -f /root/docker-compose.yml up -d", # Run the docker-compose file
@@ -131,7 +132,7 @@ resource "digitalocean_droplet" "Docker02" {
     timeout = "4m"
   }
 
-## Copy the docker-compose file to the VM
+  ## Copy the docker-compose file to the VM
   provisioner "file" {
     source      = "docker-compose_docker02.yaml"
     destination = "/root/docker-compose.yaml"
@@ -167,7 +168,7 @@ resource "digitalocean_droplet" "Docker03" {
     timeout = "4m"
   }
 
-## Copy the docker-compose file to the VM
+  ## Copy the docker-compose file to the VM
   provisioner "file" {
     source      = "docker-compose_docker03.yaml"
     destination = "/root/docker-compose.yaml"
