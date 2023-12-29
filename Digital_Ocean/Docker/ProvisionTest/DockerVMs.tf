@@ -101,7 +101,7 @@ resource "digitalocean_droplet" "Docker02" {
   region = "fra1"
   size = "s-1vcpu-2gb"
   ssh_keys = [
-    data.digitalocean_ssh_key.terraform.id
+    data.digitalocean_ssh_key.ssh_tunnels_docker01.id
   ]
 
   connection {
@@ -134,7 +134,7 @@ resource "digitalocean_droplet" "Docker03" {
   region = "fra1"
   size = "s-1vcpu-2gb"
   ssh_keys = [
-    data.digitalocean_ssh_key.terraform.id
+    data.digitalocean_ssh_key.ssh_tunnels_docker01.id
   ]
 
   connection {
