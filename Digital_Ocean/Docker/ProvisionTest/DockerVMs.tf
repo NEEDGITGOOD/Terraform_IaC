@@ -29,7 +29,7 @@ resource "digitalocean_droplet" "Docker01" {
     host = self.ipv4_address
     user = "root"
     type = "ssh"
-    private_key = "./ssh/myKey.pem"
+    private_key = file("./ssh/myKey.pem")
     timeout = "4m"
   }
 
@@ -127,7 +127,7 @@ resource "digitalocean_droplet" "Docker02" {
     host = self.ipv4_address
     user = "root"
     type = "ssh"
-    private_key = "./ssh/myKey.pem"
+    private_key = file("./ssh/myKey.pem")
     timeout = "4m"
   }
 
@@ -163,7 +163,7 @@ resource "digitalocean_droplet" "Docker03" {
     host = self.ipv4_address
     user = "root"
     type = "ssh"
-    private_key = "./ssh/myKey.pem"
+    private_key = file("./ssh/myKey.pem")
     timeout = "4m"
   }
 
