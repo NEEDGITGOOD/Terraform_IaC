@@ -52,8 +52,6 @@ sections:
     tags: [docker, dashboard, dashy]
     hotkey: 3
 
-
-
 - name: Docker02
   icon: fas fa-network-wired
   items:
@@ -76,7 +74,6 @@ sections:
     description: Watch Tower updates on Docker02
     tags: [docker, updates, watchtower]
     hotkey: 7
-
 
 - name: Docker03
   icon: fas fa-network-wired
