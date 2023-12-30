@@ -8,7 +8,7 @@ runcmd:
   - echo "Creating ssh directory!"
   - mkdir -p /root/.ssh
   - echo "Running the curl command!"
-  - 'curl -H "Authorization: token ${GITHUB_TOKEN}" -L https://raw.githubusercontent.com/NEEDGITGOOD/Terraform_IaC/main/Digital_Ocean/Docker/ProvisionTest/templates/docker-compose-portainer.yaml -o /root/docker-compose.yaml'
+  - 'curl -H "Authorization: token ${GITHUB_TOKEN}" -L https://raw.githubusercontent.com/NEEDGITGOOD/Terraform_IaC/main/Digital_Ocean/Docker/ProvisionTest_Cloud_Init/templates/docker-compose-portainer.yaml -o /root/docker-compose.yaml'
 
 packages:
  - autossh
