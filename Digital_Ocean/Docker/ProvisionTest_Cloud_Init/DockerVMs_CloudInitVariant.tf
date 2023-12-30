@@ -24,7 +24,7 @@ resource "digitalocean_droplet" "Docker01" {
     digitalocean_ssh_key.docker01_ssh_file.id
   ]
 
-  user_data = templatefile("cloud-init_portainer.yaml", {
+  user_data = templatefile("cloud-init_docker01.yaml", {
     GITHUB_TOKEN = var.GITHUB_TOKEN
   })
   
