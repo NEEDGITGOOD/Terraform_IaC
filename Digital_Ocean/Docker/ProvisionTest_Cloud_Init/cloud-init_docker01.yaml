@@ -20,3 +20,5 @@ runcmd:
  - mkdir -p /root/.ssh
  - echo "Running the setup script!"
  - /root/setup.sh
+ - DOCKER01_IP=$(hostname -I | cut -d' ' -f1)
+ - sed -i "s/PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS/${DOCKER01_IP}/" /path/to/my-config.yml

@@ -29,5 +29,5 @@ http --form POST http://localhost:9000/api/endpoints "Authorization: Bearer $TOK
 # Adding Docker01 IP for Dashy Config
 
 ## Docker01
-DOCKER01_IP=$(hostname -I | cut -d' ' -f1)
-sed -i "s/PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS/${DOCKER01_IP}/" ./my-config.yml
+#DOCKER01_IP=$(hostname -I | cut -d' ' -f1)
+#sed -i "s/PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS/${DOCKER01_IP}/" ./my-config.yml
