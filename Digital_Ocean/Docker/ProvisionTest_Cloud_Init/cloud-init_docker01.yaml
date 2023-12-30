@@ -6,7 +6,7 @@ runcmd:
   - sudo ufw allow 2374
   - mkdir -p /root/.ssh
   - 'curl -H "Authorization: token ${GITHUB_TOKEN}" -L https://raw.githubusercontent.com/NEEDGITGOOD/Terraform_IaC/main/Digital_Ocean/Docker/ProvisionTest_Cloud_Init/cloud-init_docker01.yaml -o /root/docker-compose.yaml'
-  - docker compose -f /root/docker-compose.yaml up -d
+
 
 packages:
  - autossh

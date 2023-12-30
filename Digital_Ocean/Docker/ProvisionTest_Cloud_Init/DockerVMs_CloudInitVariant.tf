@@ -42,19 +42,6 @@ resource "digitalocean_droplet" "Docker01" {
     destination = "/root/my-config.yml"
   }
 
-  ## Copy the docker-compose file to the VM
-  provisioner "file" {  
-    content     = file("${path.module}/templates/docker-compose-portainer.yaml") 
-    destination = "/root/docker-compose.yml"
-  }
-
-  ## Create the .ssh directory (for the ssh file)
-  provisioner "remote-exec" {
-    inline = [
-      "mkdir -p /root/.ssh",  
-    ]
-  }
-
   ## Copy the ssh file to the VM
   provisioner "file" {  
     source      = "./ssh/myKey.pem"
@@ -66,6 +53,7 @@ resource "digitalocean_droplet" "Docker01" {
     inline = [
       "export PATH=$PATH:/usr/bin", 
       "chmod 600 ~/.ssh/id_rsa", # Change the permissions of the ssh file
+      "docker compose -f /root/docker-compose.yaml up -d", # Run the docker-compose file
       "http POST localhost:9000/api/users/admin/init Username=\"admin\" Password=\"admin01admin01\"" # Create the admin user
     ]
   }
