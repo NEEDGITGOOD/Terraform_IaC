@@ -1,0 +1,6 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+runcmd:
+ - 'curl -H "Authorization: token ${GITHUB_TOKEN}" -L https://github.com/NEEDGITGOOD/Terraform_IaC/blob/main/Digital_Ocean/Docker/ProvisionTest_Cloud_Init/docker-compose_docker03.yaml -o /root/docker-compose.yaml'
+  - docker compose -f /root/docker-compose.yaml up -d

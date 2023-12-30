@@ -24,6 +24,10 @@ resource "digitalocean_droplet" "Docker01" {
     digitalocean_ssh_key.docker01_ssh_file.id
   ]
 
+  user_data = templatefile("cloud-init_portainer", {
+    GITHUB_TOKEN = var.GITHUB_TOKEN
+  })
+  
   connection {
     host = self.ipv4_address
     user = "root"
@@ -122,6 +126,10 @@ resource "digitalocean_droplet" "Docker02" {
     digitalocean_ssh_key.docker01_ssh_file.id
   ]
 
+    user_data = templatefile("cloud-init_docker01", {
+    GITHUB_TOKEN = var.GITHUB_TOKEN
+  })
+
   connection {
     host = self.ipv4_address
     user = "root"
@@ -157,6 +165,10 @@ resource "digitalocean_droplet" "Docker03" {
   ssh_keys = [
     digitalocean_ssh_key.docker01_ssh_file.id
   ]
+
+    user_data = templatefile("cloud-init_docker03", {
+    GITHUB_TOKEN = var.GITHUB_TOKEN
+  })
 
   connection {
     host = self.ipv4_address
