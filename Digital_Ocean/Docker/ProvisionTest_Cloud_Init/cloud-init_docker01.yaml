@@ -3,12 +3,13 @@ package_update: true
 package_upgrade: true
 packages:
  - autossh
- - http
+ - httpie
 write_files:
  - path: /root/setup.sh
    content: |
      #!/bin/bash
      echo "Running setup..."
+     echo $GITHUB_TOKEN
      curl -H "Authorization: token ${GITHUB_TOKEN}" -L https://raw.githubusercontent.com/NEEDGITGOOD/Terraform_IaC/main/Digital_Ocean/Docker/ProvisionTest_Cloud_Init/templates/docker-compose-portainer.yaml -o /root/docker-compose.yaml
    permissions: '0700'
 runcmd:
