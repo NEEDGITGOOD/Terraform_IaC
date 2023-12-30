@@ -2,11 +2,13 @@
 package_update: true
 package_upgrade: true
 runcmd:
+  - echo "Allowing ports 9000 and 2374!"
   - sudo ufw allow 9000
   - sudo ufw allow 2374
+  - echo "Creating ssh directory!"
   - mkdir -p /root/.ssh
-  - 'curl -H "Authorization: token ${GITHUB_TOKEN}" -L https://raw.githubusercontent.com/NEEDGITGOOD/Terraform_IaC/main/Digital_Ocean/Docker/ProvisionTest_Cloud_Init/cloud-init_docker01.yaml -o /root/docker-compose.yaml'
-
+  - echo "Running the curl command!"
+  - 'curl -H "Authorization: token ${GITHUB_TOKEN}" -L https://raw.githubusercontent.com/NEEDGITGOOD/Terraform_IaC/main/Digital_Ocean/Docker/ProvisionTest/templates/docker-compose-portainer.yaml -o /root/docker-compose.yaml'
 
 packages:
  - autossh
