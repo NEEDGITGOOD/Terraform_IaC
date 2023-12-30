@@ -32,17 +32,16 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
-Digital_Ocean/HoneyPot/.terraform.lock.hcl
-Digital_Ocean/Docker/.main.tf.swp
+.main.tf.swp
 
 # Ignore Automatically Generated & Copied Docker Compose File
-Digital_Ocean/Docker/ProvisionTest/docker-compose.yaml
+docker-compose.yaml
 
 # Ignore Automatically Generated & Copied SSH Tunnel Script
-Digital_Ocean/Docker/ProvisionTest/ssh_tunnels.sh
+ssh_tunnels.sh
 
 # Ignore Automatically Generated & Copied Dashy Config File
-Digital_Ocean/Docker/ProvisionTest/my-config.yml
+my-config.yml
 
 # Exclude any SSH keys
 *.pem
