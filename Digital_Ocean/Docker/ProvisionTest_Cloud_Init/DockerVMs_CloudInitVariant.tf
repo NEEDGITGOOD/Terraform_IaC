@@ -53,7 +53,7 @@ resource "digitalocean_droplet" "Docker01" {
     inline = [
       "export PATH=$PATH:/usr/bin", 
       "echo Waiting for cloud-init to complete...",
-      "sleep 60",  # Waits for 60 seconds
+      "sleep 120",  # Waits for 120 seconds
       "chmod 600 ~/.ssh/id_rsa", # Change the permissions of the ssh file
       "sudo docker compose -f /root/docker-compose.yaml up -d", # Run the docker-compose file
       "http POST localhost:9000/api/users/admin/init Username=\"admin\" Password=\"admin01admin01\"" # Create the admin user
