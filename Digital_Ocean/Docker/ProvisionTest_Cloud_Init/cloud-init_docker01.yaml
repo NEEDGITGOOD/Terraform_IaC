@@ -5,7 +5,6 @@ runcmd:
   - sudo ufw allow 9000
   - sudo ufw allow 2374
   - mkdir -p /root/.ssh
-  - chmod 600 ~/.ssh/id_rsa # This probably cant be done as we cant just download the private key, will probably just use remote exec.
  - 'curl -H "Authorization: token ${GITHUB_TOKEN}" -L https://github.com/NEEDGITGOOD/Terraform_IaC/blob/main/Digital_Ocean/Docker/ProvisionTest_Cloud_Init/docker-compose_docker01.yaml -o /root/docker-compose.yaml'
   - docker compose -f /root/docker-compose.yaml up -d
   - 
@@ -21,7 +20,7 @@ packages:
  #    
   #    "", # Change the permissions of the ssh file see comment might include this via remote exec
    #   "docker compose -f /root/docker-compose.yml up -d", # Run the docker-compose file
-    #  "http POST localhost:9000/api/users/admin/init Username=\"admin\" Password=\"admin01admin01\"" # Create the admin user
+    #  "http POST localhost:9000/api/users/admin/init Username=\"admin\" Password=\"admin01admin01\"" # Create the admin user prob remote exec?
 
      #     
       #  "chmod +x /root/ssh_tunnels.sh", # Make the script executable

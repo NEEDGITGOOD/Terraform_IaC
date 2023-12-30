@@ -24,7 +24,7 @@ resource "digitalocean_droplet" "Docker01" {
     digitalocean_ssh_key.docker01_ssh_file.id
   ]
 
-  user_data = templatefile("cloud-init_portainer", {
+  user_data = templatefile("cloud-init_portainer.yaml", {
     GITHUB_TOKEN = var.GITHUB_TOKEN
   })
   
@@ -65,13 +65,7 @@ resource "digitalocean_droplet" "Docker01" {
   provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin", 
-      "apt update", # Update the VM
       "chmod 600 ~/.ssh/id_rsa", # Change the permissions of the ssh file
-      "snap install http", # Need to install http to run the API calls (create the admin user etc.)
-      "apt install autossh", # Need to install autossh to create the ssh tunnel
-      "docker compose -f /root/docker-compose.yml up -d", # Run the docker-compose file
-      "sudo ufw allow 9000", # Allow port 9000 for portainer
-      "sudo ufw allow 2374", # Allow port 2374 for the ssh tunnel (Docker03)
       "http POST localhost:9000/api/users/admin/init Username=\"admin\" Password=\"admin01admin01\"" # Create the admin user
     ]
   }
@@ -126,7 +120,7 @@ resource "digitalocean_droplet" "Docker02" {
     digitalocean_ssh_key.docker01_ssh_file.id
   ]
 
-    user_data = templatefile("cloud-init_docker01", {
+    user_data = templatefile("cloud-init_docker01.yaml", {
     GITHUB_TOKEN = var.GITHUB_TOKEN
   })
 
@@ -136,20 +130,6 @@ resource "digitalocean_droplet" "Docker02" {
     type = "ssh"
     private_key = file("./ssh/myKey.pem")
     timeout = "4m"
-  }
-
-  ## Copy the docker-compose file to the VM
-  provisioner "file" {
-    source      = "docker-compose_docker02.yaml"
-    destination = "/root/docker-compose.yaml"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "export PATH=$PATH:/usr/bin",
-      "apt update", 
-      "docker compose -f /root/docker-compose.yaml up -d"
-    ]
   }
 
     depends_on = [digitalocean_ssh_key.docker01_ssh_file]
@@ -166,7 +146,7 @@ resource "digitalocean_droplet" "Docker03" {
     digitalocean_ssh_key.docker01_ssh_file.id
   ]
 
-    user_data = templatefile("cloud-init_docker03", {
+    user_data = templatefile("cloud-init_docker03.yaml", {
     GITHUB_TOKEN = var.GITHUB_TOKEN
   })
 
@@ -176,20 +156,6 @@ resource "digitalocean_droplet" "Docker03" {
     type = "ssh"
     private_key = file("./ssh/myKey.pem")
     timeout = "4m"
-  }
-
-  ## Copy the docker-compose file to the VM
-  provisioner "file" {
-    source      = "docker-compose_docker03.yaml"
-    destination = "/root/docker-compose.yaml"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "export PATH=$PATH:/usr/bin",
-      "apt update", 
-      "docker compose -f /root/docker-compose.yaml up -d" # Run the docker-compose file
-    ]
   }
 
   depends_on = [digitalocean_ssh_key.docker01_ssh_file]
