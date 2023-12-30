@@ -1,0 +1,183 @@
+---
+pageInfo:
+  title: IaC Dashboard
+  description: IaC Dashboard of my services.
+  logo: https://i.ibb.co/71WyyzM/little-bot-3.png
+
+appConfig:
+  statusCheck: false
+  theme: charry-blossom
+  fontAwesomeKey: c94dc2b452
+  customCss: '.clock p.time { font-size: 3rem !important; }'
+  layout: auto
+  iconSize: small
+
+sections:
+- name: Today
+  icon: far fa-smile-beam
+  displayData:
+    collapsed: false
+    hideForGuests: false
+    itemSize: large
+  widgets:
+  - type: clock
+  - type: weather
+    options:
+      apiKey: efdbade728b37086877a5e83442004db
+      city: Innsbruck
+
+- name: Docker01 - PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS
+  icon: far fa-briefcase
+  items:
+  - title: Portainer01
+    icon: fas fa-server
+    url: http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:9000/  
+    description: Portainer management on Docker01
+    tags: [docker, management, portainer]
+    hotkey: 1
+
+  - title: AlmaLinux01 - AlmaLinux 8.4
+    icon: fab fa-centos
+    url: http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS/centos01  
+    description: CentOS machine on Docker01
+    tags: [docker, centos, virtual machine]
+    hotkey: 2
+
+  - title: Dashboard01 - Dashy
+    icon: fas fa-tachometer-alt
+    url: http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:4000  
+    description: Dashy dashboard on Docker01
+    tags: [docker, dashboard, dashy]
+    hotkey: 3
+
+- name: Docker02 - PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS
+  icon: fas fa-network-wired
+  items:
+  - title: Ubuntu01 - Ubuntu 23.10
+    icon: fab fa-ubuntu
+    url: http://[UBUNTU02_IP]  
+    description: Ubuntu 23.10 server in Azure
+    tags: [azure, ubuntu, server]
+
+  - title: Monitoring01 - Uptime Kuma
+    icon: fas fa-heartbeat
+    url: http://[DOCKER02_IP]/monitoring  
+    description: Uptime Kuma monitoring on Docker02
+    tags: [docker, monitoring, uptime]
+    hotkey: 6 
+
+  - title: Update01 - Watch Tower
+    icon: favicon
+    url: http://[DOCKER02_IP]/update 
+    description: Watch Tower updates on Docker02
+    tags: [docker, updates, watchtower]
+    hotkey: 7
+
+- name: Docker03 - PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS
+  icon: fas fa-network-wired
+  items:
+  - title: Wordpress01
+    icon: fas fa-blog
+    url: http://[DOCKER03_IP]/wordpress  
+    description: Wordpress site on Docker03
+    tags: [docker, wordpress, website]
+    hotkey: 4
+
+  - title: Attackbox01
+    icon: fas fa-skull-crossbones
+    url: http://[DOCKER03_IP]/wordpress 
+    description: Kali VM - Attackbox on Docker03
+    tags: [docker, kali, vm, security]
+
+  - title: ADGuard DNS01
+    icon: fas fa-shield-alt
+    url: http://[DOCKER03_IP]/adguard  
+    description: ADGuard DNS service on Docker03
+    tags: [docker, dns, adguard]
+
+- name: Security
+  icon: fa-solid fa-honey-pot
+  items:
+  - title: HoneyPot01
+    icon: fas fa-honey-pot
+    url: http://192.0.0.1  
+    description: HoneyPot Debian server
+    tags: [honeypot, security, debian] 
+
+- name: Other
+  icon: fas fa-cloud
+  items:
+  - title: Netbox01
+    icon: fas fa-project-diagram
+    url: http://[NETBOX01_IP]  
+    description: NetBox IP Address Management
+    tags: [ipam, netbox, network]
+
+- name: VPN & Networking
+  icon: fas fa-cloud
+  items:
+  - title: VPN01 - OpenVPN Access Server
+    icon: fas fa-lock
+    url: http://[VPN01_IP] 
+    description: OpenVPN server for secure access
+    tags: [vpn, openvpn, security]
+
+  - title: Azure VPN Gateway - VPN02
+    icon: fas fa-lock
+    url: http://[VPN02_IP]  
+    description: Azure VPN Gateway for secure network
+    tags: [vpn, azure, security]
+
+- name: Azure Infrastructure
+  icon: fab fa-windows
+  items:
+  - title: DC01 - AD Server
+    icon: fas fa-server
+    url: http://[DC01_IP]
+    description: Active Directory Server on Azure
+    tags: [azure, ad, server]
+
+  - title: Client01 - Windows 10
+    icon: fas fa-desktop
+    url: http://[CLIENT01_IP]
+    description: Windows 10 client in Azure
+    tags: [azure, windows, client]
+
+  - title: Client02 - Windows 10
+    icon: fas fa-desktop
+    url: http://[CLIENT02_IP]
+    description: Windows 10 client in Azure
+    tags: [azure, windows, client]
+
+  - title: Client03 - Windows 11
+    icon: favicon
+    url: http://[CLIENT03_IP]
+    description: Windows 11 client in Azure
+    tags: [azure, windows, client]
+
+  - title: Ubuntu02 - Ubuntu 23.10
+    icon: favicon
+    url: http://[UBUNTU02_IP]
+    description: Ubuntu 23.10 server in Azure
+    tags: [azure, ubuntu, server]
+
+- name: Nginx Webserver with Load Balancers
+  icon: fas fa-sync-alt
+  items:
+  - title: Nginx01 Webserver
+    icon: favicon
+    url: http://[NGINX01_IP]  
+    description: Nginx load balancer for balancing traffic
+    tags: [webserver, nginx, network]
+    
+  - title: Nginx02 Webserver
+    icon: favicon
+    url: http://[NGINX02_IP]  
+    description: Nginx load balancer for balancing traffic
+    tags: [webserver, nginx, network]
+    
+  - title: LoadBalancer01
+    icon: favicon
+    url: http://[LOADBALANCER01_IP]  
+    description: Nginx load balancer for balancing traffic
+    tags: [loadbalancer, nginx, network]

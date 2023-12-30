@@ -1,0 +1,29 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+runcmd:
+  - sudo ufw allow 9000
+  - sudo ufw allow 2374
+  - mkdir -p /root/.ssh
+  - chmod 600 ~/.ssh/id_rsa
+  - 
+  - 
+  - 
+  - 
+  - 
+packages:
+ - autossh
+ - http
+
+
+
+            "export PATH=$PATH:/usr/bin", 
+      "", # Change the permissions of the ssh file
+      "docker compose -f /root/docker-compose.yml up -d", # Run the docker-compose file
+      "http POST localhost:9000/api/users/admin/init Username=\"admin\" Password=\"admin01admin01\"" # Create the admin user
+
+              "export PATH=$PATH:/usr/bin", 
+        "chmod +x /root/ssh_tunnels.sh", # Make the script executable
+        "echo Running my Script! command...", # Logging
+        "bash /root/ssh_tunnels.sh" # Run the script
+
