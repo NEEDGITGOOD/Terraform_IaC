@@ -116,7 +116,7 @@ resource "digitalocean_droplet" "Docker02" {
     digitalocean_ssh_key.docker01_ssh_file.id
   ]
 
-    user_data = templatefile("cloud-init_docker01.yaml", {
+    user_data = templatefile("cloud-init_docker02.yaml", {
     GITHUB_TOKEN = var.GITHUB_TOKEN
   })
 
