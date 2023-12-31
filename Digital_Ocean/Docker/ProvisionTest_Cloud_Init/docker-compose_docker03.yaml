@@ -33,5 +33,18 @@ services:
       - WORDPRESS_DB_USER=wordpress
       - WORDPRESS_DB_PASSWORD=VERYSECUREPASSWORD9857948712978412
       - WORDPRESS_DB_NAME=wordpress
+  adguardhome:
+    image: adguard/adguardhome
+    container_name: adguardhome
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 3000:3000/tcp
+      - 80:80/tcp
+      - 443:443/tcp
+    volumes:
+      - ./workdir:/opt/adguardhome/work
+      - ./confdir:/opt/adguardhome/conf
+    restart: unless-stopped
 volumes:
   db_data:

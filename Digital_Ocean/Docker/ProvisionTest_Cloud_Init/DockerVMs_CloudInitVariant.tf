@@ -48,12 +48,11 @@ resource "digitalocean_droplet" "Docker01" {
     destination = "/root/.ssh/id_rsa"
   }
 
-  ## Run Commands on the VM
+  ## Wait for cloud-init to finish
   provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin", 
-      "echo Waiting for cloud-init to complete...",
-      "sleep 360"  # Waits for 120 seconds
+      "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 1; done"
           ]
   }
 
@@ -121,14 +120,6 @@ resource "digitalocean_droplet" "Docker02" {
     GITHUB_TOKEN = var.GITHUB_TOKEN
   })
 
-  connection {
-    host = self.ipv4_address
-    user = "root"
-    type = "ssh"
-    private_key = file("./ssh/myKey.pem")
-    timeout = "4m"
-  }
-
     depends_on = [digitalocean_ssh_key.docker01_ssh_file]
 
 }
@@ -146,14 +137,6 @@ resource "digitalocean_droplet" "Docker03" {
     user_data = templatefile("cloud-init_docker03.yaml", {
     GITHUB_TOKEN = var.GITHUB_TOKEN
   })
-
-  connection {
-    host = self.ipv4_address
-    user = "root"
-    type = "ssh"
-    private_key = file("./ssh/myKey.pem")
-    timeout = "4m"
-  }
 
   depends_on = [digitalocean_ssh_key.docker01_ssh_file]
 }
