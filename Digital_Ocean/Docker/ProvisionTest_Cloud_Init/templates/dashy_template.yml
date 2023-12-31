@@ -78,20 +78,20 @@ sections:
   items:
   - title: Wordpress01
     icon: fas fa-blog
-    url: http://[DOCKER03_IP]/wordpress  
+    url: http://[PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS]:80  
     description: Wordpress site on Docker03
     tags: [docker, wordpress, website]
     hotkey: 4
 
   - title: Attackbox01
     icon: fas fa-skull-crossbones
-    url: http://[DOCKER03_IP]/wordpress 
+    url: http://[PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS] 
     description: Kali VM - Attackbox on Docker03
     tags: [docker, kali, vm, security]
 
   - title: ADGuard DNS01
     icon: fas fa-shield-alt
-    url: http://[DOCKER03_IP]/adguard  
+    url: http://[DOCKEPLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESSR03_IP]:3000  
     description: ADGuard DNS service on Docker03
     tags: [docker, dns, adguard]
 
