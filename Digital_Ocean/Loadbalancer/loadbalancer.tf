@@ -1,5 +1,5 @@
 resource "digitalocean_droplet" "www" {
-  count = 2
+  count = 3
   image = "ubuntu-20-04-x64"
   name = "www-${count.index + 1}"
   region = "nyc3"
