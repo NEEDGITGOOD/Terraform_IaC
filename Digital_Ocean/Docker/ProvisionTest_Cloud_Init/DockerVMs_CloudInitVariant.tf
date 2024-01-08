@@ -5,7 +5,7 @@ resource "tls_private_key" "ssh" {
 }
 
 # Upload the public key to DigitalOcean
-resource "digitalocean_ssh_key" "docker01_ssh_file" {
+resource "digitalocean_ssh_key" "temporary_ssh" {
   name       = "myKey"
   public_key = tls_private_key.ssh.public_key_openssh
 
@@ -15,13 +15,13 @@ resource "digitalocean_ssh_key" "docker01_ssh_file" {
 }
 
 # Netbox01
-resource "digitalocean_droplet" "netbox" {
+resource "digitalocean_droplet" "Netbox01" {
   image = "netverity-netbox-20-04"
   name = "Netbox01"
   region = "fra1"
   size = "s-1vcpu-2gb"
   ssh_keys = [
-    digitalocean_ssh_key.docker01_ssh_file.id
+    digitalocean_ssh_key.temporary_ssh.id
   ]
 
   user_data = "cloud-init_netbox01.yaml"
@@ -32,7 +32,7 @@ resource "digitalocean_firewall" "netbox_firewall" {
   name = "netbox-firewall"
 
   droplet_ids = [ 
-    digitalocean_droplet.netbox.id,
+    digitalocean_droplet.Netbox01.id,
   ]
 
  ## Inbound Rules
@@ -87,7 +87,7 @@ resource "digitalocean_droplet" "Docker01" {
   region = "fra1"
   size = "s-1vcpu-2gb"
   ssh_keys = [
-    digitalocean_ssh_key.docker01_ssh_file.id
+    digitalocean_ssh_key.temporary_ssh.id
   ]
 
   user_data = templatefile("cloud-init_docker01.yaml", {
@@ -153,7 +153,7 @@ resource "digitalocean_droplet" "Docker01" {
     digitalocean_droplet.Docker02,  # Wait for Docker02 and Docker03 to be created
     digitalocean_droplet.Docker03,
     null_resource.setup_ssh_tunnels, # Wait for the script to be created
-    digitalocean_ssh_key.docker01_ssh_file
+    digitalocean_ssh_key.temporary_ssh
   ]
 }
 
@@ -179,14 +179,14 @@ resource "digitalocean_droplet" "Docker02" {
   region = "fra1"
   size = "s-1vcpu-2gb"
   ssh_keys = [
-    digitalocean_ssh_key.docker01_ssh_file.id
+    digitalocean_ssh_key.temporary_ssh.id
   ]
 
     user_data = templatefile("cloud-init_docker02.yaml", {
     GITHUB_TOKEN = var.GITHUB_TOKEN
   })
 
-    depends_on = [digitalocean_ssh_key.docker01_ssh_file]
+    depends_on = [digitalocean_ssh_key.temporary_ssh]
 
 }
 
@@ -197,12 +197,12 @@ resource "digitalocean_droplet" "Docker03" {
   region = "fra1"
   size = "s-1vcpu-2gb"
   ssh_keys = [
-    digitalocean_ssh_key.docker01_ssh_file.id
+    digitalocean_ssh_key.temporary_ssh.id
   ]
 
     user_data = templatefile("cloud-init_docker03.yaml", {
     GITHUB_TOKEN = var.GITHUB_TOKEN
   })
 
-  depends_on = [digitalocean_ssh_key.docker01_ssh_file]
+  depends_on = [digitalocean_ssh_key.temporary_ssh]
 }
