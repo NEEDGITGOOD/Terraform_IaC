@@ -91,7 +91,7 @@ sections:
 
   - title: ADGuard DNS01
     icon: fas fa-shield-alt
-    url: http://[DOCKEPLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESSR03_IP]:3000  
+    url: http://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:3000  
     description: ADGuard DNS service on Docker03
     tags: [docker, dns, adguard]
 
