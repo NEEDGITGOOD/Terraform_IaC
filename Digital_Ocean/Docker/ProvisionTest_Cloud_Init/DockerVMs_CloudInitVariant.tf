@@ -24,7 +24,7 @@ resource "digitalocean_droplet" "netbox" {
     digitalocean_ssh_key.docker01_ssh_file.id
   ]
 
-  user_data = templatefile("cloud-init_netbox01.yaml")
+  user_data = "cloud-init_netbox01.yaml"
   }
 
 # Firewall for Netbox01
