@@ -21,52 +21,59 @@ resource "digitalocean_firewall" "honeypot_firewall" {
     digitalocean_droplet.HoneyPot01.id,
   ]
 
-## Inbound Rules
+ ## Inbound Rules
 
-### Allow Inbound TCP Honey Ports (1-64000)
+  ### Allow Inbound TCP Honey Ports (1-64000)
   inbound_rule {
     protocol         = "tcp"
     port_range       = "1-64000"
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
 
-### Allow Inbound UDP Honey Ports (1-64000)
+  ### Allow Inbound UDP Honey Ports (1-64000)
   inbound_rule {
     protocol         = "udp"
     port_range       = "1-64000"
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
 
-### Allow Inbound UDP Webinterface Ports (64000 - 65535)
+  ### Allow Inbound UDP Webinterface Ports (64000 - 65535)
   inbound_rule {
     protocol         = "udp"
-    port_range       = "1-64000"
-    source_addresses = ["0.0.0.0/0", "::/0"]
+    port_range       = "64000-65535"
+    source_addresses = ["207.154.228.93"]
   }
 
-### Allow Inbound ICMP
+  ### Allow Inbound UDP Webinterface Ports (64000 - 65535)
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "64000-65535"
+    source_addresses = ["207.154.228.93"]
+  }
+
+  ### Allow Inbound ICMP
   inbound_rule {
     protocol         = "icmp"
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
 
-## Outbound Rules
+ ## Outbound Rules (allow to any)
 
-### Allow Outbound TCP Honey Ports (1-64000)
+  ### Allow Outbound TCP (1-65535)
   outbound_rule {
     protocol         = "tcp"
-    port_range       = "1-64000"
+    port_range       = "1-65535"
     destination_addresses = ["0.0.0.0/0", "::/0"]
   }
 
-### Allow Outbound UDP Honey Ports (1-64000)
+  ### Allow Outbound UDP (1-65535)
   outbound_rule {
     protocol         = "udp"
-    port_range       = "1-64000"
+    port_range       = "1-65535"
     destination_addresses = ["0.0.0.0/0", "::/0"]
   }
 
-### Allow Outbound ICMP
+  ### Allow Outbound ICMP
   outbound_rule {
     protocol         = "icmp"
     destination_addresses = ["0.0.0.0/0", "::/0"]
