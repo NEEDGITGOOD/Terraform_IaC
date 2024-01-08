@@ -7,3 +7,68 @@ resource "digitalocean_droplet" "HoneyPot01" {
     data.digitalocean_ssh_key.terraform.id
   ]
 }
+
+resource "digitalocean_vpc" "example_vpc" {
+  name     = "example-vpc"
+  region   = "nyc3"
+  ip_range = "10.10.10.0/24"
+}
+
+resource "digitalocean_firewall" "honeypot_firewall" {
+  name = "honeypot_firewall"
+
+  droplet_ids = [ 
+    digitalocean_droplet.HoneyPot01.id,
+  ]
+
+## Inbound Rules
+
+### Allow Inbound TCP Honey Ports (1-64000)
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "1-64000"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+### Allow Inbound UDP Honey Ports (1-64000)
+  inbound_rule {
+    protocol         = "udp"
+    port_range       = "1-64000"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+### Allow Inbound UDP Webinterface Ports (64000 - 65535)
+  inbound_rule {
+    protocol         = "udp"
+    port_range       = "1-64000"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+### Allow Inbound ICMP
+  inbound_rule {
+    protocol         = "icmp"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+## Outbound Rules
+
+### Allow Outbound TCP Honey Ports (1-64000)
+  outbound_rule {
+    protocol         = "tcp"
+    port_range       = "1-64000"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+### Allow Outbound UDP Honey Ports (1-64000)
+  outbound_rule {
+    protocol         = "udp"
+    port_range       = "1-64000"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+### Allow Outbound ICMP
+  outbound_rule {
+    protocol         = "icmp"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+}
