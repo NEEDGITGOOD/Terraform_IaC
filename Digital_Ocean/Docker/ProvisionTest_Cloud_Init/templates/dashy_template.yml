@@ -10,7 +10,7 @@ appConfig:
   fontAwesomeKey: c94dc2b452
   customCss: '.clock p.time { font-size: 3rem !important; }'
   layout: auto
-  iconSize: small
+  iconSize: large
 
 sections:
 - name: Today
