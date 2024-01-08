@@ -8,6 +8,9 @@ IP_ADDRESS_DOCKER03=$(jq -r '.resources[] | select(.name=="Docker03") .instances
 IP_ADDRESS_PUBLIC_DOCKER02=$(jq -r '.resources[] | select(.name=="Docker02") .instances[0].attributes.ipv4_address' terraform.tfstate)
 IP_ADDRESS_PUBLIC_DOCKER03=$(jq -r '.resources[] | select(.name=="Docker03") .instances[0].attributes.ipv4_address' terraform.tfstate)
 
+## Netbox
+IP_ADDRESS_PUBLIC_NETBOX01=$(jq -r '.resources[] | select(.name=="Netbox01") .instances[0].attributes.ipv4_address' terraform.tfstate)
+
 # Make a copy of the Docker Compose template file
 cp ./templates/template_setup_ssh_tunnels.sh ssh_tunnels.sh
 
@@ -27,3 +30,6 @@ sed -i "s/PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_DOCKER02}/g
 
 # Replace the placeholder in the Template file with the IP address of Docker03
 sed -i "s/PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_DOCKER03}/g" my-config.yml
+
+# Replace the placeholder in the Template file with the IP address of Netbox01
+sed -i "s/PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_NETBOX01}/g" my-config.yml

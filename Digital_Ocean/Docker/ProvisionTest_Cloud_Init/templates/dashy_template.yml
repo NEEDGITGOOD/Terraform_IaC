@@ -107,7 +107,7 @@ sections:
 - name: Other
   icon: fas fa-cloud
   items:
-  - title: Netbox01
+  - title: Netbox01 - PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS
     icon: fas fa-project-diagram
     url: http://[NETBOX01_IP]  
     description: NetBox IP Address Management
