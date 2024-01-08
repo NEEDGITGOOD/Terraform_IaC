@@ -14,6 +14,15 @@ resource "digitalocean_ssh_key" "docker01_ssh_file" {
     }
 }
 
+# Set Module Path for Netbox
+module "netbox" {
+  source = "../../NetBox"
+
+  do_token = var.do_token
+}
+
+
+
 # Docker01 (Portainer)
 resource "digitalocean_droplet" "Docker01" {
   image = "docker-20-04"

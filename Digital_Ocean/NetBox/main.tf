@@ -4,9 +4,11 @@ resource "digitalocean_droplet" "netbox" {
   region = "fra1"
   size = "s-1vcpu-2gb"
   ssh_keys = [
-    data.digitalocean_ssh_key.terraform.id
+    digitalocean_ssh_key.docker01_ssh_file.id
   ]
-}
+
+  user_data = templatefile("cloud-init_netbox01.yaml")
+  }
 
 resource "digitalocean_firewall" "netbox_firewall" {
   name = "netbox-firewall"
@@ -28,6 +30,13 @@ resource "digitalocean_firewall" "netbox_firewall" {
   inbound_rule {
     protocol         = "icmp"
     source_addresses = ["207.154.228.93"]
+  }
+
+  ### Allow Inbound ssh from jumpbox
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "22"
+    source_addresses = ["206.81.16.20"]
   }
 
  ## Outbound Rules (allow to any)
