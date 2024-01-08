@@ -95,23 +95,26 @@ sections:
     description: ADGuard DNS service on Docker03
     tags: [docker, dns, adguard]
 
-- name: Security
-  icon: fa-solid fa-honey-pot
+- name: Nginx Webserver with Load Balancers
+  icon: fas fa-sync-alt
   items:
-  - title: HoneyPot01
-    icon: fas fa-honey-pot
-    url: http://192.0.0.1  
-    description: HoneyPot Debian server
-    tags: [honeypot, security, debian] 
-
-- name: Other
-  icon: fas fa-cloud
-  items:
-  - title: Netbox01 - PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS
-    icon: fas fa-project-diagram
-    url: https://PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS
-    description: NetBox IP Address Management
-    tags: [ipam, netbox, network]
+  - title: Nginx01 Webserver
+    icon: favicon
+    url: http://[NGINX01_IP]  
+    description: Nginx load balancer for balancing traffic
+    tags: [webserver, nginx, network]
+    
+  - title: Nginx02 Webserver
+    icon: favicon
+    url: http://[NGINX02_IP]  
+    description: Nginx load balancer for balancing traffic
+    tags: [webserver, nginx, network]
+    
+  - title: LoadBalancer01
+    icon: favicon
+    url: http://[LOADBALANCER01_IP]  
+    description: Nginx load balancer for balancing traffic
+    tags: [loadbalancer, nginx, network]
 
 - name: VPN & Networking
   icon: fas fa-cloud
@@ -127,6 +130,12 @@ sections:
     url: http://[VPN02_IP]  
     description: Azure VPN Gateway for secure network
     tags: [vpn, azure, security]
+
+  - title: Netbox01 - PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS
+    icon: fas fa-project-diagram
+    url: https://PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS
+    description: NetBox IP Address Management
+    tags: [ipam, netbox, network]
 
 - name: Azure Infrastructure
   icon: fab fa-windows
@@ -161,23 +170,11 @@ sections:
     description: Ubuntu 23.10 server in Azure
     tags: [azure, ubuntu, server]
 
-- name: Nginx Webserver with Load Balancers
-  icon: fas fa-sync-alt
+- name: Security - HONEYPOTIP
+  icon: fa-solid fa-honey-pot
   items:
-  - title: Nginx01 Webserver
-    icon: favicon
-    url: http://[NGINX01_IP]  
-    description: Nginx load balancer for balancing traffic
-    tags: [webserver, nginx, network]
-    
-  - title: Nginx02 Webserver
-    icon: favicon
-    url: http://[NGINX02_IP]  
-    description: Nginx load balancer for balancing traffic
-    tags: [webserver, nginx, network]
-    
-  - title: LoadBalancer01
-    icon: favicon
-    url: http://[LOADBALANCER01_IP]  
-    description: Nginx load balancer for balancing traffic
-    tags: [loadbalancer, nginx, network]
+  - title: HoneyPot01
+    icon: fas fa-honey-pot
+    url: http://192.0.0.1  
+    description: HoneyPot Debian server
+    tags: [honeypot, security, debian] 
