@@ -8,12 +8,6 @@ resource "digitalocean_droplet" "HoneyPot01" {
   ]
 }
 
-resource "digitalocean_vpc" "example_vpc" {
-  name     = "example-vpc"
-  region   = "nyc3"
-  ip_range = "10.10.10.0/24"
-}
-
 resource "digitalocean_firewall" "honeypot_firewall" {
   name = "honeypot_firewall"
 
