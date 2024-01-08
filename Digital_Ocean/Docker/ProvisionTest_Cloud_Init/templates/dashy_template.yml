@@ -109,7 +109,7 @@ sections:
   items:
   - title: Netbox01 - PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS
     icon: fas fa-project-diagram
-    url: http://[NETBOX01_IP]  
+    url: https://PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS
     description: NetBox IP Address Management
     tags: [ipam, netbox, network]
 
