@@ -9,7 +9,7 @@ resource "digitalocean_droplet" "HoneyPot01" {
 }
 
 resource "digitalocean_firewall" "honeypot_firewall" {
-  name = "honeypot_firewall"
+  name = "honeypot-firewall"
 
   droplet_ids = [ 
     digitalocean_droplet.HoneyPot01.id,
