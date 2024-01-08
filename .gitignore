@@ -47,3 +47,6 @@ my-config.yml
 *.pem
 *.pub
 id_rsa
+
+# Ignore Tmux LOg
+tmux-client*.log
