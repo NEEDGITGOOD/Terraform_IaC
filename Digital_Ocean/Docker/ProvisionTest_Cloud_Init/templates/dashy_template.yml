@@ -121,7 +121,7 @@ sections:
   items:
   - title: VPN01 - OpenVPN Access Server
     icon: fas fa-lock
-    url: http://[VPN01_IP] 
+    url: https://x.x.x.x:xx/
     description: OpenVPN server for secure access
     tags: [vpn, openvpn, security]
 
