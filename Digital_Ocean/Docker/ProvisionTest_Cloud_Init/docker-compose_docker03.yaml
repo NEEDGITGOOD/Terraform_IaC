@@ -17,10 +17,10 @@ services:
       - db_data:/var/lib/mysql
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=somewordpress
+      - MYSQL_ROOT_PASSWORD=myverypogsecurePW_39woriRiddjd3djD3
       - MYSQL_DATABASE=wordpress
       - MYSQL_USER=wordpress
-      - MYSQL_PASSWORD=wordpress
+      - MYSQL_PASSWORD=VERYSECUREPASSWORD9857948712978412
     expose:
       - 3306
       - 33060
