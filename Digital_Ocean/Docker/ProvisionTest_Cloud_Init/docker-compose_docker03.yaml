@@ -2,6 +2,7 @@ version: '3.2'
 services:
   portainer_agent:
     image: portainer/agent
+    container_name: Portainer-Agent
     network_mode: "host"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -25,6 +26,7 @@ services:
       - 33060
   wordpress:
     image: wordpress:latest
+    container_name: Wordpress
     ports:
       - 80:80
     restart: always
@@ -35,7 +37,7 @@ services:
       - WORDPRESS_DB_NAME=wordpress
   adguardhome:
     image: adguard/adguardhome
-    container_name: adguardhome
+    container_name: Adguard-Home
     ports:
       - 53:53/tcp
       - 53:53/udp

@@ -2,6 +2,7 @@ version: '3.2'
 services:
   portainer_agent:
     image: portainer/agent
+    container_name: Portainer-Agent
     network_mode: "host"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock

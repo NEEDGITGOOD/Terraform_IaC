@@ -78,7 +78,7 @@ sections:
   items:
   - title: Wordpress01
     icon: fas fa-blog
-    url: http://[PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS]:80  
+    url: http://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:80  
     description: Wordpress site on Docker03
     tags: [docker, wordpress, website]
     hotkey: 4
@@ -101,13 +101,13 @@ sections:
   - title: Nginx01 Webserver
     icon: favicon
     url: http://[NGINX01_IP]  
-    description: Nginx load balancer for balancing traffic
+    description: Nginx Webserver 1
     tags: [webserver, nginx, network]
     
   - title: Nginx02 Webserver
     icon: favicon
     url: http://[NGINX02_IP]  
-    description: Nginx load balancer for balancing traffic
+    description: Nginx Webserver 2
     tags: [webserver, nginx, network]
     
   - title: LoadBalancer01
