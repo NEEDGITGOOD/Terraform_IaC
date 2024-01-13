@@ -6,7 +6,7 @@ resource "tls_private_key" "ssh" {
 
 # Upload the public key to DigitalOcean
 resource "digitalocean_ssh_key" "temporary_ssh" {
-  name       = "myKey"
+  name       = "myPrivateKey"
   public_key = tls_private_key.ssh.public_key_openssh
 
     provisioner "local-exec" {
