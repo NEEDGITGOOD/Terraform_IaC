@@ -34,6 +34,13 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
+  gatus:
+    image: twinproduction/gatus:latest
+    restart: always	
+    ports:
+      - 8080:8080
+    volumes:
+      - ./config:/config
 
 volumes:
   portainer_data:
