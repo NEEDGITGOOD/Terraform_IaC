@@ -50,3 +50,6 @@ id_rsa
 
 # Ignore Tmux LOg
 tmux-client*.log
+
+Ignore Gatus File
+gatus-config.yml

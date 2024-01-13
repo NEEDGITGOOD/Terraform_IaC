@@ -23,7 +23,26 @@ sed -i "s/PLACEHOLDER_DOCKER03_IP_ADDRESS/${IP_ADDRESS_DOCKER03}/g" ssh_tunnels.
 ###############################################
 
 # Template Creator for Dashy
+
+# Copy File
 cp ./templates/dashy_template.yml my-config.yml
+
+# Replace the placeholder in the Template file with the IP address of Docker02
+sed -i "s/PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_DOCKER02}/g" my-config.yml
+
+# Replace the placeholder in the Template file with the IP address of Docker03
+sed -i "s/PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_DOCKER03}/g" my-config.yml
+
+# Replace the placeholder in the Template file with the IP address of Netbox01
+sed -i "s/PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_NETBOX01}/g" my-config.yml
+
+
+###############################################
+
+# Gatus Template
+
+# Copy File
+cp ./templates/gatus-config.yml my-config.yml
 
 # Replace the placeholder in the Template file with the IP address of Docker02
 sed -i "s/PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_DOCKER02}/g" my-config.yml
