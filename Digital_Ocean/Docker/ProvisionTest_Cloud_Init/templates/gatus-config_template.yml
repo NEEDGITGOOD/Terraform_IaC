@@ -9,20 +9,32 @@ endpoints:
       - "[BODY] == 93.184.216.34"
       - "[DNS_RCODE] == NOERROR"
 
-  - name: docker01
+  - name: Docker01
     url: "icmp://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
 
-  - name: docker02
-    url: "icmp://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS"
+  - name: Docker02
+    url: "icmp://PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
 
-  - name: docker03
-    url: "icmp://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS"
+  - name: Docker03
+    url: "icmp://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS"
     interval: 1m
+    conditions:
+      - "[CONNECTED] == true"
+
+  - name: Netbox01
+    url: "icmp://PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS"
+    interval: 1m
+    conditions:
+      - "[CONNECTED] == true"
+
+  - name: HoneyPot
+    url: "icmp://8.8.8.8"
+    interval: 5m
     conditions:
       - "[CONNECTED] == true"
