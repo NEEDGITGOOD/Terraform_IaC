@@ -45,10 +45,10 @@ sed -i "s/PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_NETBOX01}/g
 cp ./templates/gatus-config_template.yml gatus-config.yml
 
 # Replace the placeholder in the Template file with the IP address of Docker02
-sed -i "s/PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_DOCKER02}/g" my-config.yml
+sed -i "s/PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_DOCKER02}/g" gatus-config.yml
 
 # Replace the placeholder in the Template file with the IP address of Docker03
-sed -i "s/PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_DOCKER03}/g" my-config.yml
+sed -i "s/PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_DOCKER03}/g" gatus-config.yml
 
 # Replace the placeholder in the Template file with the IP address of Netbox01
-sed -i "s/PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_NETBOX01}/g" my-config.yml
+sed -i "s/PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_NETBOX01}/g" gatus-config.yml
