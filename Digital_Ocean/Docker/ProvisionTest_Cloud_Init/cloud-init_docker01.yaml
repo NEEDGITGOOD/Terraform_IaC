@@ -10,7 +10,7 @@ write_files:
      #!/bin/bash
      mkdir /root/config
      curl -H "Authorization: token ${GITHUB_TOKEN}" -L https://raw.githubusercontent.com/NEEDGITGOOD/Terraform_IaC/main/Digital_Ocean/Docker/ProvisionTest_Cloud_Init/templates/docker-compose-portainer.yaml -o /root/docker-compose.yaml
-     curl -H "Authorization: token ${GITHUB_TOKEN}" -L https://raw.githubusercontent.com/NEEDGITGOOD/Terraform_IaC/main/Digital_Ocean/Docker/ProvisionTest_Cloud_Init/templates/gatus-config_template.yml -o /root/config/config.yml
+     curl -H "Authorization: token ${GITHUB_TOKEN}" -L https://raw.githubusercontent.com/NEEDGITGOOD/Terraform_IaC/main/Digital_Ocean/Docker/ProvisionTest_Cloud_Init/gatus-config.yml -o /root/config/config.yml
    permissions: '0700'
 runcmd:
  - sudo ufw allow 9000
