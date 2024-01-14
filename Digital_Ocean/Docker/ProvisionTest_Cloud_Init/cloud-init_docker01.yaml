@@ -8,13 +8,13 @@ write_files:
  - path: /root/setup.sh
    content: |
      #!/bin/bash
-     mkdir /root/config
      curl -H "Authorization: token ${GITHUB_TOKEN}" -L https://raw.githubusercontent.com/NEEDGITGOOD/Terraform_IaC/main/Digital_Ocean/Docker/ProvisionTest_Cloud_Init/templates/docker-compose-portainer.yaml -o /root/docker-compose.yaml
    permissions: '0700'
 runcmd:
  - sudo ufw allow 9000
  - sudo ufw allow 2374
  - mkdir -p /root/.ssh
+ - mkdir -p /root/config
  - /root/setup.sh
  - DOCKER01_IP=$(hostname -I | cut -d' ' -f1)
  - sed -i "s/PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS/$${DOCKER01_IP}/" /root/my-config.yml
