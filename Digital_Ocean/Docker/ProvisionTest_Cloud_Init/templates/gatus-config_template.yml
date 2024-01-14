@@ -1,5 +1,5 @@
 endpoints:
-- name: example-dns-query
+  - name: example-dns-query
     url: "8.8.8.8" # Address of the DNS server to use
     interval: 5m
     dns:
