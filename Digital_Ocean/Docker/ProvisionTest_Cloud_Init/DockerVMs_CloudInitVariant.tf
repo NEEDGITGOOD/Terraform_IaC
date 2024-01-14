@@ -108,12 +108,6 @@ resource "digitalocean_droplet" "Docker01" {
     destination = "/root/my-config.yml"
   }
 
-    ## Upload Gatus Config File
-  provisioner "file" {  
-    source      = "gatus-config.yml"
-    destination = "/root/config/config.yml"
-  }
-
   ## Copy the ssh file to the VM
   provisioner "file" {  
     source      = "./ssh/myKey.pem"
@@ -126,6 +120,12 @@ resource "digitalocean_droplet" "Docker01" {
       "export PATH=$PATH:/usr/bin", 
       "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 1; done"
           ]
+  }
+
+    ## Upload Gatus Config File
+  provisioner "file" {  
+    source      = "gatus-config.yml"
+    destination = "/root/config/config.yml"
   }
 
   ## Run Commands on the VM
