@@ -108,6 +108,12 @@ resource "digitalocean_droplet" "Docker01" {
     destination = "/root/my-config.yml"
   }
 
+    ## Upload Gatus Config File
+  provisioner "file" {  
+    source      = "gatus-config.yml"
+    destination = "/root/config/config.yml"
+  }
+
   ## Copy the ssh file to the VM
   provisioner "file" {  
     source      = "./ssh/myKey.pem"
