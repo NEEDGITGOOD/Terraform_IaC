@@ -1,11 +1,13 @@
-# Set Password Variable for Alma Linux DockerFile
+### Alma Linux
+
+# Alma Linux: Set Password Variable for Alma Linux DockerFile
 variable "alma_linux_password" {
   description = "Password for the Alma Linux Docker Container/Dockerfile"
   type        = string
 }
 
-# Make Template out of Templatefile
-data "template_file" "dockerfile" {
+# Alma Linux: Make Template out of Templatefile
+data "template_file" "alma_linux_create_dockerfile" {
   template = file("${path.module}/templates/Dockerfile.alma_linux.tpl")
 
   vars = {
@@ -13,10 +15,33 @@ data "template_file" "dockerfile" {
   }
 }
 
-# Create Template File locally so it can be referenced
-resource "local_file" "rendered_dockerfile" {
+# Alma Linux: Create Template File locally so it can be referenced
+resource "local_file" "alma_linux_save_dockerfile" {
   content  = data.template_file.dockerfile.rendered
   filename = "${path.module}/Dockerfiles/rendered_Dockerfile.alma_linux"
+}
+
+### Kali Linux
+
+# Kali Linux: Set Password Variable for Kali Linux DockerFile
+variable "kali_linux_password" {
+  description = "Password for the Kali Linux Docker Container/Dockerfile"
+  type        = string
+}
+
+# Kali Linux: Make Template out of Templatefile
+data "template_file" "kali_linux_create_dockerfile" {
+  template = file("${path.module}/templates/Dockerfile.kali_linux.tpl")
+
+  vars = {
+    USER_PASSWORD = var.kali_linux_password
+  }
+}
+
+# Kali Linux: Create Template File locally so it can be referenced
+resource "local_file" "kali_linux_save_dockerfile" {
+  content  = data.template_file.dockerfile.rendered
+  filename = "${path.module}/Dockerfiles/rendered_Dockerfile.kali_linux"
 }
 
 # Generate a new SSH key
@@ -220,8 +245,14 @@ resource "digitalocean_droplet" "Docker02" {
   
   ## Upload Rendered Dockerfile to the VM (Alma Linux)
   provisioner "file" {
-    source      = local_file.rendered_dockerfile.filename
+    source      = local_file.alma_linux_save_dockerfile.filename
     destination = "/root/Dockerfile.alma_linux"
+  }
+
+  ## Upload Rendered Dockerfile to the VM (Kali Linux)
+  provisioner "file" {
+    source      = local_file.kali_linux_save_dockerfile.filename
+    destination = "/root/Dockerfile.kali_linux"
   }
 
     user_data = templatefile("cloud-init_docker02.yaml", {

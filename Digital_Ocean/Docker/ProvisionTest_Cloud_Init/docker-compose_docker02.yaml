@@ -14,3 +14,11 @@ services:
     ports:
       - "2222:22" # Map host's port 2222 to container's port 22 for the ssh connection
     container_name: almalinux_ssh
+  kalilinux:
+    build:
+      context: .
+      dockerfile: Dockerfile.kali_linux
+    ports:
+      - "2223:22" # Map host's port 2222 to container's port 22 for the ssh connection
+    container_name: kali_ssh
+    
