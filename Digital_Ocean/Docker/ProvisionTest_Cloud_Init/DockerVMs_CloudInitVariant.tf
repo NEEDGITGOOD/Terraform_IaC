@@ -17,7 +17,7 @@ data "template_file" "alma_linux_create_dockerfile" {
 
 # Alma Linux: Create Template File locally so it can be referenced
 resource "local_file" "alma_linux_save_dockerfile" {
-  content  = data.template_file.dockerfile.rendered
+  content  = data.template_file.alma_linux_create_dockerfile.rendered
   filename = "${path.module}/Dockerfiles/rendered_Dockerfile.alma_linux"
 }
 
@@ -40,7 +40,7 @@ data "template_file" "kali_linux_create_dockerfile" {
 
 # Kali Linux: Create Template File locally so it can be referenced
 resource "local_file" "kali_linux_save_dockerfile" {
-  content  = data.template_file.dockerfile.rendered
+  content  = data.template_file.kali_linux_create_dockerfile.rendered
   filename = "${path.module}/Dockerfiles/rendered_Dockerfile.kali_linux"
 }
 
