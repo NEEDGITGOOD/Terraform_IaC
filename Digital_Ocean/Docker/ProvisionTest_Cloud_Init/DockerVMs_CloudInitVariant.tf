@@ -1,3 +1,18 @@
+# Set Password Variable for Alma Linux DockerFile
+variable "alma_linux_password" {
+  description = "Password for the Alma Linux Docker Container/Dockerfile"
+  type        = string
+}
+
+# Make Template out of Templatefile
+data "template_file" "dockerfile" {
+  template = file("${path.module}/templates/Dockerfile.tpl")
+
+  vars = {
+    USER_PASSWORD = var.alma_linux_password
+  }
+}
+
 # Generate a new SSH key
 resource "tls_private_key" "ssh" {
   algorithm = "RSA"
@@ -25,7 +40,7 @@ resource "digitalocean_droplet" "Netbox01" {
   ]
 
   user_data = "cloud-init_netbox01.yaml"
-  }
+}
 
 # Firewall for Netbox01
 resource "digitalocean_firewall" "netbox_firewall" {
@@ -100,6 +115,12 @@ resource "digitalocean_droplet" "Docker01" {
     type = "ssh"
     private_key = file("./ssh/myKey.pem")
     timeout = "4m"
+  }
+
+  ## Copy Rendered Dockerfile to the VM (Alma Linux)
+  provisioner "file" {
+    source      = data.template_file.dockerfile.rendered
+    destination = "/root/Dockerfile"  
   }
 
   ## Upload Dashy Config File
