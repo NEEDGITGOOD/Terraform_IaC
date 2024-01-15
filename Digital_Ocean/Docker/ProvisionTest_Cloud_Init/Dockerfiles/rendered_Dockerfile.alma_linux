@@ -7,8 +7,8 @@ RUN yum -y install openssh-server passwd && \
 
 # Setup User
 ARG USER_PASSWORD
-RUN useradd your_user && \
-    echo "$USER_PASSWORD" | passwd your_user --stdin
+RUN useradd ssh_user && \
+    echo "${USER_PASSWORD}" | passwd ssh_user --stdin  
 
 # Configure SSH for password authentication
 RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
