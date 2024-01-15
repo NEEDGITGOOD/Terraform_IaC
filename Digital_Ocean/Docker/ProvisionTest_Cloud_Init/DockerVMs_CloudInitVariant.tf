@@ -6,7 +6,7 @@ variable "alma_linux_password" {
 
 # Make Template out of Templatefile
 data "template_file" "dockerfile" {
-  template = file("${path.module}/templates/Dockerfile.tpl")
+  template = file("${path.module}/templates/Dockerfile.alma_linux.tpl")
 
   vars = {
     USER_PASSWORD = var.alma_linux_password
@@ -117,12 +117,6 @@ resource "digitalocean_droplet" "Docker01" {
     timeout = "4m"
   }
 
-  ## Copy Rendered Dockerfile to the VM (Alma Linux)
-  provisioner "file" {
-    source      = data.template_file.dockerfile.rendered
-    destination = "/root/Dockerfile"  
-  }
-
   ## Upload Dashy Config File
   provisioner "file" {  
     source      = "my-config.yml"
@@ -139,7 +133,7 @@ resource "digitalocean_droplet" "Docker01" {
   provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin", 
-      "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 1; done"
+      "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init on Docker01...'; sleep 1; done"
           ]
   }
 
@@ -209,6 +203,12 @@ resource "digitalocean_droplet" "Docker02" {
   ssh_keys = [
     digitalocean_ssh_key.temporary_ssh.id
   ]
+  
+  ## Upload Rendered Dockerfile to the VM (Alma Linux)
+  provisioner "file" {
+    source      = data.template_file.dockerfile.rendered
+    destination = "/root/Dockerfile.alma_linux"  
+  }
 
     user_data = templatefile("cloud-init_docker02.yaml", {
     GITHUB_TOKEN = var.GITHUB_TOKEN
@@ -217,6 +217,7 @@ resource "digitalocean_droplet" "Docker02" {
     depends_on = [digitalocean_ssh_key.temporary_ssh]
 
 }
+
 
 # Docker03
 resource "digitalocean_droplet" "Docker03" {
