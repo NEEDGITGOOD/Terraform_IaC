@@ -5,6 +5,9 @@ FROM ubuntu:latest
 RUN apt-get update && apt-get install -y openssh-server && \
     rm -rf /var/lib/apt/lists/*
 
+# Create the necessary directory for SSH
+RUN mkdir -p /run/sshd
+
 # Setup User
 ARG USER_PASSWORD
 RUN useradd -m ssh_user && \

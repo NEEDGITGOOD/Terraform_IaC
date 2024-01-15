@@ -9,6 +9,7 @@ write_files:
    permissions: '0700'
 runcmd:
  - /root/setup.sh
+ - sleep 30
  - docker compose build
  - sleep 180
  - docker compose -f /root/docker-compose.yaml up -d
