@@ -51,5 +51,8 @@ id_rsa
 # Ignore Tmux LOg
 tmux-client*.log
 
-Ignore Gatus File
+# Ignore Gatus Config File
 gatus-config.yml
+
+# Ignore rendered Dockerfiles with custom password
+Digital_Ocean/Docker/ProvisionTest_Cloud_Init/Dockerfiles/rendered_Dockerfile*
