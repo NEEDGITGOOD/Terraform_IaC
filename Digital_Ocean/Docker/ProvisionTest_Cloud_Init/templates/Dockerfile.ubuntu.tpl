@@ -1,14 +1,14 @@
-# Use AlmaLinux as the base image
+# Use Ubuntu as the base image
 FROM ubuntu:latest
 
 # Install OpenSSH
-RUN yum -y install openssh-server passwd && \
-    yum clean all
+RUN apt-get update && apt-get install -y openssh-server && \
+    rm -rf /var/lib/apt/lists/*
 
 # Setup User
 ARG USER_PASSWORD
-RUN useradd ssh_user && \
-    echo "$USER_PASSWORD" | passwd ssh_user --stdin
+RUN useradd -m ssh_user && \
+    echo "ssh_user:$USER_PASSWORD" | chpasswd
 
 # Configure SSH for password authentication
 RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config && \

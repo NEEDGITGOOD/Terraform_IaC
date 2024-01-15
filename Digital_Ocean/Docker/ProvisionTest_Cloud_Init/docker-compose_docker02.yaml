@@ -19,6 +19,12 @@ services:
       context: .
       dockerfile: Dockerfile.kali_linux
     ports:
-      - "2223:22" # Map host's port 2222 to container's port 22 for the ssh connection
+      - "2223:22" # Map host's port 2223 to container's port 22 for the ssh connection
     container_name: kali_ssh
-    
+  ubuntu:
+    build:
+      context: .
+      dockerfile: Dockerfile.ubuntu
+    ports:
+      - "2224:22" # Map host's port 2224 to container's port 22 for the ssh connection
+    container_name: ubuntu_ssh

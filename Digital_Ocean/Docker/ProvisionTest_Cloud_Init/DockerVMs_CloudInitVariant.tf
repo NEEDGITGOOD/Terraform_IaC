@@ -44,6 +44,29 @@ resource "local_file" "kali_linux_save_dockerfile" {
   filename = "${path.module}/Dockerfiles/rendered_Dockerfile.kali_linux"
 }
 
+### Ubuntu
+
+# Ubuntu: Set Password Variable for Ubuntu DockerFile
+variable "ubuntu_password" {
+  description = "Password for the ubuntu Docker Container/Dockerfile"
+  type        = string
+}
+
+# Ubuntu: Make Template out of Templatefile
+data "template_file" "ubuntu_create_dockerfile" {
+  template = file("${path.module}/templates/Dockerfile.ubuntu.tpl")
+
+  vars = {
+    USER_PASSWORD = var.ubuntu_password
+  }
+}
+
+# Ubuntu: Create Template File locally so it can be referenced
+resource "local_file" "ubuntu_save_dockerfile" {
+  content  = data.template_file.ubuntu_create_dockerfile.rendered
+  filename = "${path.module}/Dockerfiles/rendered_Dockerfile.ubuntu"
+}
+
 # Generate a new SSH key
 resource "tls_private_key" "ssh" {
   algorithm = "RSA"
@@ -253,6 +276,12 @@ resource "digitalocean_droplet" "Docker02" {
   provisioner "file" {
     source      = local_file.kali_linux_save_dockerfile.filename
     destination = "/root/Dockerfile.kali_linux"
+  }
+  
+  ## Upload Rendered Dockerfile to the VM (Ubuntu)
+  provisioner "file" {
+    source      = local_file.ubuntu_save_dockerfile.filename
+    destination = "/root/Dockerfile.ubuntu"
   }
 
     user_data = templatefile("cloud-init_docker02.yaml", {

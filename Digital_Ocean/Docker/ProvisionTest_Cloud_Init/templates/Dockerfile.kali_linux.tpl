@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y openssh-server && \
 # Setup User
 ARG USER_PASSWORD
 RUN useradd -m ssh_user && \
-    echo "ssh_user:$USER_PASSWORD" | chpasswd
+    echo "ssh_user:${USER_PASSWORD}" | chpasswd
 
 # Configure SSH for password authentication
 RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
