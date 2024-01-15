@@ -33,6 +33,6 @@ output "private_ip_Docker03" {
 }
 
 output "private_ip_Netbox01" {
-  value = digitalocean_droplet.Netbox01.ipv4_address_private
-  description = "Private IP of Netbox01"
+  value = digitalocean_droplet.Netbox01.ipv4_address
+  description = "Public IP of Netbox01"
 }
