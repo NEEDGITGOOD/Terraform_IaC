@@ -36,19 +36,18 @@ sections:
     tags: [docker, management, portainer]
     hotkey: 1
 
-  - title: AlmaLinux01 - AlmaLinux 8.4
-    icon: fab fa-centos
-    url: http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS/centos01  
-    description: CentOS machine on Docker01
-    tags: [docker, centos, virtual machine]
-    hotkey: 2
+  - title: Monitoring01 - Gatus
+    icon: fas fa-heartbeat
+    url: http://DOCKEPLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESSR02_IP:80  
+    description: Uptime Kuma monitoring on Docker02
+    tags: [docker, monitoring, uptime]
+    hotkey: 2 
 
   - title: Dashboard01 - Dashy
     icon: fas fa-tachometer-alt
     url: http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:4000  
     description: Dashy dashboard on Docker01
     tags: [docker, dashboard, dashy]
-    hotkey: 3
 
 - name: Docker02 - PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS
   icon: fas fa-network-wired
@@ -59,19 +58,17 @@ sections:
     description: Ubuntu 23.10 server in Azure
     tags: [azure, ubuntu, server]
 
-  - title: Monitoring01 - Uptime Kuma
-    icon: fas fa-heartbeat
-    url: http://[DOCKER02_IP]/monitoring  
-    description: Uptime Kuma monitoring on Docker02
-    tags: [docker, monitoring, uptime]
-    hotkey: 6 
+  - title: AlmaLinux01 - AlmaLinux 8.4
+    icon: fab fa-centos
+    url: http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS/centos01  
+    description: CentOS machine on Docker01
+    tags: [docker, centos, virtual machine]
 
-  - title: Update01 - Watch Tower
-    icon: favicon
-    url: http://[DOCKER02_IP]/update 
-    description: Watch Tower updates on Docker02
-    tags: [docker, updates, watchtower]
-    hotkey: 7
+  - title: Attackbox01
+    icon: fas fa-skull-crossbones
+    url: http://[PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS] 
+    description: Kali VM - Attackbox on Docker03
+    tags: [docker, kali, vm, security]
 
 - name: Docker03 - PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS
   icon: fas fa-network-wired
@@ -81,19 +78,20 @@ sections:
     url: http://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:80  
     description: Wordpress site on Docker03
     tags: [docker, wordpress, website]
-    hotkey: 4
-
-  - title: Attackbox01
-    icon: fas fa-skull-crossbones
-    url: http://[PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS] 
-    description: Kali VM - Attackbox on Docker03
-    tags: [docker, kali, vm, security]
+    hotkey: 3
 
   - title: ADGuard DNS01
     icon: fas fa-shield-alt
     url: http://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:3000  
     description: ADGuard DNS service on Docker03
     tags: [docker, dns, adguard]
+    hotkey: 4
+
+  - title: Update01 - Watch Tower
+    icon: favicon
+    url: http://[DOCKER02_IP]/update 
+    description: Watch Tower updates on Docker02
+    tags: [docker, updates, watchtower]
 
 - name: Nginx Webserver with Load Balancers
   icon: fas fa-sync-alt
@@ -121,7 +119,7 @@ sections:
   items:
   - title: VPN01 - OpenVPN Access Server
     icon: fas fa-lock
-    url: https://x.x.x.x:xx/
+    url: https://PLACEHOLDER_OPENVPN_IP_PUBLIC_ADDRESS:
     description: OpenVPN server for secure access
     tags: [vpn, openvpn, security]
 
