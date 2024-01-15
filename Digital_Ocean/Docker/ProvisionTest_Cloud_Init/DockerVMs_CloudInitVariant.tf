@@ -204,6 +204,14 @@ resource "digitalocean_droplet" "Docker02" {
     digitalocean_ssh_key.temporary_ssh.id
   ]
   
+    connection {
+    host = self.ipv4_address
+    user = "root"
+    type = "ssh"
+    private_key = file("./ssh/myKey.pem")
+    timeout = "4m"
+  }
+  
   ## Upload Rendered Dockerfile to the VM (Alma Linux)
   provisioner "file" {
     source      = data.template_file.dockerfile.rendered
