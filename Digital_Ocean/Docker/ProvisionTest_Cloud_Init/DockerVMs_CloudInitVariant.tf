@@ -13,6 +13,12 @@ data "template_file" "dockerfile" {
   }
 }
 
+# Create Template File locally so it can be referenced
+resource "local_file" "rendered_dockerfile" {
+  content  = data.template_file.dockerfile.rendered
+  filename = "${path.module}/Dockerfiles/rendered_Dockerfile.alma_linux"
+}
+
 # Generate a new SSH key
 resource "tls_private_key" "ssh" {
   algorithm = "RSA"
@@ -214,8 +220,8 @@ resource "digitalocean_droplet" "Docker02" {
   
   ## Upload Rendered Dockerfile to the VM (Alma Linux)
   provisioner "file" {
-    source      = data.template_file.dockerfile.rendered
-    destination = "/root/Dockerfile.alma_linux"  
+    source      = local_file.rendered_dockerfile.filename
+    destination = "/root/Dockerfile.alma_linux"
   }
 
     user_data = templatefile("cloud-init_docker02.yaml", {
