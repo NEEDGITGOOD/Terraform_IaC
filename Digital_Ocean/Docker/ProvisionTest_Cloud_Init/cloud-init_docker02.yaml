@@ -10,4 +10,5 @@ write_files:
 runcmd:
  - /root/setup.sh
  - docker compose build
+ - sleep 60
  - docker compose -f /root/docker-compose.yaml up -d
