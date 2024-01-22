@@ -10,18 +10,28 @@ variable "location" {
 }
 
 
-# AD
+# Active Directory
+
+## Domain Name
+variable "ad_domain_name" {
+  description = "Name for the Domain"
+  type        = string
+}
 
 ## Administrator Username
-variable "ad_administrator_username" {
+variable "ad_admin_username" {
   description = "Username for the Administrator Account"
   type        = string
 }
 
 ## Administrator Passwort
-variable "ad_administrator_password" {
+variable "ad_admin_password" {
   description = "Password for the Administrator Account"
   type        = string
 }
+
+
+
+
 
 # Define other variables as needed

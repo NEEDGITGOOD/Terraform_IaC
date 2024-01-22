@@ -2,21 +2,31 @@ provider "azurerm" {
   features {}
 }
 
+module "resource_group" {
+  source   = "./modules/resource_group"
+  name     = var.resource_group_name
+  location = var.location
+}
+
 module "network" {
   source = "./modules/network"
   
+  resource_group_name = module.resource_group.name
+
   location  = var.location
-  resource_group_name =  var.resource_group_name
 }
 
 module "virtual-machines" {
   source = "./modules/virtual-machines"
-  # Pass necessary variables
+
+  resource_group_name = module.resource_group.name
 }
 
 # Import Active Directory Module
 module "active-directory" {
   source = "./modules/active-directory"
+
+  resource_group_name = module.resource_group.name
 
   ad_domain_name     = var.ad_domain_name
   ad_admin_username  = var.ad_administrator_username
@@ -25,5 +35,6 @@ module "active-directory" {
 
 module "client-join" {
   source = "./modules/client-join"
-  # Pass necessary variables
+
+  resource_group_name = module.resource_group.name
 }
