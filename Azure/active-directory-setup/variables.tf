@@ -29,12 +29,6 @@ variable "adds_admin_password" {
   type        = string
 }
 
-## Windows-Vms | Subnet_ID
-variable "subnet_id" {
-  description = "Subnet ID"
-  type        = string
-}
-
 ## Windows-Vms | VM Name
 variable "vm_name" {
   description = "Windows Password Client01"
