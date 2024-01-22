@@ -42,3 +42,11 @@ module "client-join" {
   location  = var.location
 
 }
+
+module "windows-vms" {
+  source = "./modules/windows-vms"
+
+  resource_group_name = module.resource_group.name
+  location  = var.location
+
+}
