@@ -27,13 +27,6 @@ module "network" {
   location  = var.location
 }
 
-module "virtual-machines" {
-  source = "./modules/virtual-machines"
-
-  resource_group_name = module.resource_group.name
-  location  = var.location
-}
-
 # Import Active Directory Module
 module "active-directory" {
   source = "./modules/active-directory-domain-services"
