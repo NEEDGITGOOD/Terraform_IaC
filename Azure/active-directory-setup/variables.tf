@@ -31,18 +31,18 @@ variable "adds_admin_password" {
 
 ## Windows-Vms | VM Name
 variable "vm_name" {
-  description = "Windows Password Client01"
+  description = "Windows VM Name"
   type        = string
 }
 
 ## Windows-Vms | Client Name
 variable "windows_username" {
-  description = "Windows Password Client01"
+  description = "Windows Username for the Client"
   type        = string
 }
 
 ## Windows-Vms | Client Password
 variable "windows_password" {
-  description = "Windows Password Client02"
+  description = "Windows Password for the Client"
   type        = string
 }
