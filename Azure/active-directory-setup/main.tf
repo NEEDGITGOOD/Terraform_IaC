@@ -9,6 +9,17 @@ module "resource_group" {
   location  = var.location
 }
 
+module "windows_vm" {
+  source              = "./modules/windows-vms"
+  vm_name             = "example-vm"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  subnet_id           = var.subnet_id
+  vm_size             = "Standard_DS1_v2"
+  admin_username      = "adminuser"
+  admin_password      = "SecurePassword123!"
+}
+
 module "network" {
   source = "./modules/network"
   
@@ -37,14 +48,6 @@ module "active-directory" {
 
 module "client-join" {
   source = "./modules/client-join"
-
-  resource_group_name = module.resource_group.name
-  location  = var.location
-
-}
-
-module "windows-vms" {
-  source = "./modules/windows-vms"
 
   resource_group_name = module.resource_group.name
   location  = var.location

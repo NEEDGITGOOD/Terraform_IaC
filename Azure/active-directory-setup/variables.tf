@@ -28,3 +28,21 @@ variable "adds_admin_password" {
   description = "Password for the Administrator Account"
   type        = string
 }
+
+## Windows-Vms | Subnet_ID
+variable "subnet_id" {
+  description = "Subnet ID"
+  type        = string
+}
+
+## Windows-Vms | Subnet_ID
+variable "windows_password_client01" {
+  description = "Windows Password Client01"
+  type        = string
+}
+
+## Windows-Vms | Subnet_ID
+variable "windows_password_client02" {
+  description = "Windows Password Client02"
+  type        = string
+}

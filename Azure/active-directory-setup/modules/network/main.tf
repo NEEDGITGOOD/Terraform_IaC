@@ -7,7 +7,7 @@ resource "azurerm_virtual_network" "vnet" {
 }
 
 # Create Subnet
-resource "azurestack_subnet" "default" {
+resource "azurestack_subnet" "subnet" {
     name                = "${var.resource_group_name}-SN"
     resource_group_name = "${var.resource_group_name}"
     virtual_network_name = azurestack_virtual_network.vnet.name
