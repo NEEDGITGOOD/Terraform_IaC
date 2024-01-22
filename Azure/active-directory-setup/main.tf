@@ -13,7 +13,6 @@ module "network" {
   source = "./modules/network"
   
   resource_group_name = module.resource_group.name
-
   location  = var.location
 }
 
@@ -21,21 +20,25 @@ module "virtual-machines" {
   source = "./modules/virtual-machines"
 
   resource_group_name = module.resource_group.name
+  location  = var.location
 }
 
 # Import Active Directory Module
 module "active-directory" {
-  source = "./modules/active-directory"
+  source = "./modules/active-directory-domain-services"
 
   resource_group_name = module.resource_group.name
+  location  = var.location
 
-  ad_domain_name     = var.ad_domain_name
-  ad_admin_username  = var.ad_administrator_username
-  ad_admin_password  = var.ad_administrator_password
+  adds_domain_name     = var.adds_domain_name
+  adds_admin_username  = var.adds_admin_username
+  adds_admin_password  = var.adds_admin_password
 }
 
 module "client-join" {
   source = "./modules/client-join"
 
   resource_group_name = module.resource_group.name
+  location  = var.location
+
 }

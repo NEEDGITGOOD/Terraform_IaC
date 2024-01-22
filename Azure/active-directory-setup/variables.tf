@@ -19,13 +19,13 @@ variable "ad_domain_name" {
 }
 
 ## Administrator Username
-variable "ad_admin_username" {
+variable "adds_admin_username" {
   description = "Username for the Administrator Account"
   type        = string
 }
 
 ## Administrator Passwort
-variable "ad_admin_password" {
+variable "adds_admin_password" {
   description = "Password for the Administrator Account"
   type        = string
 }
