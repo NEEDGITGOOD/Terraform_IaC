@@ -8,4 +8,9 @@ output "subnet_id" {
   description = "The ID of the subnet"
 }
 
+output "nsg_id" {
+  value       = azurerm_network_security_group.nsg.id
+  description = "The ID of the Nework Security Group"
+}
+
 # Define other outputs as needed

@@ -3,21 +3,21 @@ resource "azurerm_virtual_network" "vnet" {
   name                = "${var.resource_group_name}-VNET01"
   address_space       = ["10.10.10.0/24"]
   location            = var.location
-  resource_group_name = "${var.resource_group_name}"
+  resource_group_name = var.resource_group_name
 }
 
 # Create Subnet
 resource "azurerm_subnet" "subnet" {
-    name                = "${var.resource_group_name}-SN01"
-    resource_group_name = "${var.resource_group_name}"
-    virtual_network_name = azurerm_subnet.subnet.name
-    address_prefixes       = ["10.10.10.0/25"]
+  name                 = "${var.resource_group_name}-SN01"
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = ["10.10.10.0/25"]
 }
 
 # Create Security Group (Firewall)
 resource "azurerm_network_security_group" "nsg" {
   name                = "${var.resource_group_name}-NSG01"
-  location            = azurerm_resource_group.deploy.location
+  location            = var.location
   resource_group_name = var.resource_group_name
 
   security_rule {

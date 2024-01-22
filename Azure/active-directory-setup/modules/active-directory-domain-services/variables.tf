@@ -14,6 +14,11 @@ variable "adds_admin_password" {
   type        = string
 }
 
+variable "nsg_id" {
+  description = "Network Security Group ID to associate with the subnet"
+  type        = string
+}
+
 variable "location" {
   description = "The Azure region where the AD DS instance will be created"
   type        = string
@@ -21,5 +26,10 @@ variable "location" {
 
 variable "resource_group_name" {
   description = "The name of the resource group in which to create the AD DS instance"
+  type        = string
+}
+
+variable "subnet_id" {
+  description = "The ID of the subnet for the Active Directory Domain Services"
   type        = string
 }

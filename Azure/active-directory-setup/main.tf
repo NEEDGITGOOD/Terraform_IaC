@@ -29,10 +29,12 @@ module "windows_vm" {
 
 # Import Active Directory Module
 module "active-directory" {
-  source = "./modules/active-directory-domain-services"
+  source    = "./modules/active-directory-domain-services"
+  subnet_id = module.network.subnet_id 
   resource_group_name = module.resource_group.resource_group_name
   location            = var.location
   adds_domain_name    = var.adds_domain_name
   adds_admin_username = var.adds_admin_username
   adds_admin_password = var.adds_admin_password
+  nsg_id    = module.network.nsg_id  # Replace with actual NSG ID source
 }
