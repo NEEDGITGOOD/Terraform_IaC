@@ -45,11 +45,3 @@ module "active-directory" {
   adds_admin_username  = var.adds_admin_username
   adds_admin_password  = var.adds_admin_password
 }
-
-module "client-join" {
-  source = "./modules/client-join"
-
-  resource_group_name = module.resource_group.name
-  location  = var.location
-
-}
