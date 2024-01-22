@@ -11,13 +11,13 @@ module "resource_group" {
 
 module "windows_vm" {
   source              = "./modules/windows-vms"
-  vm_name             = "example-vm"
+  vm_name             = var.vm_name
   location            = var.location
   resource_group_name = var.resource_group_name
   subnet_id           = var.subnet_id
   vm_size             = "Standard_DS1_v2"
-  admin_username      = "adminuser"
-  admin_password      = "SecurePassword123!"
+  admin_username      = var.windows_username
+  admin_password      = var.windows_password
 }
 
 module "network" {

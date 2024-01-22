@@ -35,14 +35,20 @@ variable "subnet_id" {
   type        = string
 }
 
-## Windows-Vms | Subnet_ID
-variable "windows_password_client01" {
+## Windows-Vms | VM Name
+variable "vm_name" {
   description = "Windows Password Client01"
   type        = string
 }
 
-## Windows-Vms | Subnet_ID
-variable "windows_password_client02" {
+## Windows-Vms | Client Name
+variable "windows_username" {
+  description = "Windows Password Client01"
+  type        = string
+}
+
+## Windows-Vms | Client Password
+variable "windows_password" {
   description = "Windows Password Client02"
   type        = string
 }
