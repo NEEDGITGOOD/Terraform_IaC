@@ -12,9 +12,16 @@ variable "location" {
 
 # AD
 
+## Administrator Username
+variable "ad_administrator_username" {
+  description = "Username for the Administrator Account"
+  type        = string
+}
+
 ## Administrator Passwort
-variable "administrator_password" {
+variable "ad_administrator_password" {
   description = "Password for the Administrator Account"
   type        = string
 }
+
 # Define other variables as needed

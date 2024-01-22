@@ -14,13 +14,13 @@ module "virtual-machines" {
   # Pass necessary variables
 }
 
+# Import Active Directory Module
 module "active-directory" {
   source = "./modules/active-directory"
 
-  ad_domain_name     = "example.com"
-  ad_admin_username  = "admin"
-  ad_admin_password  = var.ad_admin_password
-  # Pass other necessary variables as needed
+  ad_domain_name     = var.ad_domain_name
+  ad_admin_username  = var.ad_administrator_username
+  ad_admin_password  = var.ad_administrator_password
 }
 
 module "client-join" {
