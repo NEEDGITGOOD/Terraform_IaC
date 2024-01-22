@@ -1,20 +1,14 @@
 resource "azurerm_active_directory_domain_service" "adds" {
-  name                = "example-aadds"
-  location            = azurerm_resource_group.aadds.location
-  resource_group_name = azurerm_resource_group.aadds.name
+  name                = "${var.resource_group_name}-AADS"
+  location            = var.location
+  resource_group_name = "${var.resource_group_name}"
 
-  domain_name           = "widgetslogin.net"
+  domain_name           = "${var.adds_domain_name}"
   sku                   = "Enterprise"
   filtered_sync_enabled = false
 
   initial_replica_set {
     subnet_id = azurerm_subnet.deploy.id
-  }
-
-  notifications {
-    additional_recipients = ["notifyA@example.net", "notifyB@example.org"]
-    notify_dc_admins      = true
-    notify_global_admins  = true
   }
 
   security {
@@ -24,7 +18,6 @@ resource "azurerm_active_directory_domain_service" "adds" {
   }
 
   depends_on = [
-    azuread_service_principal.example,
     azurerm_subnet_network_security_group_association.deploy,
   ]
 }

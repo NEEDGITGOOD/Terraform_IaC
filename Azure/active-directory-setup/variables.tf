@@ -9,11 +9,10 @@ variable "location" {
   type        = string
 }
 
-
 # Active Directory
 
 ## Domain Name
-variable "ad_domain_name" {
+variable "adds_domain_name" {
   description = "Name for the Domain"
   type        = string
 }
@@ -29,9 +28,3 @@ variable "adds_admin_password" {
   description = "Password for the Administrator Account"
   type        = string
 }
-
-
-
-
-
-# Define other variables as needed
