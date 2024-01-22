@@ -5,7 +5,7 @@ resource "azurerm_network_interface" "ni" {
 
   ip_configuration {
     name                          = "internal"
-    subnet_id                          = module.network.subnet_id
+    subnet_id                          = var.subnet_id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.vm_pip.id
   }
