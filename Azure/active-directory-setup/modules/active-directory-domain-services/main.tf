@@ -1,6 +1,6 @@
 resource "azurerm_subnet_network_security_group_association" "nsg" {
   subnet_id                 = var.subnet_id
-  network_security_group_id = var.nsg_id  # This assumes you pass the NSG ID as a variable
+  network_security_group_id = var.nsg_id
 }
 
 resource "azurerm_active_directory_domain_service" "adds" {
