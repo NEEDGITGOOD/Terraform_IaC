@@ -20,13 +20,11 @@ module "windows_vm" {
   vm_name             = var.vm_name
   location            = var.location
   resource_group_name = module.resource_group.resource_group_name
-  subnet_id = module.network.aadds_subnet_id
+  subnet_id = module.network.subnet_id
   vm_size             = "Standard_DS1_v2"
   admin_username      = var.windows_username
   admin_password      = var.windows_password
 }
-
-
 
 # Import Active Directory Module
 module "active-directory" {
