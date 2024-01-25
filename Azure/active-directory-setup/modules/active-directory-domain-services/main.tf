@@ -16,7 +16,7 @@ resource "azurerm_active_directory_domain_service" "adds" {
   filtered_sync_enabled = false
 
   initial_replica_set {
-    subnet_id = var.aadds_subnet_id
+    subnet_id = var.subnet2_id
   }
   security {
     sync_kerberos_passwords = true

@@ -1,3 +1,20 @@
+# Create Vnet for AADS
+resource "azurerm_virtual_network" "vnet2" {
+  name                = "${var.resource_group_name}-VNET02"
+  address_space       = ["10.10.20.0/24"]
+  location            = var.location
+  resource_group_name = var.resource_group_name
+
+}
+
+# Create Subnet
+resource "azurerm_subnet" "subnet2" {
+  name                 = "${var.resource_group_name}-SN02"
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = azurerm_virtual_network.vnet2.name
+  address_prefixes     = ["10.10.20.0/25"]
+}
+
 # Create Vnet
 resource "azurerm_virtual_network" "vnet" {
   name                = "${var.resource_group_name}-VNET01"
@@ -8,13 +25,6 @@ resource "azurerm_virtual_network" "vnet" {
 
 }
 
-# Create a separate subnet for AADDS
-resource "azurerm_subnet" "aadds_subnet" {
-  name                 = "${var.resource_group_name}-AADDS-SN"
-  resource_group_name  = var.resource_group_name
-  virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes     = ["10.10.10.128/25"] 
-}
 
 # Create Subnet
 resource "azurerm_subnet" "subnet" {

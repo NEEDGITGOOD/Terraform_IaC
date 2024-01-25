@@ -29,7 +29,7 @@ variable "resource_group_name" {
   type        = string
 }
 
-variable "subnet_id" {
+variable "subnet2_id" {
   description = "The ID of the subnet for the Active Directory Domain Services"
   type        = string
 }
