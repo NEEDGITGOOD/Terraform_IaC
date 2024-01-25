@@ -4,7 +4,7 @@ resource "azurerm_virtual_network" "vnet" {
   address_space       = ["10.10.10.0/24"]
   location            = var.location
   resource_group_name = var.resource_group_name
-  dns_servers = azurerm_active_directory_domain_service.aadds.initial_replica_set[0].domain_controller_ip_addresses
+  dns_servers = var.adds_domain_controller_ip_addresses
 
 }
 
