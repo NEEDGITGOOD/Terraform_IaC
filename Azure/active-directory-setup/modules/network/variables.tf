@@ -8,8 +8,3 @@ variable "location" {
   type        = string
 }
 
-
-variable "adds_domain_controller_ip_addresses" {
-  description = "IP Of AADDS"
-
-}
