@@ -7,7 +7,7 @@ resource "azurerm_virtual_network" "vnet" {
   dns_servers = var.dns_servers
 
 }
-<
+
 # Create a separate subnet for AADDS
 resource "azurerm_subnet" "aadds_subnet" {
   name                 = "${var.resource_group_name}-AADDS-SN"
