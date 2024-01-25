@@ -12,6 +12,8 @@ module "network" {
   
   resource_group_name = module.resource_group.resource_group_name
   location  = var.location
+  adds_domain_controller_ip_addresses = module.active-directory.adds_domain_controller_ip_addresses
+
 }
 
 module "windows_vm" {

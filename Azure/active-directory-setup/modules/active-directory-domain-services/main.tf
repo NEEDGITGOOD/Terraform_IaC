@@ -9,7 +9,7 @@ resource "azurerm_active_directory_domain_service" "adds" {
   resource_group_name = var.resource_group_name
 
   domain_name           = "${var.adds_domain_name}"
-  sku                   = "Enterprise"
+  sku                   = "Standard"
   filtered_sync_enabled = false
 
   initial_replica_set {
