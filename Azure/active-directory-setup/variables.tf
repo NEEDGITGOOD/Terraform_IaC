@@ -9,11 +9,6 @@ variable "location" {
   type        = string
 }
 
-variable "adds_domain_controller_ip_addresses" {
-  description = "The Location/Region of the Resource"
-  type        = string
-}
-
 
 
 # Active Directory
