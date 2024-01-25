@@ -3,9 +3,6 @@ resource "azurerm_subnet_network_security_group_association" "nsg" {
   network_security_group_id = var.nsg_id
 }
 
-
-
-
 resource "azurerm_active_directory_domain_service" "adds" {
   name                = "${var.resource_group_name}-AADS"
   location            = var.location
