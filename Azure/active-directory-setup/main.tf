@@ -31,7 +31,7 @@ module "windows_vm" {
 # Import Active Directory Module
 module "active-directory" {
   source    = "./modules/active-directory-domain-services"
-  subnet_id = module.network.subnet2_id 
+  subnet2_id = module.network.subnet2_id 
   resource_group_name = module.resource_group.resource_group_name
   location            = var.location
   adds_domain_name    = var.adds_domain_name
