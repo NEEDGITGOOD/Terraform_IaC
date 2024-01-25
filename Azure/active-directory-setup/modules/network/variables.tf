@@ -8,3 +8,7 @@ variable "location" {
   type        = string
 }
 
+variable "dns_servers" {
+  description = "List of IP addresses for DNS servers"
+  type        = list(string)
+}
