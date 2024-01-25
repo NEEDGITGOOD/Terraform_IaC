@@ -14,3 +14,7 @@ output "nsg_id" {
 }
 
 # Define other outputs as needed
+output "aadds_subnet_id" {
+  value       = azurerm_subnet.aadds_subnet.id
+  description = "The ID of the subnet for AADDS"
+}

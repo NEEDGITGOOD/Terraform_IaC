@@ -6,8 +6,3 @@ output "adds_domain_name" {
 output "adds_domain_controller_ip_addresses" {
   value = azurerm_active_directory_domain_service.adds.initial_replica_set[0].domain_controller_ip_addresses
 }
-
-output "aadds_subnet_id" {
-  value       = azurerm_subnet.aadds_subnet.id
-  description = "The ID of the subnet for AADDS"
-}

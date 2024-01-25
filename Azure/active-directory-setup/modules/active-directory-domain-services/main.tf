@@ -3,13 +3,7 @@ resource "azurerm_subnet_network_security_group_association" "nsg" {
   network_security_group_id = var.nsg_id
 }
 
-# Create a separate subnet for AADDS
-resource "azurerm_subnet" "aadds_subnet" {
-  name                 = "${var.resource_group_name}-AADDS-SN"
-  resource_group_name  = var.resource_group_name
-  virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes     = ["10.10.10.128/25"] 
-}
+
 
 
 resource "azurerm_active_directory_domain_service" "adds" {
