@@ -18,8 +18,12 @@ output "subnet2_id" {
   description = "The ID of the subnet"
 }
 
-output "nsg_id" {
-  value       = azurerm_network_security_group.nsg.id
+output "nsg_id01" {
+  value       = azurerm_network_security_group.nsg01.id
   description = "The ID of the Nework Security Group"
 }
 
+output "nsg_id02" {
+  value       = azurerm_network_security_group.nsg02.id
+  description = "The ID of the Nework Security Group"
+}

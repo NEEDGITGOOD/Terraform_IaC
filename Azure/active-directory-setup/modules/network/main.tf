@@ -34,9 +34,29 @@ resource "azurerm_subnet" "subnet" {
   address_prefixes     = ["10.10.10.0/25"]
 }
 
-# Create Security Group (Firewall)
-resource "azurerm_network_security_group" "nsg" {
+# Create Security Group (Firewall) (for Windows Machines)
+
+resource "azurerm_network_security_group" "nsg01" {
   name                = "${var.resource_group_name}-NSG01"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+
+  security_rule {
+    name                       = "AllowRD"
+    priority                   = 201
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "TCP"
+    source_port_range          = "*"
+    destination_port_range     = "3389"
+    source_address_prefix      = "207.154.228.93"
+    destination_address_prefix = "*"
+  }
+}
+
+# Create Security Group (Firewall) (for AADS)
+resource "azurerm_network_security_group" "nsg02" {
+  name                = "${var.resource_group_name}-NSG02"
   location            = var.location
   resource_group_name = var.resource_group_name
 
@@ -88,3 +108,4 @@ resource "azurerm_network_security_group" "nsg" {
     destination_address_prefix = "*"
   }
 }
+

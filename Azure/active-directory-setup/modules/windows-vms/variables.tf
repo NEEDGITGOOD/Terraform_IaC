@@ -13,6 +13,11 @@ variable "resource_group_name" {
   type        = string
 }
 
+variable "nsg_id" {
+  description = "Network Security Group ID to associate with the subnet"
+  type        = string
+}
+
 variable "subnet_id" {
   description = "Subnet ID for the VM"
   type        = string
