@@ -239,7 +239,7 @@ resource "digitalocean_droplet" "Docker01" {
   ]
 }
 
-# Firewall for Netbox01
+# Firewall for Docker01
 resource "digitalocean_firewall" "docker01_firewall" {
   name = "docker01-firewall"
 
@@ -249,17 +249,31 @@ resource "digitalocean_firewall" "docker01_firewall" {
 
  ## Inbound Rules
 
-  ### Allow Inbound HTTPS (443)
+  ### Allow Inbound to Portainer (9000) from VPN
   inbound_rule {
     protocol         = "tcp"
-    port_range       = "443"
+    port_range       = "9000"
+    source_addresses = ["207.154.228.93"]
+  }
+
+  ### Allow Inbound to Dashy (4000) from VPN IP
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "4000"
+    source_addresses = ["207.154.228.93"]
+  }
+
+  ### Allow Inbound to Portainer (9000) from VPN
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "9000"
     source_addresses = ["207.154.228.93"]
   }
 
   ### Allow Inbound ICMP
   inbound_rule {
     protocol         = "icmp"
-    source_addresses = ["207.154.228.93"]
+    source_addresses = ["0.0.0.0/0"]
   }
 
   ### Allow Inbound ssh from jumpbox
@@ -352,6 +366,73 @@ resource "digitalocean_droplet" "Docker02" {
 
 }
 
+# Firewall for Docker02
+resource "digitalocean_firewall" "docker02_firewall" {
+  name = "docker02-firewall"
+
+  droplet_ids = [ 
+    digitalocean_droplet.Docker02.id,
+  ]
+
+ ## Inbound Rules
+
+  ### Allow Inbound to Portainer (2222) from VPN
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "2222"
+    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+  }
+
+  ### Allow Inbound to xxx (2223) from VPN IP
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "2223"
+    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+  }
+
+  ### Allow Inbound to Portainer (2224) from VPN
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "2224"
+    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+  }
+
+  ### Allow Inbound ICMP
+  inbound_rule {
+    protocol         = "icmp"
+    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+  }
+
+  ### Allow Inbound ssh from jumpbox
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "22"
+    source_addresses = ["206.81.16.20"]
+  }
+
+ ## Outbound Rules (allow to any)
+
+  ### Allow Outbound TCP (1-65535)
+  outbound_rule {
+    protocol         = "tcp"
+    port_range       = "1-65535"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  ### Allow Outbound UDP (1-65535)
+  outbound_rule {
+    protocol         = "udp"
+    port_range       = "1-65535"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  ### Allow Outbound ICMP
+  outbound_rule {
+    protocol         = "icmp"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+}
+
 # Docker03
 resource "digitalocean_droplet" "Docker03" {
   image = "docker-20-04"
@@ -367,4 +448,64 @@ resource "digitalocean_droplet" "Docker03" {
   })
 
   depends_on = [digitalocean_ssh_key.temporary_ssh]
+}
+
+# Firewall for Docker02
+resource "digitalocean_firewall" "docker02_firewall" {
+  name = "docker02-firewall"
+
+  droplet_ids = [ 
+    digitalocean_droplet.Docker02.id,
+  ]
+
+ ## Inbound Rules
+
+  ### Allow Inbound to Wordpress (80) from VPN IP
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "80"
+    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+  }
+
+  ### Allow Inbound to ADGuard (4000) from VPN
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "4000"
+    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+  }
+
+  ### Allow Inbound ICMP
+  inbound_rule {
+    protocol         = "icmp"
+    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+  }
+
+  ### Allow Inbound ssh from jumpbox
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "22"
+    source_addresses = ["206.81.16.20"]
+  }
+
+ ## Outbound Rules (allow to any)
+
+  ### Allow Outbound TCP (1-65535)
+  outbound_rule {
+    protocol         = "tcp"
+    port_range       = "1-65535"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  ### Allow Outbound UDP (1-65535)
+  outbound_rule {
+    protocol         = "udp"
+    port_range       = "1-65535"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  ### Allow Outbound ICMP
+  outbound_rule {
+    protocol         = "icmp"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
 }
