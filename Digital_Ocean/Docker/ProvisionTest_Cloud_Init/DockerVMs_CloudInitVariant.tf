@@ -461,6 +461,20 @@ resource "digitalocean_firewall" "docker03_firewall" {
     source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
   }
 
+  ### Allow Inbound to 2374 (AUTOSSH)
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "2374"
+    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+  }
+
+  ### Allow Inbound to 2375 (AUTOSSH)
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "2375"
+    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+  }
+
   ### Allow Inbound to ADGuard (3000) from VPN
   inbound_rule {
     protocol         = "tcp"
