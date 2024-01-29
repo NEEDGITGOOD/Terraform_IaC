@@ -92,13 +92,13 @@ sections:
   items:
   - title: Nginx01 Webserver
     icon: favicon
-    url: http://[167.99.63.210]  
+    url: http://167.99.63.210
     description: Nginx Webserver 1
     tags: [webserver, nginx, network]
     
   - title: Nginx02 Webserver
     icon: favicon
-    url: http://[167.99.63.118]  
+    url: http://167.99.63.118
     description: Nginx Webserver 2
     tags: [webserver, nginx, network]
     
@@ -162,7 +162,7 @@ sections:
     description: Ubuntu 23.10 server in Azure
     tags: [azure, ubuntu, server]
 
-- name: Security - HONEYPOTIP
+- name: HoneyPot - 167.71.240.4
   icon: fa-solid fa-honey-pot
   items:
   - title: HoneyPot01
