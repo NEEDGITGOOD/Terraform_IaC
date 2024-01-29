@@ -263,17 +263,11 @@ resource "digitalocean_firewall" "docker01_firewall" {
     source_addresses = ["207.154.228.93"]
   }
 
-  ### Allow Inbound to Portainer (9000) from VPN
+  ### Allow Inbound to Gatus (8080) from VPN
   inbound_rule {
     protocol         = "tcp"
-    port_range       = "9000"
+    port_range       = "8080"
     source_addresses = ["207.154.228.93"]
-  }
-
-  ### Allow Inbound ICMP
-  inbound_rule {
-    protocol         = "icmp"
-    source_addresses = ["0.0.0.0/0"]
   }
 
   ### Allow Inbound ssh from jumpbox
@@ -376,21 +370,21 @@ resource "digitalocean_firewall" "docker02_firewall" {
 
  ## Inbound Rules
 
-  ### Allow Inbound to Portainer (2222) from VPN
+  ### Allow Inbound to Ubuntu SSH (2222) from VPN
   inbound_rule {
     protocol         = "tcp"
     port_range       = "2222"
     source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
   }
 
-  ### Allow Inbound to xxx (2223) from VPN IP
+  ### Allow Inbound to Alma Linux SSH (2223) from VPN
   inbound_rule {
     protocol         = "tcp"
     port_range       = "2223"
     source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
   }
 
-  ### Allow Inbound to Portainer (2224) from VPN
+  ### Allow Inbound to Kali SSH (2224) from VPN
   inbound_rule {
     protocol         = "tcp"
     port_range       = "2224"
