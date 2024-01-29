@@ -450,12 +450,12 @@ resource "digitalocean_droplet" "Docker03" {
   depends_on = [digitalocean_ssh_key.temporary_ssh]
 }
 
-# Firewall for Docker02
-resource "digitalocean_firewall" "docker02_firewall" {
-  name = "docker02-firewall"
+# Firewall for Docker03
+resource "digitalocean_firewall" "docker03_firewall" {
+  name = "docker03-firewall"
 
   droplet_ids = [ 
-    digitalocean_droplet.Docker02.id,
+    digitalocean_droplet.Docker03.id,
   ]
 
  ## Inbound Rules
