@@ -44,7 +44,7 @@ resource "azurerm_network_security_group" "nsg01" {
     priority                   = 201
     direction                  = "Inbound"
     access                     = "Allow"
-    protocol                   = "TCP"
+    protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "3389"
     source_address_prefix      = "207.154.228.93"
@@ -71,26 +71,14 @@ resource "azurerm_network_security_group" "nsg02" {
   }
 
     security_rule {
-    name                       = "AllowRD"
-    priority                   = 201
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "TCP"
-    source_port_range          = "*"
-    destination_port_range     = "3389"
-    source_address_prefix      = "10.10.10.0/24"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "AllowRD"
+    name                       = "Allow"
     priority                   = 201
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "3389"
-    source_address_prefix      = "CorpNetSaw"
+    source_address_prefix      = "10.10.10.0/24"
     destination_address_prefix = "*"
   }
 

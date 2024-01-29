@@ -75,14 +75,14 @@ resource "azurerm_public_ip" "vm_pip02" {
   allocation_method   = "Dynamic"
 }
 
-resource "azurerm_windows_virtual_machine" "vm" {
-  name                = var.vm_name
+resource "azurerm_windows_virtual_machine" "vm02" {
+  name                = "${var.vm_name}02"
   resource_group_name = var.resource_group_name
   location            = var.location
   size                = var.vm_size
   admin_username      = var.admin_username
   admin_password      = var.admin_password
-  network_interface_ids = [azurerm_network_interface.ni.id]
+  network_interface_ids = [azurerm_network_interface.ni02.id]
 
   os_disk {
     caching              = "ReadWrite"
