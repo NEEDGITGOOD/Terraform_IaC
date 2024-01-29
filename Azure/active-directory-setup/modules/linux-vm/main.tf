@@ -1,4 +1,4 @@
-## Network Interface Card 01
+## Network Interface Card 04
 resource "azurerm_network_interface" "ni04" {
   name                = "${var.vm_name}-ni04"
   location            = var.location
@@ -12,7 +12,7 @@ resource "azurerm_network_interface" "ni04" {
   }
 }
 
-## Associate NIC to Public IP 01
+## Associate NIC to Public IP 04
 resource "azurerm_network_interface_security_group_association" "ni_nsg04" {
   network_interface_id      = azurerm_network_interface.ni04.id
   network_security_group_id = var.nsg_id01
