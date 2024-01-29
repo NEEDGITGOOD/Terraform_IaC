@@ -84,7 +84,7 @@ resource "azurerm_public_ip" "vm_pip03" {
 
 ### Create Windows VM 01
 resource "azurerm_windows_virtual_machine" "vm01" {
-  name                = "${var.vm_name}_Win10"
+  name                = "${var.vm_name}-Win10"
   resource_group_name = var.resource_group_name
   location            = var.location
   size                = var.vm_size
@@ -107,7 +107,7 @@ resource "azurerm_windows_virtual_machine" "vm01" {
 
 ### Create Windows VM 02
 resource "azurerm_windows_virtual_machine" "vm02" {
-  name                = "${var.vm_name}_Win11"
+  name                = "${var.vm_name}-Win11"
   resource_group_name = var.resource_group_name
   location            = var.location
   size                = var.vm_size
