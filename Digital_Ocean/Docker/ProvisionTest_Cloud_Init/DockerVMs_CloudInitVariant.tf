@@ -249,10 +249,10 @@ resource "digitalocean_firewall" "docker01_firewall" {
 
  ## Inbound Rules
 
-  ### Allow Inbound to Portainer (9000) from VPN
+  ### Allow Inbound to Portainer (9443) from VPN
   inbound_rule {
     protocol         = "tcp"
-    port_range       = "9000"
+    port_range       = "9443"
     source_addresses = ["207.154.228.93"]
   }
 
