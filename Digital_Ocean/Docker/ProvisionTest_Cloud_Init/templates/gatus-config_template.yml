@@ -1,13 +1,6 @@
 endpoints:
-  - name: example-dns-query
-    url: "8.8.8.8" # Address of the DNS server to use
-    interval: 5m
-    dns:
-      query-name: "example.com"
-      query-type: "A"
-    conditions:
-      - "[BODY] == 93.184.216.34"
-      - "[DNS_RCODE] == NOERROR"
+
+### Docker01
 
   - name: Docker01
     url: "icmp://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS"
@@ -15,11 +8,52 @@ endpoints:
     conditions:
       - "[CONNECTED] == true"
 
+
+  - name: Portainer01                 # Name of your endpoint, can be anything
+    url: "https://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS/health"
+    interval: 5m                  # Duration to wait between every status check (default: 60s)
+    conditions:
+      - "[STATUS] == 200"         # Status must be 200
+
+  - name: Monitoring01                 # Name of your endpoint, can be anything
+    url: "https://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS/health"
+    interval: 5m                  # Duration to wait between every status check (default: 60s)
+    conditions:
+      - "[STATUS] == 200"         # Status must be 200
+
+   - name: Dashboard01                 # Name of your endpoint, can be anything
+    url: "https://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:4000"
+    interval: 5m                  # Duration to wait between every status check (default: 60s)
+    conditions:
+      - "[STATUS] == 200"         # Status must be 200
+
+### Docker02
+
   - name: Docker02
     url: "icmp://PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
+
+  - name: Ubuntu01 - Ubuntu Machine
+    url: "tcp://PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2222"
+    interval: 30s
+    conditions:
+      - "[CONNECTED] == true"
+
+  - name: Alma01 – Alma Linux Machine
+    url: "tcp://PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2223"
+    interval: 30s
+    conditions:
+      - "[CONNECTED] == true"
+
+  - name: Attackbox01 - Kali
+    url: "tcp://PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2224"
+    interval: 30s
+    conditions:
+      - "[CONNECTED] == true"
+
+### Docker03
 
   - name: Docker03
     url: "icmp://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS"
@@ -27,20 +61,62 @@ endpoints:
     conditions:
       - "[CONNECTED] == true"
 
+
+  - name: Wordpress01 - Wordpress                 # Name of your endpoint, can be anything
+    url: "https://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:80"
+    interval: 5m                  # Duration to wait between every status check (default: 60s)
+    conditions:
+      - "[STATUS] == 200"         # Status must be 200
+
+  - name: DNS01 – ADGuard                 # Name of your endpoint, can be anything
+    url: "https://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:4000"
+    interval: 5m                  # Duration to wait between every status check (default: 60s)
+    conditions:
+      - "[STATUS] == 200"         # Status must be 200
+
+### VPN01 - OpenVPN
+
+  - name: VPN01 - OpenVPN Access Server
+    url: "icmp://207.154.228.93"
+    interval: 5m
+    conditions:
+      - "[CONNECTED] == true"
+
+### NGINX & Loadbalancer
+
+  - name: Nginx01 Webserver
+    url: "icmp://167.99.63.210"
+    interval: 5m
+    conditions:
+      - "[CONNECTED] == true"
+
+  - name: Nginx02 Webserver
+    url: "icmp://167.99.63.118"
+    interval: 5m
+    conditions:
+      - "[CONNECTED] == true"
+
+  - name: Loadbalancer (Domain)
+    url: "8.8.8.8" # Address of the DNS server to use
+    interval: 5m
+    dns:
+      query-name: "www.newworld.icu"
+      query-type: "A"
+    conditions:
+      - "[DNS_RCODE] == NOERROR"
+
+### Netbox01
+
   - name: Netbox01
     url: "icmp://PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
 
-  - name: HoneyPot
-    url: "icmp://8.8.8.8"
-    interval: 5m
-    conditions:
-      - "[CONNECTED] == true"
+### HoneyPot
 
   - name: HoneyPot
-    url: "icmp://207.154.228.93"
+    url: "icmp://167.71.240.4"
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
