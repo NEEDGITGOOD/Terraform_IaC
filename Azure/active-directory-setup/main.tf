@@ -20,8 +20,7 @@ module "windows_vm" {
   vm_size             = "Standard_DS1_v2"
   admin_username      = var.windows_username
   admin_password      = var.windows_password
-  nsg_id    = module.network.nsg_id01
-
+  nsg_id01    = module.network.nsg_id01
 }
 
 # Import Active Directory Module

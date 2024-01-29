@@ -5,7 +5,6 @@ resource "azurerm_virtual_network" "vnet" {
   location            = var.location
   resource_group_name = var.resource_group_name
   dns_servers = var.dns_servers
-
 }
 
 ## Create Subnet
@@ -22,7 +21,6 @@ resource "azurerm_virtual_network" "vnet2" {
   address_space       = ["10.10.20.0/24"]
   location            = var.location
   resource_group_name = var.resource_group_name
-
 }
 
 ## Create Subnet
