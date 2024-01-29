@@ -10,18 +10,18 @@ endpoints:
 
 
   - name: Portainer01                 # Name of your endpoint, can be anything
-    url: "https://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS/health"
+    url: "https://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:9000"
     interval: 5m                  # Duration to wait between every status check (default: 60s)
     conditions:
       - "[STATUS] == 200"         # Status must be 200
 
   - name: Monitoring01                 # Name of your endpoint, can be anything
-    url: "https://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS/health"
+    url: "https://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:80"
     interval: 5m                  # Duration to wait between every status check (default: 60s)
     conditions:
       - "[STATUS] == 200"         # Status must be 200
 
-   - name: Dashboard01                 # Name of your endpoint, can be anything
+  - name: Dashboard01                 # Name of your endpoint, can be anything
     url: "https://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:4000"
     interval: 5m                  # Duration to wait between every status check (default: 60s)
     conditions:
