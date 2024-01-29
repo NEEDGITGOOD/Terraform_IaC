@@ -38,7 +38,7 @@ sections:
 
   - title: Monitoring01 - Gatus
     icon: fas fa-heartbeat
-    url: http://DOCKEPLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESSR02_IP:80  
+    url: http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:80  
     description: Uptime Kuma monitoring on Docker02
     tags: [docker, monitoring, uptime]
     hotkey: 2 
@@ -54,19 +54,19 @@ sections:
   items:
   - title: Ubuntu01 - Ubuntu 23.10
     icon: fab fa-ubuntu
-    url: http://[UBUNTU02_IP]  
+    url: http://[PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2222
     description: Ubuntu 23.10 server in Azure
     tags: [azure, ubuntu, server]
 
   - title: AlmaLinux01 - AlmaLinux 8.4
     icon: fab fa-centos
-    url: http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS/centos01  
+    url: http://PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2223
     description: CentOS machine on Docker01
     tags: [docker, centos, virtual machine]
 
   - title: Attackbox01
     icon: fas fa-skull-crossbones
-    url: http://[PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS] 
+    url: http://[PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2224 
     description: Kali VM - Attackbox on Docker03
     tags: [docker, kali, vm, security]
 
@@ -87,30 +87,24 @@ sections:
     tags: [docker, dns, adguard]
     hotkey: 4
 
-  - title: Update01 - Watch Tower
-    icon: favicon
-    url: http://[DOCKER02_IP]/update 
-    description: Watch Tower updates on Docker02
-    tags: [docker, updates, watchtower]
-
 - name: Nginx Webserver with Load Balancers
   icon: fas fa-sync-alt
   items:
   - title: Nginx01 Webserver
     icon: favicon
-    url: http://[NGINX01_IP]  
+    url: http://[167.99.63.210]  
     description: Nginx Webserver 1
     tags: [webserver, nginx, network]
     
   - title: Nginx02 Webserver
     icon: favicon
-    url: http://[NGINX02_IP]  
+    url: http://[167.99.63.118]  
     description: Nginx Webserver 2
     tags: [webserver, nginx, network]
     
-  - title: LoadBalancer01
+  - title: LoadBalancer01 (Domain)
     icon: favicon
-    url: http://[LOADBALANCER01_IP]  
+    url: http://www.newworld.icu  
     description: Nginx load balancer for balancing traffic
     tags: [loadbalancer, nginx, network]
 
@@ -119,7 +113,7 @@ sections:
   items:
   - title: VPN01 - OpenVPN Access Server
     icon: fas fa-lock
-    url: https://PLACEHOLDER_OPENVPN_IP_PUBLIC_ADDRESS:
+    url: https://207.154.228.93:1085/admin/
     description: OpenVPN server for secure access
     tags: [vpn, openvpn, security]
 
@@ -173,6 +167,6 @@ sections:
   items:
   - title: HoneyPot01
     icon: fas fa-honey-pot
-    url: http://192.0.0.1  
+    url: http://207.154.228.93:64297  
     description: HoneyPot Debian server
     tags: [honeypot, security, debian] 

@@ -38,3 +38,9 @@ endpoints:
     interval: 5m
     conditions:
       - "[CONNECTED] == true"
+
+  - name: HoneyPot
+    url: "icmp://207.154.228.93"
+    interval: 5m
+    conditions:
+      - "[CONNECTED] == true"
