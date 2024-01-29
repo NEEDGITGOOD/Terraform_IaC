@@ -9,8 +9,6 @@ variable "location" {
   type        = string
 }
 
-
-
 # Active Directory
 
 ## Domain Name
@@ -48,3 +46,8 @@ variable "windows_password" {
   description = "Windows Password for the Client"
   type        = string
 }
+# Define Azure Secrets
+variable "arm_client_id" {}
+variable "arm_client_secret" {}
+variable "arm_subscription_id" {}
+variable "arm_tenant_id" {}
