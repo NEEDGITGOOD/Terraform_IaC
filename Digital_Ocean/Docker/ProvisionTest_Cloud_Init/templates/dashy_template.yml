@@ -31,14 +31,14 @@ sections:
   items:
   - title: Portainer01
     icon: fas fa-server
-    url: http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:9000/  
+    url: https://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:9443/  
     description: Portainer management on Docker01
     tags: [docker, management, portainer]
     hotkey: 1
 
   - title: Monitoring01 - Gatus
     icon: fas fa-heartbeat
-    url: http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:80  
+    url: http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:8080
     description: Uptime Kuma monitoring on Docker02
     tags: [docker, monitoring, uptime]
     hotkey: 2 

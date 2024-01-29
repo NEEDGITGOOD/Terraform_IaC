@@ -22,12 +22,14 @@ endpoints:
     interval: 5m                  # Duration to wait between every status check (default: 60s)
     conditions:
       - "[STATUS] == 200"         # Status must be 200
+    timeout: 30s  # Increase this value appropriately
 
   - name: Dashboard01                 # Name of your endpoint, can be anything
     url: "https://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:4000"
     interval: 5m                  # Duration to wait between every status check (default: 60s)
     conditions:
       - "[STATUS] == 200"         # Status must be 200
+    timeout: 30s  # Increase this value appropriately
 
 ### Docker02
 
@@ -71,10 +73,11 @@ endpoints:
       - "[STATUS] == 200"         # Status must be 200
 
   - name: DNS01 – ADGuard                 # Name of your endpoint, can be anything
-    url: "https://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:3000"
+    url: "http://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:3000"
     interval: 5m                  # Duration to wait between every status check (default: 60s)
     conditions:
       - "[STATUS] == 200"         # Status must be 200
+    timeout: 30s  # Increase this value appropriately
 
 ### VPN01 - OpenVPN
 
