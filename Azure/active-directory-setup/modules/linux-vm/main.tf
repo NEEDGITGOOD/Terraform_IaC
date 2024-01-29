@@ -18,7 +18,7 @@ resource "azurerm_network_interface_security_group_association" "ni_nsg04" {
   network_security_group_id = var.nsg_id01
 }
 
-## Create Public IP 01 (Windows Client01 - Win10)
+## Create Public IP 04 (Ubuntu)
 resource "azurerm_public_ip" "vm_pip04" {
   name                = "${var.vm_name}-pip04"
   location            = var.location
@@ -26,25 +26,27 @@ resource "azurerm_public_ip" "vm_pip04" {
   allocation_method   = "Dynamic"
 }
 
-### Create Windows VM 04
-resource "azurerm_windows_virtual_machine" "vm04" {
-  name                = "${var.vm_name}-Win10"
-  resource_group_name = var.resource_group_name
+resource "azurerm_linux_virtual_machine" "UbuntuVM" {
+  name                = "${var.vm_name}-Ubuntu01"
   location            = var.location
-  size                = var.vm_size
-  admin_username      = var.admin_username
-  admin_password      = var.admin_password
-  network_interface_ids = [azurerm_network_interface.ni04.id]
+  resource_group_name = var.resource_group_name
+  network_interface_ids = [azurerm_network_interface.my_terraform_nic.id]
+  size                  = "Standard_DS1_v2"
 
   os_disk {
+    name                 = "myOsDisk"
     caching              = "ReadWrite"
-    storage_account_type = "Standard_LRS"
+    storage_account_type = "Premium_LRS"
   }
 
   source_image_reference {
     publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "18.04-LTS"
+    offer     = "0001-com-ubuntu-server-jammy"
+    sku       = "22_04-lts-gen2"
     version   = "latest"
   }
+
+  computer_name  = "UbuntuVM"
+  admin_username      = var.admin_username
+
 }

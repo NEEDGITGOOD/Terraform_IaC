@@ -39,7 +39,11 @@ module "active-directory" {
 module "linux-vm" {
   source    = "./modules/linux-vm"
   subnet_id = module.network.subnet_id
+  admin_username      = var.windows_username
+  admin_password      = var.windows_password
   resource_group_name = module.resource_group.resource_group_name
   location            = var.location
-  nsg_id    = module.network.nsg_id02
+  vm_name             = var.vm_name
+  nsg_id01            = module.network.nsg_id01
+  vm_size             = "Standard_DS1_v2"
 }
