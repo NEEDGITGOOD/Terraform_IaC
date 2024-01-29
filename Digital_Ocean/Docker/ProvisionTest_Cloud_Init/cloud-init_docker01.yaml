@@ -17,7 +17,7 @@ write_files:
      sed -i "s/PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS/$${DOCKER01_IP}/" /root/config/config.yml
    permissions: '0700'
 runcmd:
- - sudo ufw allow 9000
+ - sudo ufw allow 9443
  - sudo ufw allow 2374
  - mkdir -p /root/.ssh
  - mkdir -p /root/config
