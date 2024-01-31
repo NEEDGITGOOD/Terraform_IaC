@@ -54,20 +54,18 @@ sections:
   items:
   - title: Ubuntu01 - Ubuntu 23.10
     icon: fab fa-ubuntu
-    url: http://[PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2222
-    description: Ubuntu 23.10 server in Azure
+    description: Ubuntu VM - PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2222
     tags: [azure, ubuntu, server]
 
   - title: AlmaLinux01 - AlmaLinux 8.4
     icon: fab fa-centos
-    url: http://PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2223
-    description: CentOS machine on Docker01
+    description: Alma Linux VM - PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2223
     tags: [docker, centos, virtual machine]
 
   - title: Attackbox01
     icon: fas fa-skull-crossbones
-    url: http://[PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2224 
-    description: Kali VM - Attackbox on Docker03
+    url: http://[PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS
+    description: Kali VM - PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2224
     tags: [docker, kali, vm, security]
 
 - name: Docker03 - PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS
@@ -117,10 +115,9 @@ sections:
     description: OpenVPN server for secure access
     tags: [vpn, openvpn, security]
 
-  - title: Azure VPN Gateway - VPN02
+  - title: Ubuntu VPN - VPN02 - 52.169.184.84
     icon: fas fa-lock
-    url: http://[VPN02_IP]  
-    description: Azure VPN Gateway for secure network
+    description: Ubuntu VM as an VPN
     tags: [vpn, azure, security]
 
   - title: Netbox01 - PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS
@@ -140,20 +137,17 @@ sections:
 
   - title: Client01 - Windows 10
     icon: fas fa-desktop
-    url: http://[CLIENT01_IP]
     description: Windows 10 client in Azure
     tags: [azure, windows, client]
 
-  - title: Client02 - Windows 10
+  - title: Client02 - Windows 11
     icon: fas fa-desktop
-    url: http://[CLIENT02_IP]
-    description: Windows 10 client in Azure
+    description: Windows 11 client in Azure
     tags: [azure, windows, client]
 
-  - title: Client03 - Windows 11
+  - title: Server02 - Windows Server 2019
     icon: favicon
-    url: http://[CLIENT03_IP]
-    description: Windows 11 client in Azure
+    description: Windows Server 2019 in Azure
     tags: [azure, windows, client]
 
   - title: Ubuntu02 - Ubuntu 23.10
@@ -162,7 +156,7 @@ sections:
     description: Ubuntu 23.10 server in Azure
     tags: [azure, ubuntu, server]
 
-- name: HoneyPot - 167.71.240.4
+- name: Security - 167.71.240.4
   icon: fa-solid fa-honey-pot
   items:
   - title: HoneyPot01
