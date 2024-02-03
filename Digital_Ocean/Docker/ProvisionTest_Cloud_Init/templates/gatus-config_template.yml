@@ -9,7 +9,7 @@ endpoints:
       - "[CONNECTED] == true"
 
 
-  - name: 1_Portainer01 
+  - name: 1_Portainer01
     url: "https://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:9443"
     interval: 1m
     client:
@@ -17,17 +17,20 @@ endpoints:
     conditions:
       - "[STATUS] == 200"        
 
-  - name: 2_Monitoring01                
+  - name: 2_Monitoring01
     url: "http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:8080"
     interval: 1m
+    client:
+      insecure: true
+      timeout: 30s
     conditions:
-      - "[STATUS] == 200"         
+      - "[STATUS] == 200"
 
-  - name: 3_Dashboard01               
+  - name: 3_Dashboard01
     url: "http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS"
     interval: 1m
     conditions:
-      - "[STATUS] == 200"         
+      - "[STATUS] == 200"
 
 ### Docker02
 
@@ -63,7 +66,7 @@ endpoints:
     conditions:
       - "[CONNECTED] == true"
 
-  - name: 9_Wordpress01 - Wordpress               
+  - name: 9_Wordpress01 - Wordpress
     url: "http://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:8080"
     interval: 1m
     client:
@@ -72,12 +75,12 @@ endpoints:
     conditions:
       - "[STATUS] == 200"
 
-  - name: 10_DNS01 – ADGuard              
+  - name: 10_DNS01 – ADGuard
     url: "http://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:80"
-    interval: 1m                  
+    interval: 1m
     conditions:
-      - "[STATUS] == 200"         
-    timeout: 30s  
+      - "[STATUS] == 200"
+    timeout: 30s
 
   - name: 11_DNS - AdGuard - DNS A Request
     url: "PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS"
