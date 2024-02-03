@@ -252,10 +252,10 @@ resource "digitalocean_firewall" "docker01_firewall" {
     source_addresses = ["207.154.228.93"]
   }
 
-  ### Allow Inbound to Dashy (4000) from VPN IP
+  ### Allow Inbound to Dashy (80) from VPN IP
   inbound_rule {
     protocol         = "tcp"
-    port_range       = "4000"
+    port_range       = "80"
     source_addresses = ["207.154.228.93"]
   }
 
