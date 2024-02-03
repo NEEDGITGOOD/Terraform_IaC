@@ -2,14 +2,14 @@ endpoints:
 
 ### Docker01
 
-  - name: 10_Docker01
+  - name: 00_Docker01
     url: "icmp://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
 
 
-  - name: 11_Portainer01
+  - name: 01_Portainer01
     url: "https://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:9443"
     interval: 1m
     client:
@@ -17,7 +17,7 @@ endpoints:
     conditions:
       - "[STATUS] == 200"
 
-  - name: 12_Monitoring01
+  - name: 02_Monitoring01
     url: "http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:8080"
     interval: 1m
     client:
@@ -26,7 +26,7 @@ endpoints:
     conditions:
       - "[STATUS] == 200"
 
-  - name: 13_Dashboard01
+  - name: 03_Dashboard01
     url: "http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS"
     interval: 1m
     conditions:
@@ -34,25 +34,25 @@ endpoints:
 
 ### Docker02
 
-  - name: 14_Docker02
+  - name: 04_Docker02
     url: "icmp://PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
 
-  - name: 15_Ubuntu01 - Ubuntu Machine
+  - name: 05_Ubuntu01 - Ubuntu Machine
     url: "tcp://PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2222"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
 
-  - name: 16_Alma01 – Alma Linux Machine
+  - name: 06_Alma01 – Alma Linux Machine
     url: "tcp://PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2223"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
 
-  - name: 17_Attackbox01 - Kali
+  - name: 07_Attackbox01 - Kali
     url: "tcp://PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2224"
     interval: 1m
     conditions:
@@ -60,13 +60,13 @@ endpoints:
 
 ### Docker03
 
-  - name: 18_Docker03
+  - name: 08_Docker03
     url: "icmp://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
 
-  - name: 19_Wordpress01 - Wordpress
+  - name: 09_Wordpress01 - Wordpress
     url: "http://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:8080"
     interval: 1m
     client:
@@ -75,14 +75,14 @@ endpoints:
     conditions:
       - "[STATUS] == 200"
 
-  - name: 20_DNS01 – ADGuard
+  - name: 10_DNS01 – ADGuard
     url: "http://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:80"
     interval: 1m
     conditions:
       - "[STATUS] == 200"
     timeout: 30s
 
-  - name: 21_DNS - AdGuard - DNS A Request
+  - name: 11_DNS - AdGuard - DNS A Request
     url: "PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS"
     interval: 1m
     dns:
@@ -93,7 +93,7 @@ endpoints:
 
 ### VPN01 - OpenVPN
 
-  - name: 21_VPN01 - OpenVPN Access Server
+  - name: 12_VPN01 - OpenVPN Access Server
     url: "icmp://207.154.228.93"
     interval: 1m
     conditions:
@@ -101,25 +101,25 @@ endpoints:
 
 ### NGINX & Loadbalancer
 
-  - name: 22_Nginx01 Webserver
+  - name: 13_Nginx01 Webserver
     url: "icmp://PLACEHOLDER_NGINX01_IP_PUBLIC_ADDRESS"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
 
-  - name: 22_Nginx02 Webserver
+  - name: 14_Nginx02 Webserver
     url: "icmp://PLACEHOLDER_NGINX02_IP_PUBLIC_ADDRESS"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
 
-  - name: 23_Loadbalancer Webserver
+  - name: 15_Loadbalancer Webserver
     url: "icmp://PLACEHOLDER_LOADBALANCER_IP_PUBLIC_ADDRESS"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
 
-  - name: 24_Check DNS A Record for Webserver (newworld.icu Domain)
+  - name: 16_Check DNS A Record for Webserver (newworld.icu Domain)
     url: "8.8.8.8"
     interval: 5m
     dns:
@@ -130,7 +130,7 @@ endpoints:
 
 ### Netbox01
 
-  - name: 25_Netbox01
+  - name: 17_Netbox01
     url: "https://PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS"
     interval: 1m
     client:
@@ -140,7 +140,7 @@ endpoints:
 
 ### HoneyPot
 
-  - name: 26_HoneyPot
+  - name: 18_HoneyPot
     url: "icmp://167.71.240.4"
     interval: 1m
     conditions:
