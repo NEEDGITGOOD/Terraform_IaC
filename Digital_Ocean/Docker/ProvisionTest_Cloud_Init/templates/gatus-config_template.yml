@@ -78,6 +78,15 @@ endpoints:
       - "[STATUS] == 200"         
     timeout: 30s  
 
+  - name: DNS - AdGuard - DNS A Request
+    url: "PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS"
+    interval: 5m
+    dns:
+      query-name: "google.de"
+      query-type: "A"
+    conditions:
+      - "[DNS_RCODE] == NOERROR"
+
 ### VPN01 - OpenVPN
 
   - name: VPN01 - OpenVPN Access Server
@@ -100,7 +109,7 @@ endpoints:
     conditions:
       - "[CONNECTED] == true"
 
-  - name: Check DNS Record for Domain
+  - name: Check DNS A Record for Webserver (newworld.icu Domain)
     url: "8.8.8.8"
     interval: 1m
     dns:
