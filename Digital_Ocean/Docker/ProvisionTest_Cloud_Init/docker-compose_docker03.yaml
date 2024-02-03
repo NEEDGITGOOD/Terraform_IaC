@@ -38,6 +38,7 @@ services:
   adguardhome:
     image: adguard/adguardhome
     container_name: Adguard-Home
+    network_mode: "host"
     volumes:
       - ./workdir:/opt/adguardhome/work
       - ./confdir:/opt/adguardhome/conf

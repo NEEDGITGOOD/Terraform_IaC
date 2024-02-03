@@ -65,9 +65,12 @@ endpoints:
 
   - name: 9_Wordpress01 - Wordpress               
     url: "http://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:8080"
-    interval: 1m                  
+    interval: 1m
+    client:
+      insecure: true
+      timeout: 30s
     conditions:
-      - "[STATUS] == 200"  
+      - "[STATUS] == 200"
 
   - name: 10_DNS01 – ADGuard              
     url: "http://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:80"
