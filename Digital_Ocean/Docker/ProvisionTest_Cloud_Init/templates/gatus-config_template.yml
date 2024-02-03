@@ -98,13 +98,19 @@ endpoints:
 ### NGINX & Loadbalancer
 
   - name: Nginx01 Webserver
-    url: "icmp://167.99.63.210"
+    url: "icmp://PLACEHOLDER_NGINX01_IP_PUBLIC_ADDRESS"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
 
   - name: Nginx02 Webserver
-    url: "icmp://167.99.63.118"
+    url: "icmp://PLACEHOLDER_NGINX02_IP_PUBLIC_ADDRESS"
+    interval: 1m
+    conditions:
+      - "[CONNECTED] == true"
+
+  - name: Loadbalancer Webserver
+    url: "icmp://PLACEHOLDER_LOADBALANCER_IP_PUBLIC_ADDRESS"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"

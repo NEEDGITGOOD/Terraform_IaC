@@ -5,11 +5,24 @@ IP_ADDRESS_DOCKER02=$(jq -r '.resources[] | select(.name=="Docker02") .instances
 IP_ADDRESS_DOCKER03=$(jq -r '.resources[] | select(.name=="Docker03") .instances[0].attributes.ipv4_address_private' terraform.tfstate)
 
 # Extract the public IP address from the terraform.tfstate file
+
+## Docker02
 IP_ADDRESS_PUBLIC_DOCKER02=$(jq -r '.resources[] | select(.name=="Docker02") .instances[0].attributes.ipv4_address' terraform.tfstate)
+
+## Docker03
 IP_ADDRESS_PUBLIC_DOCKER03=$(jq -r '.resources[] | select(.name=="Docker03") .instances[0].attributes.ipv4_address' terraform.tfstate)
 
 ## Netbox
 IP_ADDRESS_PUBLIC_NETBOX01=$(jq -r '.resources[] | select(.name=="Netbox01") .instances[0].attributes.ipv4_address' terraform.tfstate)
+
+## Nginx 1
+IP_ADDRESS_PUBLIC_NGINX01=$(jq -r '.resources[] | select(.name=="www-1") .instances[0].attributes.ipv4_address' ../../Loadbalancer_DNS/terraform.tfstate)
+
+## Nginx 1
+IP_ADDRESS_PUBLIC_NGINX02=$(jq -r '.resources[] | select(.name=="www-2") .instances[0].attributes.ipv4_address' ../../Loadbalancer_DNS/terraform.tfstate)
+
+## Loadbalancer
+IP_ADDRESS_PUBLIC_LOADBALANCER=$(jq -r '.resources[] | select(.name=="default") .instances[0].attributes.ip_address' ../../Loadbalancer_DNS/terraform.tfstate)
 
 # Make a copy of the Docker Compose template file
 cp ./templates/template_setup_ssh_tunnels.sh ssh_tunnels.sh
@@ -36,6 +49,14 @@ sed -i "s/PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_DOCKER03}/g
 # Replace the placeholder in the Template file with the IP address of Netbox01
 sed -i "s/PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_NETBOX01}/g" my-config.yml
 
+# Replace the placeholder in the Template file with the IP address of Nginx01
+sed -i "s/PLACEHOLDER_NGINX01_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_NGINX01}/g" my-config.yml
+
+# Replace the placeholder in the Template file with the IP address of Nginx02
+sed -i "s/PLACEHOLDER_NGINX02_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_NGINX02}/g" my-config.yml
+
+# Replace the placeholder in the Template file with the IP address of Loadbalancer
+sed -i "s/PLACEHOLDER_LOADBALANCER_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_LOADBALANCER}/g" my-config.yml
 
 ###############################################
 
@@ -52,3 +73,12 @@ sed -i "s/PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_DOCKER03}/g
 
 # Replace the placeholder in the Template file with the IP address of Netbox01
 sed -i "s/PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_NETBOX01}/g" gatus-config.yml
+
+# Replace the placeholder in the Template file with the IP address of Nginx01
+sed -i "s/PLACEHOLDER_NGINX01_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_NGINX01}/g" gatus-config.yml
+
+# Replace the placeholder in the Template file with the IP address of Nginx02
+sed -i "s/PLACEHOLDER_NGINX02_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_NGINX02}/g" gatus-config.yml
+
+# Replace the placeholder in the Template file with the IP address of Loadbalancer
+sed -i "s/PLACEHOLDER_LOADBALANCER_IP_PUBLIC_ADDRESS/${IP_ADDRESS_PUBLIC_LOADBALANCER}/g" gatus-config.yml

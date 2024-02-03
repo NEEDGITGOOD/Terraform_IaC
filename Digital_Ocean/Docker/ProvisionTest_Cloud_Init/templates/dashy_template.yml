@@ -90,19 +90,25 @@ sections:
   items:
   - title: Nginx01 Webserver
     icon: favicon
-    url: http://167.99.63.210
+    url: http://PLACEHOLDER_NGINX01_IP_PUBLIC_ADDRESS
     description: Nginx Webserver 1
     tags: [webserver, nginx, network]
     
   - title: Nginx02 Webserver
     icon: favicon
-    url: http://167.99.63.118
+    url: http://PLACEHOLDER_NGINX02_IP_PUBLIC_ADDRESS
     description: Nginx Webserver 2
     tags: [webserver, nginx, network]
     
-  - title: LoadBalancer01 (Domain)
+  - title: LoadBalancer01 - IP
     icon: favicon
-    url: http://www.newworld.icu  
+    url: http://PLACEHOLDER_LOADBALANCER_IP_PUBLIC_ADDRESS
+    description: Nginx load balancer for balancing traffic
+    tags: [loadbalancer, nginx, network]
+
+  - title: LoadBalancer01 - Domain
+    icon: favicon
+    url: http://newworld.icu
     description: Nginx load balancer for balancing traffic
     tags: [loadbalancer, nginx, network]
 
