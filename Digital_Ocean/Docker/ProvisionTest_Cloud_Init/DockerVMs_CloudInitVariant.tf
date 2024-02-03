@@ -1,9 +1,3 @@
-### portainer pw
-#variable "portainer_password" {
-#  description = "Portainer Admin Passwort"
-#  type        = string
-#}
-
 ### Alma Linux
 
 # Alma Linux: Set Password Variable for Alma Linux DockerFile

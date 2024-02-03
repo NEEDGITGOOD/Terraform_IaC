@@ -28,7 +28,7 @@ services:
     image: wordpress:latest
     container_name: Wordpress
     ports:
-      - 80:80
+      - 8080:80
     restart: always
     environment:
       - WORDPRESS_DB_HOST=db
@@ -41,7 +41,10 @@ services:
     ports:
       - 53:53/tcp
       - 53:53/udp
+      - 784:784/udp
+      - 853:853/tcp
       - 3000:3000/tcp
+      - 80:80/tcp
       - 443:443/tcp
     volumes:
       - ./workdir:/opt/adguardhome/work
