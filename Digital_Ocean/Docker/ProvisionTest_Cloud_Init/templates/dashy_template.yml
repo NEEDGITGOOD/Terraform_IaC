@@ -45,7 +45,7 @@ sections:
 
   - title: Dashboard01 - Dashy
     icon: fas fa-tachometer-alt
-    url: http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:4000  
+    url: http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS 
     description: Dashy dashboard on Docker01
     tags: [docker, dashboard, dashy]
 
@@ -73,14 +73,14 @@ sections:
   items:
   - title: Wordpress01
     icon: fas fa-blog
-    url: http://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:80  
+    url: http://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:8080 
     description: Wordpress site on Docker03
     tags: [docker, wordpress, website]
     hotkey: 3
 
   - title: ADGuard DNS01
     icon: fas fa-shield-alt
-    url: http://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:3000  
+    url: http://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS 
     description: ADGuard DNS service on Docker03
     tags: [docker, dns, adguard]
     hotkey: 4
@@ -114,6 +114,7 @@ sections:
     url: https://207.154.228.93:1085/admin/
     description: OpenVPN server for secure access
     tags: [vpn, openvpn, security]
+    hotkey: 5
 
   - title: Ubuntu VPN - VPN02 - 52.169.184.84
     icon: fas fa-lock
@@ -125,13 +126,13 @@ sections:
     url: https://PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS
     description: NetBox IP Address Management
     tags: [ipam, netbox, network]
+    hotkey: 6
 
 - name: Azure Infrastructure
   icon: fab fa-windows
   items:
   - title: DC01 - AD Server
     icon: fas fa-server
-    url: http://[DC01_IP]
     description: Active Directory Server on Azure
     tags: [azure, ad, server]
 
@@ -150,10 +151,9 @@ sections:
     description: Windows Server 2019 in Azure
     tags: [azure, windows, client]
 
-  - title: Ubuntu02 - Ubuntu 23.10
+  - title: Ubuntu02 - Ubuntu 23.10 - 52.169.184.84
     icon: favicon
-    url: http://[UBUNTU02_IP]
-    description: Ubuntu 23.10 server in Azure
+    description: Ubuntu 23.10 server in Azure (VPN Gateway)
     tags: [azure, ubuntu, server]
 
 - name: Security - 167.71.240.4
@@ -164,3 +164,4 @@ sections:
     url: http://167.71.240.4:64297  
     description: HoneyPot Debian server
     tags: [honeypot, security, debian] 
+    hotkey: 7

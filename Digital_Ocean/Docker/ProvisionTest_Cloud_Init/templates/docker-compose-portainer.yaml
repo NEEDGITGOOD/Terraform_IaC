@@ -18,7 +18,7 @@ services:
       - /root/my-config.yml:/app/public/conf.yml
       - dashy_data:/app/data
     ports:
-      - 4000:80
+      - 80:80
     # Set any environmental variables
     environment:
       - NODE_ENV=production
@@ -36,7 +36,7 @@ services:
       start_period: 40s
   gatus:
     image: twinproduction/gatus:latest
-    restart: always	
+    restart: unless-stopped
     ports:
       - 8080:8080
     volumes:
