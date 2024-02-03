@@ -471,6 +471,13 @@ resource "digitalocean_firewall" "docker03_firewall" {
     source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
   }
 
+  ### Allow Inbound to ADGuard DNS (3000) from VPN
+  inbound_rule {
+    protocol         = "udp"
+    port_range       = "53"
+    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+  }
+
   ### Allow Inbound to 2374 (AUTOSSH)
   inbound_rule {
     protocol         = "tcp"

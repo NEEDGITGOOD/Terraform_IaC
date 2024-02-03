@@ -11,6 +11,7 @@ runcmd:
  - /root/setup.sh
  - sudo ufw allow 3000
  - sudo ufw allow 80
+ - sudo ufw allow 53
  - docker compose -f /root/docker-compose.yaml up -d
  - systemctl stop systemd-resolved
  - systemctl disable systemd-resolved
