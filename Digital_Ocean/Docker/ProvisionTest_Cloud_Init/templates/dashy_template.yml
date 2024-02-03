@@ -64,7 +64,6 @@ sections:
 
   - title: Attackbox01
     icon: fas fa-skull-crossbones
-    url: http://[PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS
     description: Kali VM - PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2224
     tags: [docker, kali, vm, security]
 
@@ -127,10 +126,10 @@ sections:
     description: Ubuntu VM as an VPN
     tags: [vpn, azure, security]
 
-  - title: Netbox01 - PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS
+  - title: Netbox01 - 
     icon: fas fa-project-diagram
     url: https://PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS
-    description: NetBox IP Address Management
+    description: PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS
     tags: [ipam, netbox, network]
     hotkey: 6
 

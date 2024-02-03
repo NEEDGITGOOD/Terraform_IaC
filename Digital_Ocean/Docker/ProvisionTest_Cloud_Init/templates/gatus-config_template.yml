@@ -18,7 +18,7 @@ endpoints:
       - "[STATUS] == 200"        
 
   - name: Monitoring01                
-    url: "https://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:8080"
+    url: "http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:8080"
     interval: 1m
     conditions:
       - "[STATUS] == 200"         
