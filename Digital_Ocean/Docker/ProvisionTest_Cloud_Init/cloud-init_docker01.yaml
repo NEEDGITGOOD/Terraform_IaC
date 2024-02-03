@@ -18,6 +18,7 @@ write_files:
    permissions: '0700'
 runcmd:
  - sudo ufw allow 9443
+ - sudo ufw allow 80
  - sudo ufw allow 2374
  - mkdir -p /root/.ssh
  - mkdir -p /root/config

@@ -450,10 +450,24 @@ resource "digitalocean_firewall" "docker03_firewall" {
 
  ## Inbound Rules
 
-  ### Allow Inbound to Wordpress (80) from VPN IP
+  ### Allow Inbound to AdGuard WebUI (80) from VPN IP
   inbound_rule {
     protocol         = "tcp"
     port_range       = "80"
+    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+  }
+
+  ### Allow Inbound to Wordpress WebUI (8080) from VPN IP
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "8080"
+    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+  }
+
+  ### Allow Inbound to ADGuard Konfiguration WebUI (3000) from VPN
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "3000"
     source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
   }
 
@@ -471,12 +485,7 @@ resource "digitalocean_firewall" "docker03_firewall" {
     source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
   }
 
-  ### Allow Inbound to ADGuard (3000) from VPN
-  inbound_rule {
-    protocol         = "tcp"
-    port_range       = "3000"
-    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
-  }
+
 
   ### Allow Inbound ICMP
   inbound_rule {
