@@ -112,11 +112,18 @@ resource "digitalocean_firewall" "netbox_firewall" {
 
  ## Inbound Rules
 
+  ### Allow Inbound ssh from jumpbox
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "22"
+    source_addresses = ["206.81.16.20"]
+  }
+
   ### Allow Inbound HTTPS (443)
   inbound_rule {
     protocol         = "tcp"
     port_range       = "443"
-    source_addresses = ["207.154.228.93"]
+    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
   }
 
   ### Allow Inbound ICMP
@@ -125,12 +132,7 @@ resource "digitalocean_firewall" "netbox_firewall" {
     source_addresses = ["207.154.228.93"]
   }
 
-  ### Allow Inbound ssh from jumpbox
-  inbound_rule {
-    protocol         = "tcp"
-    port_range       = "22"
-    source_addresses = ["206.81.16.20"]
-  }
+
 
  ## Outbound Rules (allow to any)
 
