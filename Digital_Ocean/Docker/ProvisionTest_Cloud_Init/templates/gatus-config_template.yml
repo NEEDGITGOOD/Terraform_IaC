@@ -15,7 +15,7 @@ endpoints:
     client:
       insecure: true
     conditions:
-      - "[STATUS] == 200"        
+      - "[STATUS] == 200"
 
   - name: 12_Monitoring01
     url: "http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:8080"

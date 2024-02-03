@@ -19,8 +19,6 @@ write_files:
 runcmd:
  - sudo ufw allow 9443
  - sudo ufw allow 80
-#- sudo ufw allow 2374
-###- sudo ufw allow 2375
  - mkdir -p /root/.ssh
  - mkdir -p /root/config
  - /root/setup.sh
