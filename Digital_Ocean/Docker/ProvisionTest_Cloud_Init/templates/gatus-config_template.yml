@@ -22,14 +22,12 @@ endpoints:
     interval: 1m
     conditions:
       - "[STATUS] == 200"         
-    timeout: 30s  
 
   - name: Dashboard01               
     url: "http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS"
     interval: 1m
     conditions:
       - "[STATUS] == 200"         
-    timeout: 30s 
 
 ### Docker02
 
@@ -65,12 +63,12 @@ endpoints:
     conditions:
       - "[CONNECTED] == true"
 
-
   - name: Wordpress01 - Wordpress               
     url: "http://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:80"
     interval: 1m                  
     conditions:
-      - "[STATUS] == 200"       
+      - "[STATUS] == 200"  
+
   - name: DNS01 – ADGuard              
     url: "http://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:80"
     interval: 1m                  
@@ -127,10 +125,12 @@ endpoints:
 ### Netbox01
 
   - name: Netbox01
-    url: "icmp://PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS"
+    url: "https://PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS"
     interval: 1m
+    client:
+      insecure: true
     conditions:
-      - "[CONNECTED] == true"
+      - "[STATUS] == 200"
 
 ### HoneyPot
 

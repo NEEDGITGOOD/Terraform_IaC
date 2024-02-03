@@ -123,7 +123,7 @@ resource "digitalocean_firewall" "netbox_firewall" {
   ### Allow Inbound ICMP
   inbound_rule {
     protocol         = "icmp"
-    source_addresses = ["207.154.228.93"]
+    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
   }
 
 
