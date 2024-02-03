@@ -1,6 +1,6 @@
 ---
 pageInfo:
-  title: IaC Dashboard
+  title: .\IaC_Dashboard | Ivory Tower
   description: IaC Dashboard of my services.
   logo: https://i.ibb.co/71WyyzM/little-bot-3.png
 
@@ -166,7 +166,7 @@ sections:
   items:
   - title: HoneyPot01
     icon: fas fa-honey-pot
-    url: http://167.71.240.4:64297  
+    url: https://167.71.240.4:64297  
     description: HoneyPot Debian server
     tags: [honeypot, security, debian] 
     hotkey: 7
