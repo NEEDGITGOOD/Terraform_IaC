@@ -1,7 +1,7 @@
 ---
 pageInfo:
-  title: .\IaC_Dashboard | Ivory Tower
-  description: IaC Dashboard of my services.
+  title: .\IaC_Dashboard
+  description: My Ivory Tower.
   logo: https://i.ibb.co/71WyyzM/little-bot-3.png
 
 appConfig:
@@ -126,7 +126,7 @@ sections:
     description: Ubuntu VM as an VPN
     tags: [vpn, azure, security]
 
-  - title: Netbox01 - 
+  - title: Netbox01
     icon: fas fa-project-diagram
     url: https://PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS
     description: PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS
@@ -156,9 +156,9 @@ sections:
     description: Windows Server 2019 in Azure
     tags: [azure, windows, client]
 
-  - title: Ubuntu02 - Ubuntu 23.10 - 52.169.184.84
+  - title: Ubuntu02 - Ubuntu 23.10
     icon: favicon
-    description: Ubuntu 23.10 server in Azure (VPN Gateway)
+    description: Ubuntu 23.10 - 52.169.184.84
     tags: [azure, ubuntu, server]
 
 - name: Security - 167.71.240.4
