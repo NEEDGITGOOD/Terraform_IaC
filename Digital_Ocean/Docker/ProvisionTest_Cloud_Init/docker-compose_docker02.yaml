@@ -7,6 +7,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /var/lib/docker/volumes:/var/lib/docker/volumes
+    restart: unless-stopped
   almalinux:
     build:
       context: .
@@ -14,6 +15,7 @@ services:
     ports:
       - "2222:22" # Map host's port 2222 to container's port 22 for the ssh connection
     container_name: almalinux_ssh
+    restart: unless-stopped
   kalilinux:
     build:
       context: .
@@ -21,6 +23,7 @@ services:
     ports:
       - "2223:22" # Map host's port 2223 to container's port 22 for the ssh connection
     container_name: kali_ssh
+    restart: unless-stopped
   ubuntu:
     build:
       context: .
@@ -28,3 +31,4 @@ services:
     ports:
       - "2224:22" # Map host's port 2224 to container's port 22 for the ssh connection
     container_name: ubuntu_ssh
+    restart: unless-stopped

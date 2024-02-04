@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Extract the private IP address from the terraform.tfstate file
-IP_ADDRESS_DOCKER02=$(jq -r '.resources[] | select(.name=="Docker02") .instances[0].attributes.ipv4_address_private' terraform.tfstate)
-IP_ADDRESS_DOCKER03=$(jq -r '.resources[] | select(.name=="Docker03") .instances[0].attributes.ipv4_address_private' terraform.tfstate)
+IP_ADDRESS_DOCKER02=$(jq -r '.resources[] | select(.name=="Docker02") .instances[0].attributes.ipv4_address' terraform.tfstate)
+IP_ADDRESS_DOCKER03=$(jq -r '.resources[] | select(.name=="Docker03") .instances[0].attributes.ipv4_address' terraform.tfstate)
 
 # Extract the public IP address from the terraform.tfstate file
 
