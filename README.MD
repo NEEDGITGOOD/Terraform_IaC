@@ -1,8 +1,8 @@
 #### Docker Infrastructure
-- [3x Docker Hosts | Automated Docker Infrastructure](/Digital%20Ocean/Docker/ProvisionTest_Cloud_Init)
+- [3x Docker Hosts | Automated Docker Infrastructure](/Digital_Ocean/Docker/ProvisionTest_Cloud_Init)
 
 Includes:
-- ADGuards
+- ADGuard
 - Wordpress
 - Kali Linux VM
 - Ubuntu VM
@@ -12,26 +12,25 @@ Includes:
 
 #### Active Directory
 
-- [Azure Active Directory Infrastructure| AADDS ](/Digital%20Ocean/Azure/active-directory-setup)
+- [Azure Active Directory Infrastructure| AADDS ](/Azure/active-directory-setup)
 
 #### HoneyPot
 
-- [HoneyPot](/Digital%20Ocean/HoneyPot)
+- [HoneyPot](/Digital_Ocean/HoneyPot)
 
 #### Other
 
-- [Loadbalancer_DNS](/Digital%20Ocean/Loadbalancer_DNS)
-
-- [OpenVPN](/Digital%20Ocean/OpenVPN)
+- [Loadbalancer_DNS](/Digital_Ocean/Loadbalancer_DNS)
+- [OpenVPN](/Digital_Ocean/OpenVPN)
 
 #### Redundant (Already Included in Docker etc.)    
-- [Wordpress](/Digital%20Ocean/Wordpress)
-- [NetBox](/Digital%20Ocean/NetBox)
-- [Loadbalancer_DNS](/Digital%20Ocean/NetBox)
+- [Wordpress](/Digital_Ocean/Wordpress)
+- [NetBox](/Digital_Ocean/NetBox)
+- [Loadbalancer_DNS](/Digital_Ocean/NetBox)
 
 ### Usage
 
 ````bash
 terraform apply
-````bash
+````
 
