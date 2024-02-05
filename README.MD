@@ -12,7 +12,7 @@ Includes:
 
 #### Active Directory
 
-- [Azure Active Directory Infrastructure| AADDS ](/Digital_Ocean/Azure/active-directory-setup)
+- [Azure Active Directory Infrastructure| AADDS ](/Azure/active-directory-setup)
 
 #### HoneyPot
 
