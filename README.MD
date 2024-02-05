@@ -21,7 +21,6 @@ Includes:
 #### Other
 
 - [Loadbalancer_DNS](/Digital_Ocean/Loadbalancer_DNS)
-
 - [OpenVPN](/Digital_Ocean/OpenVPN)
 
 #### Redundant (Already Included in Docker etc.)    
