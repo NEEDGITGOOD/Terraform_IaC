@@ -33,5 +33,5 @@ Includes:
 
 ````bash
 terraform apply
-````bash
+````
 
