@@ -117,13 +117,13 @@ resource "digitalocean_firewall" "netbox_firewall" {
   inbound_rule {
     protocol         = "tcp"
     port_range       = "443"
-    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+    source_addresses = ["0.0.0.0/0", "${digitalocean_droplet.Docker01.ipv4_address}"]
   }
 
   ### Allow Inbound ICMP
   inbound_rule {
     protocol         = "icmp"
-    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+    source_addresses = ["0.0.0.0/0", "${digitalocean_droplet.Docker01.ipv4_address}"]
   }
 
 
@@ -248,21 +248,21 @@ resource "digitalocean_firewall" "docker01_firewall" {
   inbound_rule {
     protocol         = "tcp"
     port_range       = "9443"
-    source_addresses = ["207.154.228.93"]
+    source_addresses = ["0.0.0.0/0"]
   }
 
   ### Allow Inbound to Dashy (80) from VPN IP
   inbound_rule {
     protocol         = "tcp"
     port_range       = "80"
-    source_addresses = ["207.154.228.93"]
+    source_addresses = ["0.0.0.0/0"]
   }
 
   ### Allow Inbound to Gatus (8080) from VPN
   inbound_rule {
     protocol         = "tcp"
     port_range       = "8080"
-    source_addresses = ["207.154.228.93"]
+    source_addresses = ["0.0.0.0/0"]
   }
 
   ### Allow Inbound ssh from jumpbox
@@ -370,34 +370,34 @@ resource "digitalocean_firewall" "docker02_firewall" {
   inbound_rule {
     protocol         = "tcp"
     port_range       = "2222"
-    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+    source_addresses = ["0.0.0.0/0", "${digitalocean_droplet.Docker01.ipv4_address}"]
   }
 
   ### Allow Inbound to Alma Linux SSH (2223) from VPN
   inbound_rule {
     protocol         = "tcp"
     port_range       = "2223"
-    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+    source_addresses = ["0.0.0.0/0", "${digitalocean_droplet.Docker01.ipv4_address}"]
   }
 
   ### Allow Inbound to Kali SSH (2224) from VPN
   inbound_rule {
     protocol         = "tcp"
     port_range       = "2224"
-    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+    source_addresses = ["0.0.0.0/0", "${digitalocean_droplet.Docker01.ipv4_address}"]
   }
 
   ### Allow Inbound ICMP
   inbound_rule {
     protocol         = "icmp"
-    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+    source_addresses = ["0.0.0.0/0", "${digitalocean_droplet.Docker01.ipv4_address}"]
   }
 
   ### Allow Inbound ssh from jumpbox
   inbound_rule {
     protocol         = "tcp"
     port_range       = "22"
-    source_addresses = ["206.81.16.20", "${digitalocean_droplet.Docker01.ipv4_address}"]
+    source_addresses = ["0.0.0.0/0", "${digitalocean_droplet.Docker01.ipv4_address}"]
   }
 
  ## Outbound Rules (allow to any)
@@ -453,41 +453,41 @@ resource "digitalocean_firewall" "docker03_firewall" {
   inbound_rule {
     protocol         = "tcp"
     port_range       = "80"
-    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+    source_addresses = ["0.0.0.0/0", "${digitalocean_droplet.Docker01.ipv4_address}"]
   }
 
   ### Allow Inbound to Wordpress WebUI (8080) from VPN IP
   inbound_rule {
     protocol         = "tcp"
     port_range       = "8080"
-    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+    source_addresses = ["0.0.0.0/0", "${digitalocean_droplet.Docker01.ipv4_address}"]
   }
 
   ### Allow Inbound to ADGuard Konfiguration WebUI (3000) from VPN
   inbound_rule {
     protocol         = "tcp"
     port_range       = "3000"
-    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+    source_addresses = ["0.0.0.0/0", "${digitalocean_droplet.Docker01.ipv4_address}"]
   }
 
   ### Allow Inbound to ADGuard DNS (3000) from VPN
   inbound_rule {
     protocol         = "udp"
     port_range       = "53"
-    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+    source_addresses = ["0.0.0.0/0", "${digitalocean_droplet.Docker01.ipv4_address}"]
   }
 
   ### Allow Inbound ICMP
   inbound_rule {
     protocol         = "icmp"
-    source_addresses = ["207.154.228.93", "${digitalocean_droplet.Docker01.ipv4_address}"]
+    source_addresses = ["0.0.0.0/0", "${digitalocean_droplet.Docker01.ipv4_address}"]
   }
 
   ### Allow Inbound ssh from jumpbox
   inbound_rule {
     protocol         = "tcp"
     port_range       = "22"
-    source_addresses = ["206.81.16.20", "${digitalocean_droplet.Docker01.ipv4_address}"]
+    source_addresses = ["0.0.0.0/0", "${digitalocean_droplet.Docker01.ipv4_address}"]
   }
 
  ## Outbound Rules (allow to any)
