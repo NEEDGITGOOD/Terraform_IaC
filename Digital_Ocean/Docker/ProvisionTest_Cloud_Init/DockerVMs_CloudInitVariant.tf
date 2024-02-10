@@ -161,9 +161,7 @@ resource "digitalocean_droplet" "Docker01" {
     digitalocean_ssh_key.temporary_ssh.id
   ]
 
-  user_data = templatefile("cloud-init_docker01.yaml", {
-    GITHUB_TOKEN = var.GITHUB_TOKEN
-  })
+
   
   connection {
     host = self.ipv4_address
@@ -322,7 +320,7 @@ resource "digitalocean_droplet" "Docker02" {
     digitalocean_ssh_key.temporary_ssh.id
   ]
   
-    connection {
+  connection {
     host = self.ipv4_address
     user = "root"
     type = "ssh"
@@ -348,9 +346,7 @@ resource "digitalocean_droplet" "Docker02" {
     destination = "/root/Dockerfile.ubuntu"
   }
 
-    user_data = templatefile("cloud-init_docker02.yaml", {
-    GITHUB_TOKEN = var.GITHUB_TOKEN
-  })
+    user_data = "cloud-init_docker02.yaml"
 
     depends_on = [digitalocean_ssh_key.temporary_ssh]
 
@@ -433,9 +429,8 @@ resource "digitalocean_droplet" "Docker03" {
     digitalocean_ssh_key.temporary_ssh.id
   ]
 
-    user_data = templatefile("cloud-init_docker03.yaml", {
-    GITHUB_TOKEN = var.GITHUB_TOKEN
-  })
+  user_data = "cloud-init_docker03.yaml"
+  
 
   depends_on = [digitalocean_ssh_key.temporary_ssh]
 }
