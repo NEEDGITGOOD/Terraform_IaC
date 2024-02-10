@@ -110,7 +110,7 @@ resource "digitalocean_firewall" "netbox_firewall" {
   inbound_rule {
     protocol         = "tcp"
     port_range       = "22"
-    source_addresses = ["206.81.16.20"]
+    source_addresses = ["0.0.0.0/0"]
   }
 
   ### Allow Inbound HTTPS (443)
