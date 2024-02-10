@@ -45,9 +45,34 @@ Includes:
 - [NetBox](/Digital_Ocean/NetBox)
 - [Loadbalancer_DNS](/Digital_Ocean/NetBox)
 
-### Usage
+### Usage (for the Docker Infrastructure)
+
+0. Go to Directory
+````
+cd ./Terraform_IaC/Digital_Ocean/Docker/ProvisionTest_Cloud_Init
+````
+
+1. Get Digital Ocean Personal Access Key and set it with
 
 ````bash
+export DO_PAT="KEY_HERE"
+````
+
+2. Create Empty SSH File
+
+````
+mkdir -p ./ssh && ssh-keygen -t rsa -b 4096 -f ./ssh/myKey.pem -q -N ""
+````
+
+2. terraform init (just once)
+
+````
+terraform init
+````
+
+3. terraform apply
+
+````
 terraform apply
 ````
 
