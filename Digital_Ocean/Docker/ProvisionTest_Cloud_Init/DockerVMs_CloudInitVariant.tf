@@ -79,7 +79,7 @@ resource "digitalocean_ssh_key" "temporary_ssh" {
   public_key = tls_private_key.ssh.public_key_openssh
 
     provisioner "local-exec" {
-        command = "mkdir -p ./ssh && echo '${tls_private_key.ssh.private_key_pem}' > ./ssh/myKey.pem && chmod 400 ./ssh/myKey.pem"
+        command = "echo '${tls_private_key.ssh.private_key_pem}' > ./ssh/myKey.pem && chmod 400 ./ssh/myKey.pem"
     }
 }
 
@@ -157,12 +157,12 @@ resource "digitalocean_droplet" "Docker01" {
   name = "Docker01"
   region = "fra1"
   size = "s-1vcpu-2gb"
+  user_data = "cloud-init_docker01.yaml"
+
   ssh_keys = [
     digitalocean_ssh_key.temporary_ssh.id
   ]
 
-
-  
   connection {
     host = self.ipv4_address
     user = "root"
@@ -182,6 +182,7 @@ resource "digitalocean_droplet" "Docker01" {
     source      = "./ssh/myKey.pem"
     destination = "/root/.ssh/id_rsa"
   }
+
 
   ## Wait for cloud-init to finish
   provisioner "remote-exec" {
@@ -316,9 +317,12 @@ resource "digitalocean_droplet" "Docker02" {
   name = "Docker02"
   region = "fra1"
   size = "s-1vcpu-2gb"
+  user_data = "cloud-init_docker02.yaml"
   ssh_keys = [
     digitalocean_ssh_key.temporary_ssh.id
   ]
+
+
   
   connection {
     host = self.ipv4_address
@@ -345,12 +349,12 @@ resource "digitalocean_droplet" "Docker02" {
     source      = local_file.ubuntu_save_dockerfile.filename
     destination = "/root/Dockerfile.ubuntu"
   }
-
-    user_data = "cloud-init_docker02.yaml"
-
-    depends_on = [digitalocean_ssh_key.temporary_ssh]
-
+  
+  depends_on = [
+    digitalocean_ssh_key.temporary_ssh,
+  ]
 }
+
 
 # Firewall for Docker02
 resource "digitalocean_firewall" "docker02_firewall" {
