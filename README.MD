@@ -6,6 +6,11 @@ You will need to get an Digital Ocean Personal Access Token, this Repo was priva
 
 If there are any questions ask.
 
+#### To Do
+
+- [ ] Create an Setup Script
+- [ ] Organize Docker Setup better.
+
 #### Infrastructure Goal | Illustration
 
 ##### Digital Ocean
