@@ -19,31 +19,37 @@ On Linux Machine: jq Installed.
 
 ### Usage (for the Docker Infrastructure)
 
-0. Go to Directory
+1. Clone repo
 
 ````
-cd ./Terraform_IaC/Digital_Ocean/Docker_Infrastructure
+git clone https://github.com/NEEDGITGOOD/Terraform_IaC
 ````
 
-1. Get Digital Ocean Personal Access Key and set it with
+2. Go to Directory
+
+````
+cd ./Digital_Ocean/Docker_Infrastructure
+````
+
+3. Get Digital Ocean Personal Access Key and set it with
 
 ````bash
 export DO_PAT="KEY_HERE"
 ````
 
-2. Create Empty SSH File
+4. Create Empty SSH File
 
 ````
 mkdir -p ./ssh && ssh-keygen -t rsa -b 4096 -f ./ssh/myKey.pem -q -N ""
 ````
 
-2. terraform init (just once)
+5. terraform init (just once)
 
 ````
 terraform init
 ````
 
-3. terraform apply
+6. terraform apply
 
 ````
 terraform apply -var "do_token=${DO_PAT}"
