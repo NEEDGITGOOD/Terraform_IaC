@@ -31,7 +31,7 @@ sections:
   items:
   - title: Portainer01
     icon: fas fa-server
-    url: https://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:9443/  
+    url: https://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS:443/  
     description: Portainer management on Docker01
     tags: [docker, management, portainer]
     hotkey: 1
