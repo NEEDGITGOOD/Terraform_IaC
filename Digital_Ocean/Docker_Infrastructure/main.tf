@@ -94,7 +94,7 @@ resource "digitalocean_droplet" "Docker01" {
 
   ## Upload Dashy Config File
   provisioner "file" {  
-    source      = "dashy-config.yml"
+    source      = "./rendered-templates/dashy-config.yml"
     destination = "/root/my-config.yml"
   }
 
@@ -114,7 +114,7 @@ resource "digitalocean_droplet" "Docker01" {
 
   ## Upload Gatus Config File
   provisioner "file" {  
-    source      = "gatus-config.yml"
+    source      = "./rendered-templates/gatus-config.yml"
     destination = "/root/config/config.yml"
   }
 
@@ -131,7 +131,7 @@ resource "digitalocean_droplet" "Docker01" {
 
   ## Copy the script to the remote machine (from my Host to the VM)
   provisioner "file" {
-    source      = "ssh_tunnels.sh"
+    source      = "./rendered-templates/ssh_tunnels.sh"
     destination = "/root/ssh_tunnels.sh"  
   }
 
@@ -191,19 +191,19 @@ resource "digitalocean_droplet" "Docker02" {
   ## Upload Rendered Dockerfile to the VM (Alma Linux)
   provisioner "file" {
     source      = local_file.alma_linux_save_dockerfile.filename
-    destination = "/root/Dockerfile.alma_linux"
+    destination = "/root/rendered-dockerfiles/Dockerfile.alma_linux"
   }
 
   ## Upload Rendered Dockerfile to the VM (Kali Linux)
   provisioner "file" {
     source      = local_file.kali_linux_save_dockerfile.filename
-    destination = "/root/Dockerfile.kali_linux"
+    destination = "/root/rendered-dockerfiles/Dockerfile.kali_linux"
   }
   
   ## Upload Rendered Dockerfile to the VM (Ubuntu)
   provisioner "file" {
     source      = local_file.ubuntu_save_dockerfile.filename
-    destination = "/root/Dockerfile.ubuntu"
+    destination = "/root/rendered-dockerfiles/Dockerfile.ubuntu"
   }
   
   depends_on = [
