@@ -116,12 +116,12 @@ sections:
   items:
   - title: VPN01 - OpenVPN Access Server
     icon: fas fa-lock
-    url: https://207.154.228.93:1085/admin/
+    url: https://1.1.1.1/
     description: OpenVPN server for secure access
     tags: [vpn, openvpn, security]
     hotkey: 5
 
-  - title: Ubuntu VPN - VPN02 - 52.169.184.84
+  - title: Ubuntu VPN - VPN02
     icon: fas fa-lock
     description: Ubuntu VM as an VPN
     tags: [vpn, azure, security]
@@ -158,7 +158,7 @@ sections:
 
   - title: Ubuntu02 - Ubuntu 23.10
     icon: favicon
-    description: Ubuntu 23.10 - 52.169.184.84
+    description: Ubuntu 23.10
     tags: [azure, ubuntu, server]
 
 - name: Security - 167.71.240.4
@@ -166,7 +166,7 @@ sections:
   items:
   - title: HoneyPot01
     icon: fas fa-honey-pot
-    url: https://167.71.240.4:64297  
+    url: https://1.1.1.1/
     description: HoneyPot Debian server
     tags: [honeypot, security, debian] 
     hotkey: 7

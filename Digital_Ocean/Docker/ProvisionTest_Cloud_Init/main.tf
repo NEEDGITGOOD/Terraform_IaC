@@ -10,7 +10,7 @@ data "template_file" "alma_linux_create_dockerfile" {
 # Alma Linux: Create Template File locally so it can be referenced
 resource "local_file" "alma_linux_save_dockerfile" {
   content  = data.template_file.alma_linux_create_dockerfile.rendered
-  filename = "${path.module}/Dockerfiles/rendered_Dockerfile.alma_linux"
+  filename = "${path.module}/rendered-dockerfiles/rendered_Dockerfile.alma_linux"
 }
 
 # Kali Linux: Make Template out of Templatefile
@@ -25,7 +25,7 @@ data "template_file" "kali_linux_create_dockerfile" {
 # Kali Linux: Create Template File locally so it can be referenced
 resource "local_file" "kali_linux_save_dockerfile" {
   content  = data.template_file.kali_linux_create_dockerfile.rendered
-  filename = "${path.module}/Dockerfiles/rendered_Dockerfile.kali_linux"
+  filename = "${path.module}/rendered-dockerfiles/rendered_Dockerfile.kali_linux"
 }
 
 ### Ubuntu
@@ -42,7 +42,7 @@ data "template_file" "ubuntu_create_dockerfile" {
 # Ubuntu: Create Template File locally so it can be referenced
 resource "local_file" "ubuntu_save_dockerfile" {
   content  = data.template_file.ubuntu_create_dockerfile.rendered
-  filename = "${path.module}/Dockerfiles/rendered_Dockerfile.ubuntu"
+  filename = "${path.module}/rendered-dockerfiles/rendered_Dockerfile.ubuntu"
 }
 
 # Generate a new SSH key
@@ -67,7 +67,7 @@ resource "digitalocean_droplet" "Netbox01" {
   name = "Netbox01"
   region = "fra1"
   size = "s-1vcpu-1gb"
-  user_data =  file("./templates/cloud-init/cloud-init_netbox01.yaml")
+  user_data =  file("./cloud-init/cloud-init_netbox01.yaml")
 
   ssh_keys = [
     digitalocean_ssh_key.temporarySSH.id
@@ -81,7 +81,7 @@ resource "digitalocean_droplet" "Docker01" {
   name = "Docker01"
   region = "fra1"
   size = "s-1vcpu-1gb"
-  user_data =  file("./templates/cloud-init/cloud-init_docker01.yaml")
+  user_data =  file("./cloud-init/cloud-init_docker01.yaml")
 
   ssh_keys = [
     digitalocean_ssh_key.temporarySSH.id
