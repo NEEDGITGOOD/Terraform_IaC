@@ -41,18 +41,18 @@ docker-compose.yaml
 ssh_tunnels.sh
 
 # Ignore Automatically Generated & Copied Dashy Config File
-my-config.yml
+dashy-config.yml
+
+# Ignore Automatically Generated & Copied Gatus Config File
+gatus-config.yml
 
 # Exclude any SSH keys
 *.pem
 *.pub
 id_rsa
 
-# Ignore Tmux LOg
+# Ignore Tmux Log
 tmux-client*.log
-
-# Ignore Gatus Config File
-gatus-config.yml
 
 # Ignore rendered Dockerfiles with custom password
 rendered_Dockerfile*
