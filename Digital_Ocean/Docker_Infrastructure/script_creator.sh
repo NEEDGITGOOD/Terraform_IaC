@@ -18,7 +18,7 @@ IP_ADDRESS_PUBLIC_NETBOX01=$(jq -r '.resources[] | select(.name=="Netbox01") .in
 ## Nginx 1
 IP_ADDRESS_PUBLIC_NGINX01=$(jq -r '.resources[] | select(.name=="www-1") .instances[0].attributes.ipv4_address' ../../Loadbalancer_DNS/terraform.tfstate)
 
-## Nginx 1
+## Nginx 2
 IP_ADDRESS_PUBLIC_NGINX02=$(jq -r '.resources[] | select(.name=="www-2") .instances[0].attributes.ipv4_address' ../../Loadbalancer_DNS/terraform.tfstate)
 
 ## Loadbalancer
