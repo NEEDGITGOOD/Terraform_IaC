@@ -1,6 +1,6 @@
 # Alma Linux: Make Template out of Templatefile
 data "template_file" "alma_linux_create_dockerfile" {
-  template = file("${path.module}/templates/Dockerfile.alma_linux.tpl")
+  template = file("${path.module}/dockerfiles/Dockerfile.alma_linux.tpl")
 
   vars = {
     USER_PASSWORD = var.alma_linux_password
@@ -15,7 +15,7 @@ resource "local_file" "alma_linux_save_dockerfile" {
 
 # Kali Linux: Make Template out of Templatefile
 data "template_file" "kali_linux_create_dockerfile" {
-  template = file("${path.module}/templates/Dockerfile.kali_linux.tpl")
+  template = file("${path.module}/dockerfiles/Dockerfile.kali_linux.tpl")
 
   vars = {
     USER_PASSWORD = var.kali_linux_password
@@ -28,11 +28,9 @@ resource "local_file" "kali_linux_save_dockerfile" {
   filename = "${path.module}/rendered-dockerfiles/rendered_Dockerfile.kali_linux"
 }
 
-### Ubuntu
-
 # Ubuntu: Make Template out of Templatefile
 data "template_file" "ubuntu_create_dockerfile" {
-  template = file("${path.module}/templates/Dockerfile.ubuntu.tpl")
+  template = file("${path.module}/dockerfiles/Dockerfile.ubuntu.tpl")
 
   vars = {
     USER_PASSWORD = var.ubuntu_password
@@ -72,7 +70,6 @@ resource "digitalocean_droplet" "Netbox01" {
   ssh_keys = [
     digitalocean_ssh_key.temporarySSH.id
   ]
-
 }
 
 # Docker01 (Portainer)
@@ -97,7 +94,7 @@ resource "digitalocean_droplet" "Docker01" {
 
   ## Upload Dashy Config File
   provisioner "file" {  
-    source      = "my-config.yml"
+    source      = "dashy-config.yml"
     destination = "/root/my-config.yml"
   }
 
@@ -115,7 +112,7 @@ resource "digitalocean_droplet" "Docker01" {
           ]
   }
 
-    ## Upload Gatus Config File
+  ## Upload Gatus Config File
   provisioner "file" {  
     source      = "gatus-config.yml"
     destination = "/root/config/config.yml"
@@ -162,7 +159,7 @@ resource "null_resource" "setup_ssh_tunnels" {
 
   # Run the script to create the dynamic SSH tunnel file
   provisioner "local-exec" {
-    command = "bash setup_ssh_tunnels.sh"
+    command = "bash script_creator.sh"
   }
 
   # Ensure this runs after Docker02 and Docker03 are created
@@ -178,7 +175,7 @@ resource "digitalocean_droplet" "Docker02" {
   name = "Docker02"
   region = "fra1"
   size = "s-1vcpu-1gb"
-  user_data =  file("./templates/cloud-init/cloud-init_docker02.yaml")
+  user_data =  file("./cloud-init/cloud-init_docker02.yaml")
   ssh_keys = [
     digitalocean_ssh_key.temporarySSH.id
   ]
@@ -220,12 +217,10 @@ resource "digitalocean_droplet" "Docker03" {
   name = "Docker03"
   region = "fra1"
   size = "s-1vcpu-1gb"
-  user_data =  file("./templates/cloud-init/cloud-init_docker03.yaml")
+  user_data =  file("./cloud-init/cloud-init_docker03.yaml")
   ssh_keys = [
     digitalocean_ssh_key.temporarySSH.id
   ]
-
-
 
   depends_on = [digitalocean_ssh_key.temporarySSH]
 }

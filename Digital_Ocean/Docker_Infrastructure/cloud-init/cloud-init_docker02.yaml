@@ -5,7 +5,7 @@ write_files:
  - path: /root/setup.sh
    content: |
      #!/bin/bash
-     curl -v -L https://raw.githubusercontent.com/NEEDGITGOOD/Terraform_IaC/main/Digital_Ocean/Docker/ProvisionTest_Cloud_Init/docker-compose_docker02.yaml -o /root/docker-compose.yaml
+     curl -v -L https://raw.githubusercontent.com/NEEDGITGOOD/Terraform_IaC/main/Digital_Ocean/Docker_Infrastructure/docker-compose/docker-compose_docker02.yaml -o /root/docker-compose.yaml
    permissions: '0700'
 runcmd:
  - sleep 60
