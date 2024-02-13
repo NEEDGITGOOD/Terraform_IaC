@@ -25,7 +25,7 @@ IP_ADDRESS_PUBLIC_NGINX02=$(jq -r '.resources[] | select(.name=="www-2") .instan
 IP_ADDRESS_PUBLIC_LOADBALANCER=$(jq -r '.resources[] | select(.name=="default") .instances[0].attributes.ip_address' ../../Loadbalancer_DNS/terraform.tfstate)
 
 # Make a copy of the Docker Compose template file
-cp ./templates/template_setup_ssh_tunnels.sh ssh_tunnels.sh
+cp ./templates/create_ssh_dashy_gatus.sh ssh_tunnels.sh
 
 # Replace the placeholder in the Template file with the IP address of Docker02
 sed -i "s/PLACEHOLDER_DOCKER02_IP_ADDRESS/${IP_ADDRESS_DOCKER02}/g" ssh_tunnels.sh
