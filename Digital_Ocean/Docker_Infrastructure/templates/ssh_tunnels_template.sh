@@ -5,11 +5,11 @@ export PATH=$PATH:/usr/bin
 
 ## Docker02
 echo "Running SSH command...AUTOSSH Version for Docker02"
-AUTOSSH_LOGLEVEL=7 autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -o "StrictHostKeyChecking=no" -f -N -L 2375:/var/run/docker.sock root@PLACEHOLDER_DOCKER02_IP_ADDRESS
+AUTOSSH_LOGLEVEL=7 autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -o "StrictHostKeyChecking=no" -f -N -L 2375:/var/run/docker.sock root@${PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS}
 
 ## Docker03
 echo "Running SSH command...AUTOSSH Version for Docker03"
-AUTOSSH_LOGLEVEL=7 autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -o "StrictHostKeyChecking=no" -f -N -L 2374:/var/run/docker.sock root@PLACEHOLDER_DOCKER03_IP_ADDRESS
+AUTOSSH_LOGLEVEL=7 autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -o "StrictHostKeyChecking=no" -f -N -L 2374:/var/run/docker.sock root@${PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS}
 
 # Adding the Environments!
 

@@ -72,6 +72,109 @@ resource "digitalocean_droplet" "Netbox01" {
   ]
 }
 
+# Docker02
+resource "digitalocean_droplet" "Docker02" {
+  image = "docker-20-04"
+  name = "Docker02"
+  region = "fra1"
+  size = "s-1vcpu-1gb"
+  user_data =  file("./cloud-init/cloud-init_docker02.yaml")
+  ssh_keys = [
+    digitalocean_ssh_key.temporarySSH.id
+  ]
+
+  connection {
+    host = self.ipv4_address
+    user = "root"
+    type = "ssh"
+    private_key = file("./ssh/myKey.pem")
+    timeout = "4m"
+  }
+  
+  ## Upload Rendered Dockerfile to the VM (Alma Linux)
+  provisioner "file" {
+    source      = local_file.alma_linux_save_dockerfile.filename
+    destination = "/root/rendered-dockerfiles/Dockerfile.alma_linux"
+  }
+
+  ## Upload Rendered Dockerfile to the VM (Kali Linux)
+  provisioner "file" {
+    source      = local_file.kali_linux_save_dockerfile.filename
+    destination = "/root/rendered-dockerfiles/Dockerfile.kali_linux"
+  }
+  
+  ## Upload Rendered Dockerfile to the VM (Ubuntu)
+  provisioner "file" {
+    source      = local_file.ubuntu_save_dockerfile.filename
+    destination = "/root/rendered-dockerfiles/Dockerfile.ubuntu"
+  }
+  
+  depends_on = [
+    digitalocean_ssh_key.temporarySSH,
+  ]
+}
+
+# Docker03
+resource "digitalocean_droplet" "Docker03" {
+  image = "docker-20-04"
+  name = "Docker03"
+  region = "fra1"
+  size = "s-1vcpu-1gb"
+  user_data =  file("./cloud-init/cloud-init_docker03.yaml")
+  ssh_keys = [
+    digitalocean_ssh_key.temporarySSH.id
+  ]
+
+  depends_on = [digitalocean_ssh_key.temporarySSH]
+}
+
+# Create Dashy Config
+resource "local_file" "dashy_config" {
+  content  = templatefile("${path.module}/templates/dashy_template.yml", {
+    PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS = digitalocean_droplet.Docker02.ipv4_address,
+    PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS = digitalocean_droplet.Docker03.ipv4_address,
+    PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS = digitalocean_droplet.Netbox01.ipv4_address,
+  })
+  filename = "${path.module}/rendered-templates/dashy-config.yml"
+  
+  depends_on = [
+    digitalocean_droplet.Docker02,
+    digitalocean_droplet.Docker03
+  ]
+}
+
+
+# Create Gatus Config
+resource "local_file" "gatus_config" {
+  content  = templatefile("${path.module}/templates/gatus_template.yml", {
+    PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS = digitalocean_droplet.Docker02.ipv4_address
+    PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS = digitalocean_droplet.Docker03.ipv4_address
+    PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS = digitalocean_droplet.Netbox01.ipv4_address
+  })
+  filename = "${path.module}/rendered-templates/gatus-config.yml"
+  
+  # Ensure this runs after Docker02 and Docker03 are created
+  depends_on = [
+    digitalocean_droplet.Docker02,
+    digitalocean_droplet.Docker03
+  ]
+}
+
+# Create AutoSSH Tunnels
+resource "local_file" "autossh_config" {
+  content  = templatefile("${path.module}/templates/ssh_tunnels_template.sh", {
+    PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS = digitalocean_droplet.Docker02.ipv4_address
+    PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS = digitalocean_droplet.Docker03.ipv4_address
+  })
+  filename = "${path.module}/rendered-templates/ssh_tunnels.sh"
+
+  # Ensure this runs after Docker02 and Docker03 are created
+  depends_on = [
+    digitalocean_droplet.Docker02,
+    digitalocean_droplet.Docker03
+  ]
+}
+
 # Docker01 (Portainer)
 resource "digitalocean_droplet" "Docker01" {
   image = "docker-20-04"
@@ -149,79 +252,9 @@ resource "digitalocean_droplet" "Docker01" {
   depends_on = [
     digitalocean_droplet.Docker02,  # Wait for Docker02 and Docker03 to be created
     digitalocean_droplet.Docker03,
-    null_resource.setup_ssh_tunnels, # Wait for the script to be created
+    local_file.autossh_config, # Wait for the autossh script to be created
+    local_file.dashy_config, # Wait for the the Dashy config to be created
+    local_file.gatus_config, # Wait for the the Gatus config to be created
     digitalocean_ssh_key.temporarySSH
   ]
 }
-
-# SSH Tunnel Script Creator
-resource "null_resource" "setup_ssh_tunnels" {
-
-  # Run the script to create the dynamic SSH tunnel file
-  provisioner "local-exec" {
-    command = "bash script_creator.sh"
-  }
-
-  # Ensure this runs after Docker02 and Docker03 are created
-  depends_on = [
-    digitalocean_droplet.Docker02,
-    digitalocean_droplet.Docker03
-  ]
-}
-
-# Docker02
-resource "digitalocean_droplet" "Docker02" {
-  image = "docker-20-04"
-  name = "Docker02"
-  region = "fra1"
-  size = "s-1vcpu-1gb"
-  user_data =  file("./cloud-init/cloud-init_docker02.yaml")
-  ssh_keys = [
-    digitalocean_ssh_key.temporarySSH.id
-  ]
-
-  connection {
-    host = self.ipv4_address
-    user = "root"
-    type = "ssh"
-    private_key = file("./ssh/myKey.pem")
-    timeout = "4m"
-  }
-  
-  ## Upload Rendered Dockerfile to the VM (Alma Linux)
-  provisioner "file" {
-    source      = local_file.alma_linux_save_dockerfile.filename
-    destination = "/root/rendered-dockerfiles/Dockerfile.alma_linux"
-  }
-
-  ## Upload Rendered Dockerfile to the VM (Kali Linux)
-  provisioner "file" {
-    source      = local_file.kali_linux_save_dockerfile.filename
-    destination = "/root/rendered-dockerfiles/Dockerfile.kali_linux"
-  }
-  
-  ## Upload Rendered Dockerfile to the VM (Ubuntu)
-  provisioner "file" {
-    source      = local_file.ubuntu_save_dockerfile.filename
-    destination = "/root/rendered-dockerfiles/Dockerfile.ubuntu"
-  }
-  
-  depends_on = [
-    digitalocean_ssh_key.temporarySSH,
-  ]
-}
-
-# Docker03
-resource "digitalocean_droplet" "Docker03" {
-  image = "docker-20-04"
-  name = "Docker03"
-  region = "fra1"
-  size = "s-1vcpu-1gb"
-  user_data =  file("./cloud-init/cloud-init_docker03.yaml")
-  ssh_keys = [
-    digitalocean_ssh_key.temporarySSH.id
-  ]
-
-  depends_on = [digitalocean_ssh_key.temporarySSH]
-}
-

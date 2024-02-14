@@ -45,41 +45,41 @@ sections:
 
   - title: Dashboard01 - Dashy
     icon: fas fa-tachometer-alt
-    url: http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS 
+    url: http://PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS
     description: Dashy dashboard on Docker01
     tags: [docker, dashboard, dashy]
 
-- name: Docker02 - PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS
+- name: Docker02 - ${PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS}
   icon: fas fa-network-wired
   items:
   - title: Ubuntu01 - Ubuntu 23.10
     icon: fab fa-ubuntu
-    description: Ubuntu VM - PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2222
+    description: Ubuntu VM - ${PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS}:2222
     tags: [azure, ubuntu, server]
 
   - title: AlmaLinux01 - AlmaLinux 8.4
     icon: fab fa-centos
-    description: Alma Linux VM - PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2223
+    description: Alma Linux VM - ${PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS}:2223
     tags: [docker, centos, virtual machine]
 
   - title: Attackbox01
     icon: fas fa-skull-crossbones
-    description: Kali VM - PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2224
+    description: Kali VM - ${PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS}:2224
     tags: [docker, kali, vm, security]
 
-- name: Docker03 - PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS
+- name: Docker03 - ${PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS}
   icon: fas fa-network-wired
   items:
   - title: Wordpress01
     icon: fas fa-blog
-    url: http://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:8080 
+    url: http://${PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS}:8080 
     description: Wordpress site on Docker03
     tags: [docker, wordpress, website]
     hotkey: 3
 
   - title: ADGuard DNS01
     icon: fas fa-shield-alt
-    url: http://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS 
+    url: http://${PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS} 
     description: ADGuard DNS service on Docker03
     tags: [docker, dns, adguard]
     hotkey: 4
@@ -128,8 +128,8 @@ sections:
 
   - title: Netbox01
     icon: fas fa-project-diagram
-    url: https://PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS
-    description: PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS
+    url: https://${PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS}
+    description: ${PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS}
     tags: [ipam, netbox, network]
     hotkey: 6
 

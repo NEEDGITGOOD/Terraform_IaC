@@ -26,25 +26,25 @@ endpoints:
 ### Docker02
 
   - name: 03_Docker02
-    url: "icmp://PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS"
+    url: "icmp://${PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS}"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
 
   - name: 04_Ubuntu01 - Ubuntu Machine
-    url: "tcp://PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2222"
+    url: "tcp://${PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS}:2222"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
 
   - name: 05_Alma01 – Alma Linux Machine
-    url: "tcp://PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2223"
+    url: "tcp://${PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS}:2223"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
 
   - name: 06_Attackbox01 - Kali
-    url: "tcp://PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS:2224"
+    url: "tcp://${PLACEHOLDER_DOCKER02_IP_PUBLIC_ADDRESS}:2224"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
@@ -52,13 +52,13 @@ endpoints:
 ### Docker03
 
   - name: 07_Docker03
-    url: "icmp://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS"
+    url: "icmp://${PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS}"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
 
   - name: 08_Wordpress01 - Wordpress
-    url: "http://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:8080"
+    url: "http://${PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS}:8080"
     interval: 1m
     client:
       insecure: true
@@ -67,14 +67,14 @@ endpoints:
       - "[STATUS] == 200"
 
   - name: 09_DNS01 – ADGuard
-    url: "http://PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS:80"
+    url: "http://${PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS}:80"
     interval: 1m
     conditions:
       - "[STATUS] == 200"
     timeout: 30s
 
   - name: 10_DNS - AdGuard - DNS A Request
-    url: "PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS"
+    url: "${PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS}"
     interval: 1m
     dns:
       query-name: "google.de"
@@ -122,7 +122,7 @@ endpoints:
 ### Netbox01
 
   - name: 16_Netbox01
-    url: "https://PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS"
+    url: "https://${PLACEHOLDER_NETBOX01_IP_PUBLIC_ADDRESS}"
     interval: 1m
     client:
       insecure: true
