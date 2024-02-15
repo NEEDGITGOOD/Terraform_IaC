@@ -143,7 +143,6 @@ resource "local_file" "dashy_config" {
   ]
 }
 
-
 # Create Gatus Config
 resource "local_file" "gatus_config" {
   content  = templatefile("${path.module}/templates/gatus_template.yml", {
