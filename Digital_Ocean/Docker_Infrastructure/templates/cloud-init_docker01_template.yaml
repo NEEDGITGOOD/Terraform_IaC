@@ -1,0 +1,137 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+packages:
+ - autossh
+ - httpie
+write_files:
+ - path: /root/setup.sh
+   content: |
+     #!/bin/bash
+     curl -v -L https://raw.githubusercontent.com/NEEDGITGOOD/Terraform_IaC/main/Digital_Ocean/Docker_Infrastructure/docker-compose/docker-compose-docker01.yaml -o /root/docker-compose.yaml
+   permissions: '0700'
+ - path: /root/docker-compose-docker01.yaml
+   content: |
+     version: '3.8'
+ 
+     networks:
+       web:
+         external: true
+       internal:
+         external: false
+ 
+     services:
+       blog:
+         image: wordpress:4.9.8-apache
+         environment:
+           WORDPRESS_DB_PASSWORD:
+         labels:
+           - traefik.http.routers.blog.rule=Host(`blog.${DOMAIN}`)"
+           - traefik.http.routers.blog.tls=true
+           - traefik.http.routers.blog.tls.certresolver=lets-encrypt
+           - traefik.port=80
+         networks:
+           - internal
+           - web
+         depends_on:
+           - mysql
+ 
+       mysql:
+         image: mysql:5.7
+         environment:
+           MYSQL_ROOT_PASSWORD:
+         networks:
+           - internal
+         labels:
+           - traefik.enable=false
+ 
+       adminer:
+         image: adminer:4.6.3-standalone
+         labels:
+           - traefik.http.routers.adminer.rule=Host(`db-admin.${DOMAIN}`)"
+           - traefik.http.routers.adminer.tls=true
+           - traefik.http.routers.adminer.tls.certresolver=lets-encrypt
+           - traefik.port=8080
+         networks:
+           - internal
+           - web
+         depends_on:
+           - mysql
+       portainer:
+         image: portainer/portainer-ce
+         labels:
+           - "traefik.enable=true"
+           - "traefik.http.routers.portainer.rule=Host(`portainer.${DOMAIN}`)"
+           - "traefik.http.routers.portainer.entrypoints=websecure"
+           - "traefik.http.services.portainer.loadbalancer.server.port=9000"
+           - "traefik.http.routers.portainer.service=portainer"
+           - "traefik.http.routers.portainer.tls.certresolver=leresolver"
+         command: -H unix:///var/run/docker.sock
+         restart: always
+         volumes:
+           - /var/run/docker.sock:/var/run/docker.sock
+           - portainer_data:/data
+         networks:
+           - internal
+           - web
+       dashy:
+         image: lissy93/dashy
+         labels:
+           - traefik.http.routers.dashy.rule=Host(`dashy.${DOMAIN}`)"
+           - traefik.http.routers.dashy.tls=true
+           - traefik.http.routers.dashy.tls.certresolver=lets-encrypt
+           - traefik.port=80
+         container_name: dashy
+         volumes:
+           - /root/my-config.yml:/app/public/conf.yml
+           - dashy_data:/app/data
+         environment:
+           - NODE_ENV=production
+         restart: unless-stopped
+         healthcheck:
+           test: ['CMD', 'node', '/app/services/healthcheck']
+           interval: 1m30s
+           timeout: 10s
+           retries: 3
+           start_period: 40s
+         networks:
+           - internal
+           - web
+       gatus:
+         image: twinproduction/gatus:latest
+         labels:
+           - traefik.http.routers.gatus.rule=Host(`gatus.${DOMAIN}`)"
+           - traefik.http.routers.gatus.tls=true
+           - traefik.http.routers.gatus.tls.certresolver=lets-encrypt
+           - traefik.port=2085
+         restart: unless-stopped
+         volumes:
+           - ./config:/config
+         networks:
+           - internal
+           - web
+ 
+       traefik:
+         image: traefik:v2.2
+         volumes:
+                 - /var/run/docker.sock:/var/run/docker.sock
+                 - $PWD/traefik.toml:/traefik.toml
+                 - $PWD/traefik_dynamic.toml:/traefik_dynamic.toml
+                 - $PWD/acme.json:/acme.json
+         ports:
+           - 80:80
+           - 443:443
+         container_name: traefik
+         networks:
+           - web
+ 
+     volumes:
+       portainer_data:
+       dashy_data:   permissions: '0700'
+runcmd:
+# - sudo ufw allow 9443
+ - mkdir -p /root/.ssh
+ - mkdir -p /root/config
+ - /root/setup.sh
+ - DOCKER01_IP=$$(hostname -I | cut -d' ' -f1)
+ - sed -i "s/PLACEHOLDER_DOCKER01_IP_PUBLIC_ADDRESS/$${DOCKER01_IP}/" /root/my-config.yml

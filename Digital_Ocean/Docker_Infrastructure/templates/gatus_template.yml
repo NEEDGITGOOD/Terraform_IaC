@@ -1,3 +1,6 @@
+web:
+  port: 2085
+
 endpoints:
 
 ### Docker01

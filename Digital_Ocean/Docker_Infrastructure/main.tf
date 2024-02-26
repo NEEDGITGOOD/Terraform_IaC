@@ -1,3 +1,20 @@
+# Cloud Init for Docker01 (Portainer): Make Template out of Templatefile
+data "template_file" "cloud_init_docker01_template" {
+  template = file("${path.module}/templates/cloud-init_docker01_template.yaml")
+
+  vars = {
+    DOMAIN = var.domain_dns
+  }
+}
+
+# Cloud Init for Docker01 (Portainer): Create Template File locally so it can be referenced
+resource "local_file" "cloud_init_docker01_template_save" {
+  content  = data.template_file.cloud_init_docker01_template.rendered
+  filename = "${path.module}/rendered-templates/cloud-init_docker01.yaml"
+}
+
+#########
+
 # Alma Linux: Make Template out of Templatefile
 data "template_file" "alma_linux_create_dockerfile" {
   template = file("${path.module}/dockerfiles/Dockerfile.alma_linux.tpl")
@@ -12,6 +29,8 @@ resource "local_file" "alma_linux_save_dockerfile" {
   content  = data.template_file.alma_linux_create_dockerfile.rendered
   filename = "${path.module}/rendered-dockerfiles/rendered_Dockerfile.alma_linux"
 }
+
+#########
 
 # Kali Linux: Make Template out of Templatefile
 data "template_file" "kali_linux_create_dockerfile" {
@@ -28,6 +47,8 @@ resource "local_file" "kali_linux_save_dockerfile" {
   filename = "${path.module}/rendered-dockerfiles/rendered_Dockerfile.kali_linux"
 }
 
+#########
+
 # Ubuntu: Make Template out of Templatefile
 data "template_file" "ubuntu_create_dockerfile" {
   template = file("${path.module}/dockerfiles/Dockerfile.ubuntu.tpl")
@@ -42,6 +63,8 @@ resource "local_file" "ubuntu_save_dockerfile" {
   content  = data.template_file.ubuntu_create_dockerfile.rendered
   filename = "${path.module}/rendered-dockerfiles/rendered_Dockerfile.ubuntu"
 }
+
+#########
 
 # Generate a new SSH key
 resource "tls_private_key" "ssh" {
@@ -137,6 +160,7 @@ resource "local_file" "dashy_config" {
   })
   filename = "${path.module}/rendered-templates/dashy-config.yml"
   
+  # Ensure this runs after Docker02 and Docker03 are created
   depends_on = [
     digitalocean_droplet.Docker02,
     digitalocean_droplet.Docker03
@@ -180,7 +204,7 @@ resource "digitalocean_droplet" "Docker01" {
   name = "Docker01"
   region = "fra1"
   size = "s-1vcpu-1gb"
-  user_data =  file("./cloud-init/cloud-init_docker01.yaml")
+  user_data =  data.template_file.cloud_init_docker01_template.rendered
 
   ssh_keys = [
     digitalocean_ssh_key.temporarySSH.id
@@ -254,6 +278,8 @@ resource "digitalocean_droplet" "Docker01" {
     local_file.autossh_config, # Wait for the autossh script to be created
     local_file.dashy_config, # Wait for the the Dashy config to be created
     local_file.gatus_config, # Wait for the the Gatus config to be created
+    data.template_file.cloud_init_docker01_template,
+    local_file.cloud_init_docker01_template_save,
     digitalocean_ssh_key.temporarySSH
   ]
 }

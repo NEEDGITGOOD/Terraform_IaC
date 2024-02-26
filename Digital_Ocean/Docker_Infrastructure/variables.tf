@@ -1,3 +1,9 @@
+# Set Domain
+variable "domain_dns" {
+  description = "The Domain Name for the DNS"
+  type        = string
+}
+
 # Ubuntu: Set Password Variable for Ubuntu DockerFile
 variable "ubuntu_password" {
   description = "Password for the ubuntu Docker Container/Dockerfile"
