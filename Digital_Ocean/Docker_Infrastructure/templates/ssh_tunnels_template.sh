@@ -11,7 +11,7 @@ AUTOSSH_LOGLEVEL=7 autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCount
 echo "Running SSH command...AUTOSSH Version for Docker03"
 AUTOSSH_LOGLEVEL=7 autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -o "StrictHostKeyChecking=no" -f -N -L 2374:/var/run/docker.sock root@${PLACEHOLDER_DOCKER03_IP_PUBLIC_ADDRESS}
 
-# Adding the Environments!
+# Adding the Environments
 
 ## Token!
 echo "Getting the Token!"
