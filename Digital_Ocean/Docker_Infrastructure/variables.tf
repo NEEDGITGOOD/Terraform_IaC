@@ -6,7 +6,7 @@ variable "domain_dns" {
 
 # Ubuntu: Set Password Variable for Ubuntu DockerFile
 variable "ubuntu_password" {
-  description = "Password for the ubuntu Docker Container/Dockerfile"
+  description = "Password for the Ubuntu Docker Container/Dockerfile"
   type        = string
   sensitive = true
 }
