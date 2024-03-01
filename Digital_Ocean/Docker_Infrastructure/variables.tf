@@ -1,6 +1,6 @@
 # Set Domain
 variable "domain_dns" {
-  description = "The Domain Name for the DNS"
+  description = "The Name of your Domain (DNS)"
   type        = string
 }
 
