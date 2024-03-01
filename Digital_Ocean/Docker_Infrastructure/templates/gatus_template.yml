@@ -133,9 +133,10 @@ endpoints:
       - "[STATUS] == 200"
 
 ### HoneyPot
+### To Do: Dynamically Change HoneyPot IP
 
   - name: 17_HoneyPot
-    url: "icmp://167.71.240.4"
+    url: "icmp://localhost"
     interval: 1m
     conditions:
       - "[CONNECTED] == true"
