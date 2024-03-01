@@ -13,8 +13,6 @@ resource "local_file" "cloud_init_docker01_template_save" {
   filename = "${path.module}/rendered-templates/cloud-init_docker01.yaml"
 }
 
-#########
-
 # Alma Linux: Make Template out of Templatefile
 data "template_file" "alma_linux_create_dockerfile" {
   template = file("${path.module}/dockerfiles/Dockerfile.alma_linux.tpl")
