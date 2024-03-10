@@ -1,6 +1,14 @@
 #### Overview
 This project is a comprehensive Terraform setup designed as part of an educational assignment. It focuses on deploying a sophisticated Docker infrastructure across multiple cloud platforms, primarily utilizing Digital Ocean and Azure. The architecture includes the deployment of Digital Ocean Droplets and Azure VMs, configured for various uses including container management and remote access.
 
+#### Infrastructure Goal | Illustration
+
+##### Digital Ocean
+![Digital Ocean](https://raw.githubusercontent.com/NEEDGITGOOD/Terraform_IaC/main/Digital_Ocean.png)
+
+##### Azure
+![Azure](https://raw.githubusercontent.com/NEEDGITGOOD/Terraform_IaC/main/azure.png)
+
 #### Key Features
 - Automated Deployment of Digital Ocean Droplets: Creates three droplets, with the first, Docker01, hosting the Portainer container for Docker container management.
 - Remote Environment Configuration: Utilizes AUTOSSH for secure connection to Docker02 and Docker03, binding these connections to localhost:2375 and localhost:2374, respectively, facilitating a fully automated setup.
@@ -51,13 +59,7 @@ terraform init
 terraform apply -var "do_token=${DO_PAT}"
 ````
 
-#### Infrastructure Goal | Illustration
 
-##### Digital Ocean
-![Digital Ocean](https://raw.githubusercontent.com/NEEDGITGOOD/Terraform_IaC/main/Digital_Ocean.png)
-
-##### Azure
-![Azure](https://raw.githubusercontent.com/NEEDGITGOOD/Terraform_IaC/main/azure.png)
 
 
 #### Docker Infrastructure
