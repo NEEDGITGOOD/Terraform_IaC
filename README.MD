@@ -2,16 +2,16 @@
 This project is a comprehensive Terraform setup designed as part of an educational assignment. It focuses on deploying a sophisticated Docker infrastructure across multiple cloud platforms, primarily utilizing Digital Ocean and Azure. The architecture includes the deployment of Digital Ocean Droplets and Azure VMs, configured for various uses including container management and remote access.
 
 #### Key Features
-Automated Deployment of Digital Ocean Droplets: Creates three droplets, with the first, Docker01, hosting the Portainer container for Docker container management.
-Remote Environment Configuration: Utilizes AUTOSSH for secure connection to Docker02 and Docker03, binding these connections to localhost:2375 and localhost:2374, respectively, facilitating a fully automated setup.
-Multi-VM Setup on Docker02: Hosts three VMs (Ubuntu, AlmaLinux, Ubuntu), accessible via SSH on ports 2222, 2223, and 2224, with custom SSH user configuration.
-Azure Integration: Supports passing environmental variables through the CLI or a .tfvars file for Azure resource management.
+- Automated Deployment of Digital Ocean Droplets: Creates three droplets, with the first, Docker01, hosting the Portainer container for Docker container management.
+- Remote Environment Configuration: Utilizes AUTOSSH for secure connection to Docker02 and Docker03, binding these connections to localhost:2375 and localhost:2374, respectively, facilitating a fully automated setup.
+- Multi-VM Setup on Docker02: Hosts three VMs (Ubuntu, AlmaLinux, Ubuntu), accessible via SSH on ports 2222, 2223, and 2224, with custom SSH user configuration.
+- Azure Integration: Supports passing environmental variables through the CLI or a .tfvars file for Azure resource management.
 
 #### Prerequisites
-Digital Ocean and Azure accounts.
-You need an [Digital Ocean Personal Access Key](https://cloud.digitalocean.com/account/api/tokens) if you want to use the Digital Ocean Infrastructure.
-Terraform installed on your machine.
-On Linux Machine: jq Installed.
+- Digital Ocean and Azure accounts.
+- You need an [Digital Ocean Personal Access Key](https://cloud.digitalocean.com/account/api/tokens) if you want to use the Digital Ocean Infrastructure.
+- Terraform installed on your machine.
+- On Linux Machine: jq Installed.
 
 ### Usage (for the Docker Infrastructure)
 
