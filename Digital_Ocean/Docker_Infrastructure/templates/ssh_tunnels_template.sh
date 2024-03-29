@@ -20,7 +20,7 @@ echo $TOKEN
 
 ## Docker02
 echo "Adding Environment for Docker02..."
-http --verify no --form POST http://localhost:9000/api/endpoints "Authorization: Bearer $TOKEN" Name='Docker02' URL='tcp://localhost:2375' EndpointCreationType=1
+http --verify no --form POST https://localhost:9000/api/endpoints "Authorization: Bearer $TOKEN" Name='Docker02' URL='tcp://localhost:2375' EndpointCreationType=1
 
 ## Docker03
 echo "Adding Environment for Docker03..."
