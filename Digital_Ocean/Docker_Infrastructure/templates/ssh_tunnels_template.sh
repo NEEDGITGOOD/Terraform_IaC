@@ -15,13 +15,13 @@ AUTOSSH_LOGLEVEL=7 autossh -M 0 -o "ServerAliveInterval 30" -o "ServerAliveCount
 
 ## Token!
 echo "Getting the Token!"
-TOKEN=$(http POST localhost:9000/api/auth Username="admin" Password="admin01admin01" | jq -r ".jwt")
+TOKEN=$(http --verify no POST https://localhost/api/auth Username="admin" Password="admin01admin01" | jq -r ".jwt")
 echo $TOKEN
 
 ## Docker02
 echo "Adding Environment for Docker02..."
-http --form POST http://localhost:9000/api/endpoints "Authorization: Bearer $TOKEN" Name='Docker02' URL='tcp://localhost:2375' EndpointCreationType=1
+http --verify no --form POST http://localhost:9000/api/endpoints "Authorization: Bearer $TOKEN" Name='Docker02' URL='tcp://localhost:2375' EndpointCreationType=1
 
 ## Docker03
 echo "Adding Environment for Docker03..."
-http --form POST http://localhost:9000/api/endpoints "Authorization: Bearer $TOKEN" Name='Docker03' URL='tcp://localhost:2374' EndpointCreationType=1
+http --verify no --form POST https://localhost/api/endpoints "Authorization: Bearer $TOKEN" Name='Docker03' URL='tcp://localhost:2374' EndpointCreationType=1
