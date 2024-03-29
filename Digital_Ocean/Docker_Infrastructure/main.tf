@@ -249,7 +249,7 @@ resource "digitalocean_droplet" "Docker01" {
       "bash setupDocker01IP.sh", # Run the Script, which changes the Docker01 Placeholder in the Gatos Config file to the Docker01 IP.
       "chmod 600 ~/.ssh/id_rsa", # Change the permissions of the ssh file
       "sudo docker compose -f /root/docker-compose.yaml up -d", # Run the docker-compose file
-      "http POST localhost:9000/api/users/admin/init Username=\"admin\" Password=\"admin01admin01\"" # Create the admin user
+      "http --verify no POST https://localhost/api/users/admin/init Username=\"admin\" Password=\"admin01admin01\"" # Create the admin user
     ]
   }
 
